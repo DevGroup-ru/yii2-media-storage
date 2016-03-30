@@ -4,16 +4,15 @@ namespace app\modules\media\assets;
 
 use yii\web\AssetBundle;
 
-class MediaAsset extends AssetBundle
+class IndexAsset extends AssetBundle
 {
 	public $sourcePath = '@app/modules/media/assets/res';
 
     public $css = [
-        'css/media.css',
+        'css/index.css',
     ];
     public $js = [
-		'js/dropzone.js',
-		'js/media.js',
+		'js/index.js',
     ];
 	public $depends = [
 		'yii\web\JqueryAsset',

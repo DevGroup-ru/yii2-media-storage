@@ -1,28 +1,4 @@
 jQuery(function($){
-	////////////////
-	// Index page //
-	////////////////
-
-	$('.media-storage-library .thumbnail .btn-danger').click(function(){
-		var $thumb = $(this);
-
-		$.ajax({
-			url: 'media/delete',
-			type: 'DELETE',
-			success: function(data) {
-				if (data.success) {
-					$thumb.fadeOut('400', function(){
-						$(this).remove();remove();
-					});
-				}
-			}
-		});
-	});
-
-	/////////////////
-	// Upload page //
-	/////////////////
-
 	// Dropzone {
 	var MediaDropzone = new Dropzone('form.media-storage-upload-form', {
 		uploadMultiple: false,

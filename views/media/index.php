@@ -1,13 +1,13 @@
 <?php
 
 use yii\helpers\Url;
-use app\modules\media\assets\MediaAsset;
+use app\modules\media\assets\IndexAsset;
 
 /**
  * @var yii\web\View $this
  */
 
-MediaAsset::register($this);
+IndexAsset::register($this);
 
 $this->title = 'Media Storage';
 $this->params['breadcrumbs'][] = $this->title;

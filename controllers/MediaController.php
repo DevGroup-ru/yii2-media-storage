@@ -86,10 +86,15 @@ class MediaController extends Controller
         return Json::encode(['status' => 'ok', 'file' => $filename]);
     }
 
-	public function actionDelete()
+	public function actionDelete($id)
 	{
-		// code for removing media from db
+		$result = false;
+		$media = Media::findOne($id);
 
-		return Json::encode(['success' => true]);
+		if ($media !== null) {
+			$result = $media->delete();
+		}
+
+		return Json::encode(['result' => $result]);
 	}
 }

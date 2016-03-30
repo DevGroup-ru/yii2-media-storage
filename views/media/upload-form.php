@@ -3,13 +3,13 @@
 use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
-use app\modules\media\assets\MediaAsset;
+use app\modules\media\assets\UploadingAsset;
 
 /**
  * @var yii\web\View $this
  */
 
-MediaAsset::register($this);
+UploadingAsset::register($this);
 
 $this->title = 'Media Storage';
 $this->params['breadcrumbs'][] = $this->title;
