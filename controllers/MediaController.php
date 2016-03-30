@@ -12,6 +12,10 @@ use app\modules\media\models\Media;
 
 class MediaController extends Controller
 {
+	const EVENT_ADD = 'media-add';
+	const EVENT_CHANGE = 'media-change';
+	const EVENT_DELETE = 'media-delete';
+
 	public function behaviors()
 	{
 		return [
@@ -83,7 +87,9 @@ class MediaController extends Controller
 		]);
 		$media->save();
 
-        return Json::encode(['status' => 'ok', 'file' => $filename]);
+		$this->trigger(self::EVENT_ADD);
+
+        return Json::encode(['result' => true]);
     }
 
 	public function actionDelete($id)
@@ -93,6 +99,10 @@ class MediaController extends Controller
 
 		if ($media !== null) {
 			$result = $media->delete();
+		}
+
+		if ($result) {
+			$this->trigger(self::EVENT_DELETE);
 		}
 
 		return Json::encode(['result' => $result]);
