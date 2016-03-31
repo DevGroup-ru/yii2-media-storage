@@ -87,17 +87,16 @@ class MediaController extends Controller
         $title    = $request->post('media-title', null);
         $group_id = $request->post('media-group', 1);
 
-        $uplPath = MediaHelper::getUploadPath();
         $uplDir  = MediaHelper::getUploadDir();
 
         $filename = $file->name;
         $i = 1;
 
-        while(file_exists($uplPath.$uplDir.$filename)) {
-            $filename = $file->baseName . '_' . $i++ . $file->extension;
+        while(Yii::$app->fs->has($uplDir.$filename)) {
+            $filename = $file->baseName . '_' . $i++ . '.' . $file->extension;
         }
 
-        $file->saveAs($uplPath.$uplDir.$filename);
+        Yii::$app->fs->write($uplDir.$filename, file_get_contents($file->tempName));
 
         $media = new Media([
             'path'     => $uplDir.$filename,
@@ -110,7 +109,7 @@ class MediaController extends Controller
         $event->message = $media->id;
         $this->trigger(self::EVENT_ADD, $event);
 
-        return Json::encode(['result' => true]);
+        return Json::encode(['result' => true, 'tmp' => $file->tempName]);
     }
 
     public function actionAddGroup() {

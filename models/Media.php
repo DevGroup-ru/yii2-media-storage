@@ -2,9 +2,9 @@
 
 namespace app\modules\media\models;
 
+use Yii;
 use yii\db\ActiveRecord;
 use yii\helpers\FileHelper;
-use app\modules\media\helpers\MediaHelper;
 use app\modules\media\models\MediaGroup;
 
 class Media extends ActiveRecord
@@ -37,7 +37,11 @@ class Media extends ActiveRecord
     }
 
     public function getType() {
-        return FileHelper::getMimeType(MediaHelper::getUploadPath() . $this->path);
+        //return Yii::$app->fs->getWithMetadata($this->path, ['mimetype']);
+
+        # Temporarily while issue not fixed
+        # https://github.com/creocoder/yii2-flysystem/issues/19
+        return Yii::$app->fs->getWithMetadata($this->path, ['mimetype'])['mimetype'];
     }
 
     public function isImage() {
