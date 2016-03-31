@@ -13,7 +13,7 @@ class MediaHelper {
         if (self::$uplDir !== null && self::$uplPath !== null)
             return;
 
-        self::$uplDir = '/media-storage/'.date('Y/d/');
+        self::$uplDir = '/media-storage/'.date('Y/m/');
         //self::$uplPath = Yii::getAlias('@app');
         self::$uplPath = Yii::getAlias('@webroot');
 

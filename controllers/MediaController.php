@@ -9,6 +9,7 @@ use yii\web\UploadedFile;
 use yii\helpers\Json;
 use yii\filters\AccessControl;
 use app\modules\media\models\Media;
+use app\modules\media\models\MediaGroup;
 use app\modules\media\events\MediaEvent;
 use app\modules\media\helpers\MediaHelper;
 
@@ -42,22 +43,39 @@ class MediaController extends Controller
         ]);
     }
 
-    public function actionShow()
+    public function actionShowItem()
     {
-        return 'media item page';
+        return $this->render('show-item');
     }
 
-    public function actionSettings()
+    public function actionShowGroup()
     {
-        return $this->render('settings');
+        return $this->render('show-group');
     }
 
-    public function actionAdd()
+    public function actionNewItemForm()
     {
-        return $this->render('upload-form');
+        $media_groups = [];
+
+        foreach(MediaGroup::find()->select(['id', 'name'])->all() as $group) {
+            $media_groups[] = [
+                'label'   => $group->name,
+                'url'     => '#',
+                'options' => ['data-id' => $group->id],
+            ];
+        }
+
+        return $this->render('add-item-form', [
+            'media_groups' => $media_groups,
+        ]);
     }
 
-    public function actionUpload()
+    public function actionNewGroupForm()
+    {
+        return $this->render('add-group-form');
+    }
+
+    public function actionAddItem()
     {
         $file = UploadedFile::getInstanceByName('media-file');
 
@@ -65,8 +83,9 @@ class MediaController extends Controller
             throw new HttpException(500, 'Upload error');
         }
 
-        $request = Yii::$app->request;
-        $title   = $request->post('media-title', null);
+        $request  = Yii::$app->request;
+        $title    = $request->post('media-title', null);
+        $group_id = $request->post('media-group', 1);
 
         $uplPath = MediaHelper::getUploadPath();
         $uplDir  = MediaHelper::getUploadDir();
@@ -81,8 +100,9 @@ class MediaController extends Controller
         $file->saveAs($uplPath.$uplDir.$filename);
 
         $media = new Media([
-            'path'  => $uplDir.$filename,
-            'title' => $title,
+            'path'     => $uplDir.$filename,
+            'title'    => $title,
+            'group_id' => $group_id,
         ]);
         $media->save();
 
@@ -93,7 +113,25 @@ class MediaController extends Controller
         return Json::encode(['result' => true]);
     }
 
-    public function actionDelete($id)
+    public function actionAddGroup() {
+        $request = Yii::$app->request;
+
+        $name = $request->post('group-name', null);
+
+        if (empty($name)) {
+            throw new Exception('Wrong fields in request');
+            return;
+        }
+
+        $media_group = new MediaGroup([
+            'name' => $name,
+        ]);
+        $media_group->save();
+
+        return $this->redirect(['media/show-group']);
+    }
+
+    public function actionDeleteItem($id)
     {
         $result = false;
         $media = Media::findOne($id);

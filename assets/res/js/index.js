@@ -6,7 +6,7 @@ jQuery(function($){
         var $thumb = $(this).parents('.thumbnail');
 
         $.ajax({
-            url: 'media/delete/'+id,
+            url: 'media/delete/item/'+id,
             type: 'DELETE',
             dataType: 'json',
             success: function(data) {

@@ -17,5 +17,6 @@ class UploadingAsset extends AssetBundle
     ];
     public $depends = [
         'yii\web\JqueryAsset',
+        'app\modules\media\assets\HelperAsset',
     ];
 }

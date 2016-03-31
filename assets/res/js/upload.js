@@ -1,6 +1,6 @@
 jQuery(function($){
     // Dropzone {
-    var MediaDropzone = new Dropzone('form.media-storage-upload-form', {
+    var MediaDropzone = new Dropzone('.media-storage-upload-form', {
         uploadMultiple: false,
         maxFilesize: 7,
         maxFiles: 1,
@@ -17,7 +17,7 @@ jQuery(function($){
 
     MediaDropzone.on('addedfile', function(file){
         MediaDropzoneList.push(file.name);
-        $('form.media-storage-upload-form').css('borderColor', '#0087f7');
+        $('.media-storage-upload-form').css('borderColor', '#0087f7');
     });
 
     MediaDropzone.on('removedfile', function(file){
@@ -40,16 +40,23 @@ jQuery(function($){
     // }
 
     $('#media-title-input').keyup(function(){
-        $('form.media-storage-upload-form input[name="media-title"]').val( $(this).val() );
+        $('.media-storage-upload-form input[name="media-title"]').val( $(this).val() );
     });
 
     $('.media-storage-submit-item').click(function(){
         if ( !MediaDropzoneList.length ) {
-            $('form.media-storage-upload-form').css('borderColor', 'red');
+            $('.media-storage-upload-form').css('borderColor', 'red');
             return false;
         }
 
         MediaDropzone.processQueue();
         $(this).text('Отправка ...');
+    });
+
+    $('.media-storage-items-fields .dropdown-menu a').click(function(event){
+        event.preventDefault();
+
+        $('.media-storage-items-fields .dropdown > button span:first-child').text( $(this).text() );
+        $('.media-storage-upload-form input[name="media-group"]').val( $(this).parent().data('id') );
     });
 });

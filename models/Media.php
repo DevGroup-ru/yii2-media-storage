@@ -5,6 +5,7 @@ namespace app\modules\media\models;
 use yii\db\ActiveRecord;
 use yii\helpers\FileHelper;
 use app\modules\media\helpers\MediaHelper;
+use app\modules\media\models\MediaGroup;
 
 class Media extends ActiveRecord
 {
@@ -25,6 +26,14 @@ class Media extends ActiveRecord
     {
         return [
         ];
+    }
+
+    /**
+     * Relation with Media Groups
+     */
+    public function getGroup()
+    {
+        return $this->hasOne(MediaGroup::classname(), ['id' => 'group_id']);
     }
 
     public function getType() {
