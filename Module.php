@@ -14,12 +14,12 @@ class Module extends \yii\base\Module
         parent::init();
     }
 
-	public function registerTranslations()
-	{
-		//Yii::$app->i18n->translations['modules/media/*'] = [
-			//'class' => '',
-			//'sourceLanguage' => 'en_US',
-			//'basePath' => '@app/modules/media',
-		//];
-	}
+    public function registerTranslations()
+    {
+        //Yii::$app->i18n->translations['modules/media/*'] = [
+            //'class' => '',
+            //'sourceLanguage' => 'en_US',
+            //'basePath' => '@app/modules/media',
+        //];
+    }
 }

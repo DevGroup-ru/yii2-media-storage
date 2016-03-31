@@ -6,16 +6,16 @@ use yii\web\AssetBundle;
 
 class UploadingAsset extends AssetBundle
 {
-	public $sourcePath = '@app/modules/media/assets/res';
+    public $sourcePath = '@app/modules/media/assets/res';
 
     public $css = [
-        'css/uploading.css',
+        'css/upload.css',
     ];
     public $js = [
-		'js/dropzone.js',
-		'js/media.js',
+        'js/dropzone.js',
+        'js/upload.js',
     ];
-	public $depends = [
-		'yii\web\JqueryAsset',
-	];
+    public $depends = [
+        'yii\web\JqueryAsset',
+    ];
 }
