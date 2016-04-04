@@ -3,25 +3,22 @@
 use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
-use app\modules\media\assets\IndexAsset;
 
 /**
  * @var yii\web\View $this
  */
-
-IndexAsset::register($this);
 
 $this->title = 'Media Storage | New Group';
 
 $this->params['breadcrumbs'][] = ['label' => 'Media Storage', 'url' => Url::to(['media/index'])];
 $this->params['breadcrumbs'][] = 'New Group';
 ?>
-<div class="media-storage-groups">
+<div class="media-storage-view media-storage-groups">
     <div class="row">
         <div class="col-md-3">
             <?php
             $form = ActiveForm::begin([
-                'action' => Url::to(),
+                'action' => Url::to(['media/save-group', 'id' => 0]),
                 'method' => 'post',
             ]);
 
@@ -31,6 +28,8 @@ $this->params['breadcrumbs'][] = 'New Group';
             echo Html::endTag('div');
 
             echo Html::tag('p', 'Some other fields will be here.');
+
+            echo Html::hiddenInput('id', 0, ['autocomlete' => 'off']);
 
             echo Html::submitButton();
 

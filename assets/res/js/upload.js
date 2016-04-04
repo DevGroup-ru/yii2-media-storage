@@ -11,7 +11,10 @@ jQuery(function($){
         thumbnailHeight: 200,
     });
     MediaDropzone.on('maxfilesexceeded', function(file){ this.removeFile(file); });
-    //MediaDropzone.on('complete', function(file){ location.reload(); });
+    MediaDropzone.on('complete', function(file){
+        console.log( $('.media-storage-upload-form').data('redirect') );
+        location.assign( $('.media-storage-upload-form').data('redirect') );
+    });
 
     var MediaDropzoneList = [];
 
@@ -32,13 +35,6 @@ jQuery(function($){
         MediaDropzoneList = tmp;
     });
 
-    //MediaDropzone.on('success', function(){
-        //$('#post-separate .form-container').fadeOut('slow', function(){
-            //$('#post-separate .alert').removeClass('hidden');
-        //});
-    //});
-    // }
-
     $('#media-title-input').keyup(function(){
         $('.media-storage-upload-form input[name="media-title"]').val( $(this).val() );
     });
@@ -50,13 +46,6 @@ jQuery(function($){
         }
 
         MediaDropzone.processQueue();
-        $(this).text('Отправка ...');
-    });
-
-    $('.media-storage-items-fields .dropdown-menu a').click(function(event){
-        event.preventDefault();
-
-        $('.media-storage-items-fields .dropdown > button span:first-child').text( $(this).text() );
-        $('.media-storage-upload-form input[name="media-group"]').val( $(this).data('id') );
+        $(this).text('Sending ...');
     });
 });

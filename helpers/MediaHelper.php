@@ -9,7 +9,8 @@ class MediaHelper {
     private static $tmp_dir = null;
     private static $storage_folder_name = '/media-storage/';
 
-    public static function getTmpDir() {
+    public static function getTmpDir()
+    {
         if (self::$tmp_dir === null) {
             self::$tmp_dir = Yii::getAlias('@runtime') . self::$storage_folder_name;
 
@@ -21,7 +22,8 @@ class MediaHelper {
         return self::$tmp_dir;
     }
 
-    public static function getUploadDir() {
+    public static function getUploadDir()
+    {
         if (self::$upl_dir === null) {
             self::$upl_dir = self::$storage_folder_name.date('Y/m/');
 

@@ -7,6 +7,7 @@ use yii\db\ActiveRecord;
 use yii\helpers\FileHelper;
 use yii\helpers\Html;
 use yii\helpers\Url;
+use branchonline\lightbox\Lightbox;
 use app\modules\media\models\MediaGroup;
 
 class Media extends ActiveRecord
@@ -36,17 +37,29 @@ class Media extends ActiveRecord
     public function show()
     {
         echo Html::img(
-            Url::to(['media/show-item', 'id' => $this->id, 'size' => 'full']),
+            Url::to(['media/show-item', 'id' => $this->id]),
             ['alt' => $this->title]
         );
     }
 
-    public function showThumb()
+    public function showThumb($use_lightbox = true)
     {
-        echo Html::img(
-            Url::to(['media/show-item', 'id' => $this->id, 'size' => 'thumb']),
-            ['alt' => $this->title]
-        );
+        if ($use_lightbox) {
+            echo Lightbox::widget([
+                'files' => [
+                    [
+                        'thumb'    => Url::to(['media/show-item', 'id' => $this->id, 'size' => 'thumb']),
+                        'original' => Url::to(['media/show-item', 'id' => $this->id]),
+                        'title'    => $this->title ? : "File #{$this->id}",
+                    ]
+                ],
+            ]);
+        } else {
+            echo Html::img(
+                Url::to(['media/show-item', 'id' => $this->id, 'size' => 'thumb']),
+                ['alt' => $this->title]
+            );
+        }
     }
 
     public function getType()

@@ -11,4 +11,10 @@ class HelperAsset extends AssetBundle
     public $css = [
         'css/helper.css',
     ];
+    public $js = [
+        'js/helper.js',
+    ];
+    public $depends = [
+        'yii\web\JqueryAsset',
+    ];
 }

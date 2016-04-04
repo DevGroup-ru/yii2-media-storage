@@ -8,6 +8,7 @@ use yii\web\Request;
 use yii\web\Controller;
 use yii\web\UploadedFile;
 use yii\helpers\Json;
+use yii\helpers\Url;
 use yii\filters\AccessControl;
 use yii\imagine\Image;
 use app\modules\media\models\Media;
@@ -38,7 +39,7 @@ class MediaController extends Controller
 
     public function actionIndex()
     {
-        $mediaLibrary = Media::find()->all();
+        $mediaLibrary = Media::find()->orderBy(['id' => SORT_DESC])->all();
 
         return $this->render('index', [
             'mediaLibrary' => $mediaLibrary,
@@ -93,47 +94,44 @@ class MediaController extends Controller
         }
     }
 
-    public function actionNewItemForm()
+    public function actionSaveItem($id)
     {
-        return $this->render('add-item-form', [
-            'media_groups' => MediaGroup::getForDropdown(),
-        ]);
-    }
+        if (empty($id)) {
+            $file = UploadedFile::getInstanceByName('media-file');
 
-    public function actionNewGroupForm()
-    {
-        return $this->render('add-group-form');
-    }
+            if ($file->hasError) {
+                throw new HttpException(500, 'Upload error');
+            }
 
-    public function actionAddItem()
-    {
-        $file = UploadedFile::getInstanceByName('media-file');
+            $request  = Yii::$app->request;
+            $title    = $request->post('media-title', null);
+            $group_id = $request->post('media-group', 1);
 
-        if ($file->hasError) {
-            throw new HttpException(500, 'Upload error');
+            $upl_dir  = MediaHelper::getUploadDir();
+
+            $filename = $file->name;
+            $i        = 1;
+
+            while(Yii::$app->fs->has($upl_dir.$filename)) {
+                $filename = $file->baseName . '_' . $i++ . '.' . $file->extension;
+            }
+
+            Yii::$app->fs->write($upl_dir.$filename, file_get_contents($file->tempName));
+
+            $media = new Media([
+                'path'      => $upl_dir.$filename,
+                'title'     => $title,
+                'group_id'  => $group_id,
+            ]);
+            $media->save();
+        } else {
+            $request  = Yii::$app->request;
+
+            $media = Media::findOne($id);
+            $media->title = $request->post('media-title', null);
+            $media->group_id    = $request->post('media-group', 1);
+            $media->save();
         }
-
-        $request  = Yii::$app->request;
-        $title    = $request->post('media-title', null);
-        $group_id = $request->post('media-group', 1);
-
-        $upl_dir  = MediaHelper::getUploadDir();
-
-        $filename = $file->name;
-        $i        = 1;
-
-        while(Yii::$app->fs->has($upl_dir.$filename)) {
-            $filename = $file->baseName . '_' . $i++ . '.' . $file->extension;
-        }
-
-        Yii::$app->fs->write($upl_dir.$filename, file_get_contents($file->tempName));
-
-        $media = new Media([
-            'path'      => $upl_dir.$filename,
-            'title'     => $title,
-            'group_id'  => $group_id,
-        ]);
-        $media->save();
 
         $event = new MediaEvent;
         $event->message = [
@@ -142,10 +140,12 @@ class MediaController extends Controller
         ];
         $this->trigger(self::EVENT_ADD, $event);
 
-        return Json::encode(['result' => true, 'tmp' => $file->tempName]);
+        return empty($id) ?
+            Json::encode(['result' => true, 'id' => $media->id, 'redirect' => Url::to(['media/index'])]) :
+            $this->redirect(Url::to(['media/item-form', 'id' => $media->id]));
     }
 
-    public function actionAddGroup() {
+    public function actionSaveGroup($id) {
         $request = Yii::$app->request;
 
         $name = $request->post('group-name', null);
@@ -163,14 +163,12 @@ class MediaController extends Controller
         return $this->redirect(['media/index']);
     }
 
-    public function actionEditItem()
+    public function actionItemForm($id)
     {
-        $request = Yii::$app->request;
-        $id = $request->get('id', null);
-
-        if (!$id) {
-            throw new Exception('Wrong fields in request');
-            return;
+        if (empty($id)) {
+            return $this->render('new-item', [
+                'media_groups' => MediaGroup::getForDropdown(),
+            ]);
         }
 
         $media = Media::findOne($id);
@@ -186,8 +184,12 @@ class MediaController extends Controller
         ]);
     }
 
-    public function actionEditGroup()
+    public function actionGroupForm($id)
     {
+        if (empty($id)) {
+            return $this->render('new-group');
+        }
+
         return $this->render('edit-group');
     }
 

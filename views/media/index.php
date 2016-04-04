@@ -12,12 +12,12 @@ IndexAsset::register($this);
 $this->title = 'Media Storage';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="media-storage-library">
+<div class="media-storage-view media-storage-library">
     <div class="row">
         <div class="col-md-12">
-            <a class="btn btn-primary" href="<?= Url::to(['media/new-item-form']) ?>">Add new item</a>
+            <a class="btn btn-primary" href="<?= Url::to(['media/item-form', 'id' => 0]) ?>">Add new item</a>
             <div class="spacer"></div>
-            <a class="btn btn-primary" href="<?= Url::to(['media/new-group-form']) ?>">Add new group</a>
+            <a class="btn btn-primary" href="<?= Url::to(['media/group-form', 'id' => 0]) ?>">Add new group</a>
         </div>
     </div>
     <div class="row mt20">
@@ -26,13 +26,13 @@ $this->params['breadcrumbs'][] = $this->title;
 
             <?php foreach($mediaLibrary as $media) { ?>
             <div class="thumbnail">
-                <?= $media->showThumb() ?>
+                <?= $media->showThumb(false) ?>
 
                 <div class="caption">
                     <h3><?= $media->title ? : "File #{$media->id}" ?></h3>
                     <p>File group: <?= $media->group->name ?></p>
                     <p>
-                        <a class="btn btn-default" href="<?= Url::to(['media/edit-item', 'id' => $media->id]) ?>">Edit</a>
+                        <a class="btn btn-default" href="<?= Url::to(['media/item-form', 'id' => $media->id]) ?>">Edit</a>
                         <a class="btn btn-danger" href="#" data-id="<?= $media->id ?>">Delete</a>
                     </p>
                 </div>

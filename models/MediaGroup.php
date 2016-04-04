@@ -41,7 +41,7 @@ class MediaGroup extends ActiveRecord
             $media_groups[] = [
                 'label'       => $group->name,
                 'url'         => '#',
-                'linkOptions' => ['data-id' => $group->id],
+                'linkOptions' => ['data-val' => $group->id],
             ];
         }
 
