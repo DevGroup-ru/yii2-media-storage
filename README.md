@@ -12,8 +12,9 @@ Media Storage module for Yii2
      'showScriptName' => false,
      'rules' => [
          'media' => 'media/media/index',
-         'media/item/<id:\d+>' => 'media/media/show-item',
-         'media/group/<id:\d+>' => 'media/media/show-group',
+         'media/show/item/<id:\d+>' => 'media/media/show-item',
+         'media/edit/item/<id:\d+>' => 'media/media/edit-item',
+         'media/edit/group/<id:\d+>' => 'media/media/edit-group',
          'GET media/add/item' => 'media/media/new-item-form',
          'GET media/add/group' => 'media/media/new-group-form',
          'POST media/add/item' => 'media/media/add-item',
@@ -24,10 +25,29 @@ Media Storage module for Yii2
  ],
  ```
 
-3. Run migrations:
+3. Add media module:
+ ```php
+ 'modules' => [
+     'media' => [
+         'class' => 'app\modules\media\Module',
+         'accessPermissions' => ['@'],
+     ],
+ ],
+ ```
+4. Run migrations:
  ```bash
  ./yii migrate --migrationPath='modules/media/migrations'
  ```
+
+5. Put to your .htaccess this line:
+ ```apacheconf
+ XSendFile on
+ XSendFilePath "/absolute-path-to-application-root/runtime/media-storage"
+ ```
+
+### Dependencies
+creocoder/yii2-flysystem
+yiisoft/yii2-imagine
 
 ### Version
 0.1

@@ -28,4 +28,23 @@ class MediaGroup extends ActiveRecord
     {
         return $this->hasMany(Media::classname(), ['group_id' => 'id']);
     }
+
+    /**
+     * Return all media groups for using as dropdown items
+     *
+     * @return array Dropdown items format
+     */
+    static public function getForDropdown() {
+        $media_groups = [];
+
+        foreach(self::find()->select(['id', 'name'])->all() as $group) {
+            $media_groups[] = [
+                'label'       => $group->name,
+                'url'         => '#',
+                'linkOptions' => ['data-id' => $group->id],
+            ];
+        }
+
+        return $media_groups;
+    }
 }

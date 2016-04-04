@@ -57,6 +57,6 @@ jQuery(function($){
         event.preventDefault();
 
         $('.media-storage-items-fields .dropdown > button span:first-child').text( $(this).text() );
-        $('.media-storage-upload-form input[name="media-group"]').val( $(this).parent().data('id') );
+        $('.media-storage-upload-form input[name="media-group"]').val( $(this).data('id') );
     });
 });

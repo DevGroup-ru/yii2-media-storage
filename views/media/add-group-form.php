@@ -11,8 +11,10 @@ use app\modules\media\assets\IndexAsset;
 
 IndexAsset::register($this);
 
-$this->title = 'Media Storage Group';
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = 'Media Storage | New Group';
+
+$this->params['breadcrumbs'][] = ['label' => 'Media Storage', 'url' => Url::to(['media/index'])];
+$this->params['breadcrumbs'][] = 'New Group';
 ?>
 <div class="media-storage-groups">
     <div class="row">

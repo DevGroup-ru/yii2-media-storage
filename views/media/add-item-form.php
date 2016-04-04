@@ -12,13 +12,15 @@ use app\modules\media\assets\UploadingAsset;
 
 UploadingAsset::register($this);
 
-$this->title = 'Media Storage';
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = 'Media Storage | New Item';
+
+$this->params['breadcrumbs'][] = ['label' => 'Media Storage', 'url' => Url::to(['media/index'])];
+$this->params['breadcrumbs'][] = 'New Item';
 ?>
 <div class="row">
     <div class="col-md-12">
         <?php
-        $form = ActiveForm::begin([
+        ActiveForm::begin([
             'action' => Url::to(),
             'method' => 'post',
             'options' => [
@@ -37,7 +39,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
         echo Html::beginTag('div', ['class' => 'media-storage-items-fields mt20']);
             echo Html::beginTag('div', ['class' => 'form-group']);
-                Html::input('text', 'media-title', null, ['id' => 'media-title-input', 'placeholder' => 'File Hint']);
+                echo Html::input('text', 'media-title', null, ['id' => 'media-title-input', 'placeholder' => 'File Hint']);
             echo Html::endTag('div');
 
             echo Html::beginTag('div', ['class' => 'dropdown']);
