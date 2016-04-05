@@ -29,6 +29,11 @@ class MediaGroup extends ActiveRecord
         return $this->hasMany(Media::classname(), ['group_id' => 'id']);
     }
 
+    public function getItemsCount()
+    {
+        return $this->getMedias()->count();
+    }
+
     /**
      * Return all media groups for using as dropdown items
      *
@@ -41,7 +46,7 @@ class MediaGroup extends ActiveRecord
             $media_groups[] = [
                 'label'       => $group->name,
                 'url'         => '#',
-                'linkOptions' => ['data-val' => $group->id],
+                'linkOptions' => ['data-val' => $group->id, 'class' => 'js-link'],
             ];
         }
 

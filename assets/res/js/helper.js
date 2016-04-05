@@ -1,7 +1,9 @@
 jQuery(function($){
-    $('.media-storage-view .dropdown .dropdown-menu a').click(function(event){
+    $('.js-link').click(function(event){
         event.preventDefault();
+    });
 
+    $('.media-storage-view .dropdown .dropdown-menu a').click(function(){
         $dropdown = $(this).parents('.dropdown');
 
         $dropdown.find('button span:first-child').text( $(this).text() );

@@ -1,0 +1,10 @@
+.media-storage-groups .list-group-item {
+    cursor: pointer;
+}
+.media-storage-groups .list-group-item:hover {
+    background-color: #ddd;
+}
+.media-storage-groups .list-group-item .badge {
+    float: none !important;
+    margin-left: 5px;
+}

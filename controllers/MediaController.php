@@ -18,9 +18,12 @@ use app\modules\media\helpers\MediaHelper;
 
 class MediaController extends Controller
 {
-    const EVENT_ADD = 'media-add';
-    const EVENT_CHANGE = 'media-change';
-    const EVENT_DELETE = 'media-delete';
+    const EVENT_ITEM_ADD     = 'media-item-add';
+    const EVENT_ITEM_CHANGE  = 'media-item-change';
+    const EVENT_ITEM_DELETE  = 'media-item-delete';
+    const EVENT_GROUP_ADD    = 'media-group-add';
+    const EVENT_GROUP_CHANGE = 'media-group-change';
+    const EVENT_GROUP_DELETE = 'media-group-delete';
 
     public function behaviors()
     {
@@ -37,21 +40,24 @@ class MediaController extends Controller
         ];
     }
 
-    public function actionIndex()
+    public function actionAllFiles()
     {
-        $mediaLibrary = Media::find()->orderBy(['id' => SORT_DESC])->all();
+        return $this->render('all-files', [
+            'media_library' => Media::find()->orderBy(['id' => SORT_DESC])->all(),
+            'media_groups' => MediaGroup::getForDropdown(),
+        ]);
+    }
 
-        return $this->render('index', [
-            'mediaLibrary' => $mediaLibrary,
+    public function actionAllGroups()
+    {
+        return $this->render('all-groups', [
+            'media_groups' => MediaGroup::find()->orderBy(['id' => SORT_DESC])->all(),
         ]);
     }
 
     # TODO: Add code for checking permissions
-    public function actionShowItem()
+    public function actionShowItem($id)
     {
-        $request = Yii::$app->request;
-        $id = $request->get('id', null);
-
         if (!$id) {
             throw new Exception('Wrong fields in request');
             return;
@@ -75,6 +81,7 @@ class MediaController extends Controller
             }
 
             # Making thumbnail {
+            $request = Yii::$app->request;
             $img_size = $request->get('size', 'full');
 
             if ($img_size === 'thumb') {
@@ -138,11 +145,9 @@ class MediaController extends Controller
             'id' => $media->id,
             'mime' => $media->getType(),
         ];
-        $this->trigger(self::EVENT_ADD, $event);
+        $this->trigger(self::EVENT_ITEM_ADD, $event);
 
-        return empty($id) ?
-            Json::encode(['result' => true, 'id' => $media->id, 'redirect' => Url::to(['media/index'])]) :
-            $this->redirect(Url::to(['media/item-form', 'id' => $media->id]));
+        return Json::encode(['result' => true, 'id' => $media->id, 'redirect' => Url::to(['media/all-files'])]);
     }
 
     public function actionSaveGroup($id) {
@@ -155,42 +160,11 @@ class MediaController extends Controller
             return;
         }
 
-        $media_group = new MediaGroup([
-            'name' => $name,
-        ]);
-        $media_group->save();
+        $group = $id ? MediaGroup::findOne($id) : new MediaGroup();
+        $group->name = $name;
+        $group->save();
 
-        return $this->redirect(['media/index']);
-    }
-
-    public function actionItemForm($id)
-    {
-        if (empty($id)) {
-            return $this->render('new-item', [
-                'media_groups' => MediaGroup::getForDropdown(),
-            ]);
-        }
-
-        $media = Media::findOne($id);
-
-        if ($media === null) {
-            throw new Exception('File not found');
-            return;
-        }
-
-        return $this->render('edit-item', [
-            'media' => $media,
-            'media_groups' => MediaGroup::getForDropdown(),
-        ]);
-    }
-
-    public function actionGroupForm($id)
-    {
-        if (empty($id)) {
-            return $this->render('new-group');
-        }
-
-        return $this->render('edit-group');
+        return Json::encode(['result' => true, 'id' => $group->id, 'redirect' => Url::to(['media/all-groups'])]);
     }
 
     public function actionDeleteItem($id)
@@ -200,14 +174,31 @@ class MediaController extends Controller
 
         if ($media !== null) {
             Yii::$app->fs->delete($media->path);
-            Yii::$app->fs->delete($media->thumbnail);
 
             $result = $media->delete();
 
             if ($result) {
                 $event = new MediaEvent;
                 $event->message = $id;
-                $this->trigger(self::EVENT_DELETE, $event);
+                $this->trigger(self::EVENT_ITEM_DELETE, $event);
+            }
+        }
+
+        return Json::encode(['result' => $result]);
+    }
+
+    public function actionDeleteGroup($id)
+    {
+        $result = false;
+        $group = MediaGroup::findOne($id);
+
+        if ($group !== null) {
+            $result = $group->delete();
+
+            if ($result) {
+                $event = new MediaEvent;
+                $event->message = $id;
+                $this->trigger(self::EVENT_GROUP_DELETE, $event);
             }
         }
 

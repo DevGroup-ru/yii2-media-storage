@@ -57,7 +57,7 @@ class Media extends ActiveRecord
         } else {
             echo Html::img(
                 Url::to(['media/show-item', 'id' => $this->id, 'size' => 'thumb']),
-                ['alt' => $this->title]
+                ['alt' => $this->title, 'class' => 'media-item']
             );
         }
     }
