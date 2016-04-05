@@ -45,6 +45,13 @@ Media Storage module for Yii2
  XSendFilePath "/absolute-path-to-application-root/runtime/media-storage"
  ```
 
+### Clean runtime folder
+This module will store temporarily files in Yii runtime folder. For clean it, add module in console.php and run:
+ ```bash
+ ./yii media/clean
+ ```
+You can also create task for cron.
+
 ### Dependencies
 creocoder/yii2-flysystem
 yiisoft/yii2-imagine

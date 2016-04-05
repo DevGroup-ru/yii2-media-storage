@@ -33,11 +33,15 @@ $this->params['breadcrumbs'][] = $this->title;
 
                     <div class="caption">
                         <h3><?= $media->title ? : "File #{$media->id}" ?></h3>
-                        <p>File group: <?= $media->group->name ?></p>
+
                         <p>
+                            File group: <?= $media->group->name ?> <br>
+                            File uploader: <?= $media->author ?>
+                        </p>
+                        <div class="mt20">
                             <a class="js-link btn btn-default" href="#">Edit</a>
                             <a class="js-link btn btn-danger" href="<?= Url::to(['media/delete-item', 'id' => $media->id]) ?>">Delete</a>
-                        </p>
+                        </div>
                     </div>
                 </div>
                 <?php } ?>

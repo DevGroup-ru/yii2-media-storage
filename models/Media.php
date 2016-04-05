@@ -26,6 +26,12 @@ class Media extends ActiveRecord
         ];
     }
 
+    // Yii2 is sucks
+    //public function getTitle()
+    //{
+        //return empty($this->title) ? "File #{$this->id}" : $this->title;
+    //}
+
     /**
      * Relation with Media Groups
      */
@@ -34,10 +40,18 @@ class Media extends ActiveRecord
         return $this->hasOne(MediaGroup::classname(), ['id' => 'group_id']);
     }
 
+    /**
+     * Relation with User
+     */
+    //public function getAuthor()
+    //{
+        //return $this->hasOne(Yii::$app->user->identityClass, ['id' => 'author']);
+    //}
+
     public function show()
     {
         echo Html::img(
-            Url::to(['media/show-item', 'id' => $this->id]),
+            ['media/show-item', 'id' => $this->id],
             ['alt' => $this->title]
         );
     }
@@ -56,7 +70,7 @@ class Media extends ActiveRecord
             ]);
         } else {
             echo Html::img(
-                Url::to(['media/show-item', 'id' => $this->id, 'size' => 'thumb']),
+                ['media/show-item', 'id' => $this->id, 'size' => 'thumb'],
                 ['alt' => $this->title, 'class' => 'media-item']
             );
         }
