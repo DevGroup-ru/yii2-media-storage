@@ -2,7 +2,7 @@
 
 namespace app\modules\media;
 
-//use Yii;
+use Yii;
 
 class Module extends \yii\base\Module
 {
@@ -12,6 +12,10 @@ class Module extends \yii\base\Module
     public function init()
     {
         parent::init();
+
+        if (Yii::$app instanceof \yii\console\Application) {
+            $this->controllerNamespace = 'app\modules\media\commands';
+        }
     }
 
     public function registerTranslations()

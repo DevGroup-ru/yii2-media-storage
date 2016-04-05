@@ -39,7 +39,7 @@ Media Storage module for Yii2
  ./yii migrate --migrationPath='modules/media/migrations'
  ```
 
-5. Put to your .htaccess this line:
+5. Put this lines to VirtualHost section of your domain in Apache configurations files:
  ```apacheconf
  XSendFile on
  XSendFilePath "/absolute-path-to-application-root/runtime/media-storage"
@@ -48,6 +48,7 @@ Media Storage module for Yii2
 ### Dependencies
 creocoder/yii2-flysystem
 yiisoft/yii2-imagine
+branchonline/yii2-lightbox
 
 ### Version
 0.1

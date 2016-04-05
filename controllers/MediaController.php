@@ -128,6 +128,7 @@ class MediaController extends Controller
             $media = new Media([
                 'path'      => $upl_dir.$filename,
                 'title'     => $title,
+                'author'    => Yii::$app->user->getId(),
                 'group_id'  => $group_id,
             ]);
             $media->save();
