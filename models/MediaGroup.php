@@ -39,7 +39,8 @@ class MediaGroup extends ActiveRecord
      *
      * @return array Dropdown items format
      */
-    static public function getForDropdown() {
+    static public function getForDropdown()
+    {
         $media_groups = [];
 
         foreach(self::find()->select(['id', 'name'])->all() as $group) {

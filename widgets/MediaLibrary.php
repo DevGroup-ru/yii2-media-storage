@@ -8,11 +8,10 @@ use yii\helpers\Url;
 use yii\bootstrap\Modal;
 use app\modules\media\models\Media;
 use app\modules\media\assets\WidgetAsset;
+use app\modules\media\helpers\MediaHelper;
 
 class MediaLibrary extends Widget
 {
-    public $input = 'media-item-id';
-
     public function init()
     {
         WidgetAsset::register($this->getView());
@@ -46,7 +45,7 @@ class MediaLibrary extends Widget
             echo Html::endTag('div');
         }
 
-        echo Html::hiddenInput($this->input, 0, ['autocomplete' => 'off']);
+        echo Html::hiddenInput(MediaHelper::getWidgetInputName(), 0, ['autocomplete' => 'off']);
 
         echo Html::endTag('div');
 

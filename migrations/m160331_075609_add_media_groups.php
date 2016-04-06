@@ -7,7 +7,7 @@ class m160331_075609_add_media_groups extends Migration
     public function up()
     {
         $this->createTable('media-storage-groups', [
-            'id' => $this->primaryKey(),
+            'id'   => $this->primaryKey(),
             'name' => $this->string(64),
         ]);
 
@@ -26,15 +26,4 @@ class m160331_075609_add_media_groups extends Migration
 
         $this->dropTable('media-storage-groups');
     }
-
-    /*
-    // Use safeUp/safeDown to run migration code within a transaction
-    public function safeUp()
-    {
-    }
-
-    public function safeDown()
-    {
-    }
-    */
 }

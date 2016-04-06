@@ -34,4 +34,8 @@ class MediaHelper {
 
         return self::$upl_dir;
     }
+
+    public static function getWidgetInputName() {
+        return 'media-item-id';
+    }
 }

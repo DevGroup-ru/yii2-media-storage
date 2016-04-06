@@ -4,7 +4,6 @@ namespace app\modules\media\controllers;
 
 use Yii;
 use yii\base\Exception;
-use yii\web\Request;
 use yii\web\Controller;
 use yii\web\UploadedFile;
 use yii\helpers\Json;
@@ -151,7 +150,8 @@ class MediaController extends Controller
         return Json::encode(['result' => true, 'id' => $media->id, 'redirect' => Url::to(['media/all-files'])]);
     }
 
-    public function actionSaveGroup($id) {
+    public function actionSaveGroup($id)
+    {
         $request = Yii::$app->request;
 
         $name = $request->post('group-name', null);
