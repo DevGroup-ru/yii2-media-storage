@@ -4,6 +4,7 @@ namespace app\modules\media\models;
 
 use yii\db\ActiveRecord;
 use app\modules\media\models\Media;
+use app\modules\media\models\MediaPermission;
 
 class MediaGroup extends ActiveRecord
 {
@@ -18,6 +19,8 @@ class MediaGroup extends ActiveRecord
     public function rules()
     {
         return [
+            ['name', 'required'],
+            ['name', 'unique'],
         ];
     }
 
@@ -35,22 +38,20 @@ class MediaGroup extends ActiveRecord
     }
 
     /**
-     * Return all media groups for using as dropdown items
-     *
-     * @return array Dropdown items format
+     * Relation with Group Permissions
      */
-    static public function getForDropdown()
+    public function getPermissions()
     {
-        $media_groups = [];
+        $permissions = $this->hasMany(MediaPermission::classname(), ['group_id' => 'id'])->select('name')->all();
 
-        foreach(self::find()->select(['id', 'name'])->all() as $group) {
-            $media_groups[] = [
-                'label'       => $group->name,
-                'url'         => '#',
-                'linkOptions' => ['data-val' => $group->id, 'class' => 'js-link'],
-            ];
+        foreach($permissions as &$p) {
+            $p = $p->name;
         }
 
-        return $media_groups;
+        return $permissions;
+    }
+
+    public function extraFields() {
+        return ['permissions'];
     }
 }

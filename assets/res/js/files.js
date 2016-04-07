@@ -15,7 +15,7 @@ jQuery(function($){
     var MediaDropzone = new Dropzone('.media-item-new form', {
         uploadMultiple: false,
         maxFiles: 1,
-        paramName: 'media-file',
+        paramName: 'file',
         addRemoveLinks: true,
         autoProcessQueue: false,
         thumbnailWidth: 150,
@@ -55,8 +55,8 @@ jQuery(function($){
             return false;
         }
 
-        MediaDropzone.processQueue();
         $(this).text('Sending ...');
+        MediaDropzone.processQueue();
     });
 
     ////////////
@@ -65,7 +65,7 @@ jQuery(function($){
 
     $('.media-storage-library .thumbnail .btn-default').click(function(){
         var $thumb = $(this).parents('.thumbnail');
-        var data = $thumb.data('all');
+        var data   = $thumb.data('all');
 
         $('.media-storage-library .thumbnail').removeClass('selected-block');
         $thumb.addClass('selected-block');
@@ -78,8 +78,8 @@ jQuery(function($){
         // }
 
         $('.media-item-edit .dropdown-menu a[data-val="' + data.group_id + '"]').click();
-        $('#media-id-edit-hidden').val( data.id );
-        $('#media-title-edit-input').val( data.title );
+        $('#media-id-edit-hidden').val(data.id);
+        $('#media-title-edit-input').val(data._title);
 
         $('.media-item-new').addClass('hidden');
         $('.media-item-edit').removeClass('hidden');
@@ -92,8 +92,8 @@ jQuery(function($){
             url: $form.data('url').replace(0, $('#media-id-edit-hidden').val()),
             type: 'POST',
             data: {
-                'media-title': $('#media-title-edit-input').val(),
-                'media-group': $('#media-group-edit-hidden').val()
+                'title': $('#media-title-edit-input').val(),
+                'group': $('#media-group-edit-hidden').val()
             },
             dataType: 'json',
             success: function(data) {

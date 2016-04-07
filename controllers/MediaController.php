@@ -10,8 +10,10 @@ use yii\helpers\Json;
 use yii\helpers\Url;
 use yii\filters\AccessControl;
 use yii\imagine\Image;
+use yii\rbac\Assignment;
 use app\modules\media\models\Media;
 use app\modules\media\models\MediaGroup;
+use app\modules\media\models\MediaPermission;
 use app\modules\media\events\MediaEvent;
 use app\modules\media\helpers\MediaHelper;
 
@@ -33,7 +35,7 @@ class MediaController extends Controller
                     [
                         'allow' => true,
                         'roles' => $this->module->accessPermissions,
-                    ]
+                    ],
                 ],
             ],
         ];
@@ -43,25 +45,24 @@ class MediaController extends Controller
     {
         return $this->render('all-files', [
             'media_library' => Media::find()->orderBy(['id' => SORT_DESC])->all(),
-            'media_groups' => MediaGroup::getForDropdown(),
+            'media_groups' => MediaHelper::getMediaGroupsForDropdown(),
         ]);
     }
 
     public function actionAllGroups()
     {
+        $user_rights = Yii::$app->authManager->getAssignments( Yii::$app->user->getId() );
+        $user_rights = array_keys($user_rights);
+
         return $this->render('all-groups', [
             'media_groups' => MediaGroup::find()->orderBy(['id' => SORT_DESC])->all(),
+            'permissions'  => MediaHelper::getPermissionsForSelect(),
         ]);
     }
 
     # TODO: Add code for checking permissions
     public function actionShowItem($id)
     {
-        if (!$id) {
-            throw new Exception('Wrong fields in request');
-            return;
-        }
-
         $media = Media::findOne($id);
 
         if ($media === null) {
@@ -102,16 +103,16 @@ class MediaController extends Controller
 
     public function actionSaveItem($id)
     {
+        $request = Yii::$app->request;
+        $title   = trim( $request->post('title', null) );
+        $group   = $request->post('group', 1);
+
         if (empty($id)) {
-            $file = UploadedFile::getInstanceByName('media-file');
+            $file = UploadedFile::getInstanceByName('file');
 
             if ($file->hasError) {
                 throw new HttpException(500, 'Upload error');
             }
-
-            $request  = Yii::$app->request;
-            $title    = $request->post('media-title', null);
-            $group_id = $request->post('media-group', 1);
 
             $upl_dir  = MediaHelper::getUploadDir();
 
@@ -126,46 +127,59 @@ class MediaController extends Controller
 
             $media = new Media([
                 'path'      => $upl_dir.$filename,
-                'title'     => $title,
-                'author'    => Yii::$app->user->getId(),
-                'group_id'  => $group_id,
+                '_title'    => $title,
+                'group_id'  => $group,
+                'author_id' => Yii::$app->user->getId(),
             ]);
             $media->save();
         } else {
-            $request  = Yii::$app->request;
-
-            $media = Media::findOne($id);
-            $media->title = $request->post('media-title', null);
-            $media->group_id    = $request->post('media-group', 1);
+            $media            = Media::findOne($id);
+            $media->_title    = $title;
+            $media->group_id  = $group;
             $media->save();
         }
 
         $event = new MediaEvent;
         $event->message = [
-            'id' => $media->id,
+            'id'   => $media->id,
             'mime' => $media->getType(),
         ];
         $this->trigger(self::EVENT_ITEM_ADD, $event);
 
-        return Json::encode(['result' => true, 'id' => $media->id, 'redirect' => Url::to(['media/all-files'])]);
+        return Json::encode(['result' => true, 'id' => $media->id, 'redirect' => Url::to(['/media/media/all-files'])]);
     }
 
     public function actionSaveGroup($id)
     {
         $request = Yii::$app->request;
 
-        $name = $request->post('group-name', null);
+        # Save group {
+        $group = $id ? MediaGroup::findOne($id) : new MediaGroup();
+        $group->name = $request->post('name', null);
+        $group->save();
+        # }
 
-        if (empty($name)) {
-            throw new Exception('Wrong fields in request');
-            return;
+        # Save permissions {
+        $permissions = $request->post('permissions', []) ? : [];
+
+        if ($id) {
+            MediaPermission::deleteAll(['group_id' => $group->id]);
         }
 
-        $group = $id ? MediaGroup::findOne($id) : new MediaGroup();
-        $group->name = $name;
-        $group->save();
+        foreach($permissions as $permission) {
+            $new_permissions = new MediaPermission([
+                'group_id' => $group->id,
+                'name'     => $permission,
+            ]);
+            $new_permissions->save();
+        }
+        # }
 
-        return Json::encode(['result' => true, 'id' => $group->id, 'redirect' => Url::to(['media/all-groups'])]);
+        $event = new MediaEvent;
+        $event->message = $group->id;
+        $this->trigger(self::EVENT_GROUP_ADD, $event);
+
+        return Json::encode(['result' => true, 'id' => $group->id, 'redirect' => Url::to(['/media/media/all-groups'])]);
     }
 
     public function actionDeleteItem($id)

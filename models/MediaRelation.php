@@ -10,4 +10,13 @@ class MediaRelation extends ActiveRecord
     {
         return 'media-storage-relations';
     }
+
+    public function rules()
+    {
+        return [
+            [['media', 'object_id', 'object_model'], 'required'],
+            [['media', 'object_id'], 'integer'],
+            ['object_model', 'string', 'max' => 64],
+        ];
+    }
 }

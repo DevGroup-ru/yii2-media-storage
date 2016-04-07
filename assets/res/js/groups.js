@@ -10,6 +10,7 @@ jQuery(function($){
         $h3.text($h3.data('add'));
 
         $('#media-group-name').val('').focus();
+        $('#group-permissions').val('').trigger('change');
         $('.media-group-form').data({
             update: false,
             id: 0
@@ -29,6 +30,7 @@ jQuery(function($){
 
         var data = $(this).data('all');
         $('#media-group-name').val(data.name);
+        $('#group-permissions').val(data.permissions).trigger('change');;
 
         $('.media-group-form').data({
             update: true,
@@ -50,7 +52,8 @@ jQuery(function($){
             url: url,
             type: 'POST',
             data: {
-                'group-name': $('#media-group-name').val()
+                'name':        $('#media-group-name').val(),
+                'permissions': $('#group-permissions').val()
             },
             dataType: 'json',
             success: function(data) {

@@ -26,11 +26,10 @@ class Media extends ActiveRecord
         ];
     }
 
-    // Yii2 is sucks
-    //public function getTitle()
-    //{
-        //return empty($this->title) ? "File #{$this->id}" : $this->title;
-    //}
+    public function getTitle()
+    {
+        return empty($this->_title) ? "File #{$this->id}" : $this->_title;
+    }
 
     /**
      * Relation with Media Groups
@@ -51,7 +50,7 @@ class Media extends ActiveRecord
     public function show()
     {
         echo Html::img(
-            ['media/show-item', 'id' => $this->id],
+            ['/media/media/show-item', 'id' => $this->id],
             ['alt' => $this->title]
         );
     }
@@ -62,15 +61,15 @@ class Media extends ActiveRecord
             echo Lightbox::widget([
                 'files' => [
                     [
-                        'thumb'    => Url::to(['media/show-item', 'id' => $this->id, 'size' => 'thumb']),
-                        'original' => Url::to(['media/show-item', 'id' => $this->id]),
+                        'thumb'    => Url::to(['/media/media/show-item', 'id' => $this->id, 'size' => 'thumb']),
+                        'original' => Url::to(['/media/media/show-item', 'id' => $this->id]),
                         'title'    => $this->title ? : "File #{$this->id}",
                     ]
                 ],
             ]);
         } else {
             echo Html::img(
-                ['media/show-item', 'id' => $this->id, 'size' => 'thumb'],
+                ['/media/media/show-item', 'id' => $this->id, 'size' => 'thumb'],
                 ['alt' => $this->title, 'class' => 'media-item']
             );
         }

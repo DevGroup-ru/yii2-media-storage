@@ -3,6 +3,7 @@
 namespace app\modules\media\helpers;
 
 use Yii;
+use app\modules\media\models\MediaGroup;
 
 class MediaHelper {
     private static $upl_dir = null;
@@ -35,7 +36,43 @@ class MediaHelper {
         return self::$upl_dir;
     }
 
-    public static function getWidgetInputName() {
+    public static function getWidgetInputName()
+    {
         return 'media-item-id';
+    }
+
+    /**
+     * Return all media groups for using as dropdown items
+     *
+     * @return array Dropdown items format
+     */
+    static public function getMediaGroupsForDropdown()
+    {
+        $media_groups = [];
+
+        foreach(MediaGroup::find()->select(['id', 'name'])->orderBy(['name' => SORT_ASC])->all() as $group) {
+            $media_groups[] = [
+                'label'       => $group->name,
+                'url'         => '#',
+                'linkOptions' => ['data-val' => $group->id, 'class' => 'js-link'],
+            ];
+        }
+
+        return $media_groups;
+    }
+
+    /**
+     * Return roles and permission items for using in Select2 widget
+     *
+     * @return array Roles and permission items
+     */
+    public static function getPermissionsForSelect()
+    {
+        $get_names = function($item){return $item->name;};
+
+        return [
+            'Roles' => array_map($get_names, Yii::$app->authManager->getRoles()),
+            'Items' => array_map($get_names, Yii::$app->authManager->getPermissions()),
+        ];
     }
 }
