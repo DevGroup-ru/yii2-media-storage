@@ -1,21 +1,20 @@
 <?php
 
-namespace app\modules\media\assets;
+namespace DevGroup\MediaStorage\assets;
 
 use yii\web\AssetBundle;
 
-class WidgetAsset extends AssetBundle
+class HelperAsset extends AssetBundle
 {
     public $sourcePath = '@app/modules/media/assets/res';
 
     public $css = [
-        'css/widget.css',
+        'css/helper.css',
     ];
     public $js = [
-        'js/widget.js',
+        'js/helper.js',
     ];
     public $depends = [
         'yii\web\JqueryAsset',
-        'app\modules\media\assets\HelperAsset',
     ];
 }

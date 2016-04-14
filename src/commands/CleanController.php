@@ -1,10 +1,10 @@
 <?php
 
-namespace app\modules\media\commands;
+namespace DevGroup\MediaStorage\commands;
 
 use Yii;
 use yii\console\Controller;
-use app\modules\media\helpers\MediaHelper;
+use DevGroup\MediaStorage\helpers\MediaHelper;
 
 class CleanController extends Controller
 {

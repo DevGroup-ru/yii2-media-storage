@@ -1,6 +1,6 @@
 <?php
 
-namespace app\modules\media\assets;
+namespace DevGroup\MediaStorage\assets;
 
 use yii\web\AssetBundle;
 
@@ -16,6 +16,6 @@ class GroupsAsset extends AssetBundle
     ];
     public $depends = [
         'yii\web\JqueryAsset',
-        'app\modules\media\assets\HelperAsset',
+        'DevGroup\MediaStorage\assets\HelperAsset',
     ];
 }

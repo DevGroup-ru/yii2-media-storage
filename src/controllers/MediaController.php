@@ -1,6 +1,6 @@
 <?php
 
-namespace app\modules\media\controllers;
+namespace DevGroup\MediaStorage\controllers;
 
 use Yii;
 use yii\base\Exception;
@@ -11,11 +11,11 @@ use yii\helpers\Url;
 use yii\filters\AccessControl;
 use yii\imagine\Image;
 use yii\rbac\Assignment;
-use app\modules\media\models\Media;
-use app\modules\media\models\MediaGroup;
-use app\modules\media\models\MediaPermission;
-use app\modules\media\events\MediaEvent;
-use app\modules\media\helpers\MediaHelper;
+use DevGroup\MediaStorage\models\Media;
+use DevGroup\MediaStorage\models\MediaGroup;
+use DevGroup\MediaStorage\models\MediaPermission;
+use DevGroup\MediaStorage\events\MediaEvent;
+use DevGroup\MediaStorage\helpers\MediaHelper;
 
 class MediaController extends Controller
 {

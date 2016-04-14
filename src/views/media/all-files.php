@@ -4,7 +4,7 @@ use yii\helpers\Json;
 use yii\helpers\Url;
 use yii\bootstrap\Dropdown;
 use branchonline\lightbox\Lightbox;
-use app\modules\media\assets\FilesAsset;
+use DevGroup\MediaStorage\assets\FilesAsset;
 
 /**
  * @var yii\web\View $this

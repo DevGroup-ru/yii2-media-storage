@@ -1,14 +1,14 @@
 <?php
 
-namespace app\modules\media\widgets;
+namespace DevGroup\MediaStorage\widgets;
 
 use yii\base\Widget;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\bootstrap\Modal;
-use app\modules\media\models\Media;
-use app\modules\media\assets\WidgetAsset;
-use app\modules\media\helpers\MediaHelper;
+use DevGroup\MediaStorage\models\Media;
+use DevGroup\MediaStorage\assets\WidgetAsset;
+use DevGroup\MediaStorage\helpers\MediaHelper;
 
 class MediaLibrary extends Widget
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace app\modules\media\models;
+namespace DevGroup\MediaStorage\models;
 
 use yii\db\ActiveRecord;
 

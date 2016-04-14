@@ -1,12 +1,12 @@
 <?php
 
-namespace app\modules\media;
+namespace DevGroup\MediaStorage;
 
 use Yii;
 
 class Module extends \yii\base\Module
 {
-    public $controllerNamespace = 'app\modules\media\controllers';
+    public $controllerNamespace = 'DevGroup\MediaStorage\controllers';
     public $accessPermissions = ['@'];
 
     public function init()
@@ -14,7 +14,7 @@ class Module extends \yii\base\Module
         parent::init();
 
         if (Yii::$app instanceof \yii\console\Application) {
-            $this->controllerNamespace = 'app\modules\media\commands';
+            $this->controllerNamespace = 'DevGroup\MediaStorage\commands';
         }
     }
 

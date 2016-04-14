@@ -1,6 +1,6 @@
 <?php
 
-namespace app\modules\media\events;
+namespace DevGroup\MediaStorage\events;
 
 use yii\base\Event;
 

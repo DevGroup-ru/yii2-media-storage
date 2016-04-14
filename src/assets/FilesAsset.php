@@ -1,20 +1,22 @@
 <?php
 
-namespace app\modules\media\assets;
+namespace DevGroup\MediaStorage\assets;
 
 use yii\web\AssetBundle;
 
-class HelperAsset extends AssetBundle
+class FilesAsset extends AssetBundle
 {
     public $sourcePath = '@app/modules/media/assets/res';
 
     public $css = [
-        'css/helper.css',
+        'css/files.css',
     ];
     public $js = [
-        'js/helper.js',
+        'js/dropzone.js',
+        'js/files.js',
     ];
     public $depends = [
         'yii\web\JqueryAsset',
+        'DevGroup\MediaStorage\assets\HelperAsset',
     ];
 }

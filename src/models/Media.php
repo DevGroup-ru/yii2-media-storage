@@ -1,6 +1,6 @@
 <?php
 
-namespace app\modules\media\models;
+namespace DevGroup\MediaStorage\models;
 
 use Yii;
 use yii\db\ActiveRecord;
@@ -8,7 +8,7 @@ use yii\helpers\FileHelper;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use branchonline\lightbox\Lightbox;
-use app\modules\media\models\MediaGroup;
+use DevGroup\MediaStorage\models\MediaGroup;
 
 class Media extends ActiveRecord
 {

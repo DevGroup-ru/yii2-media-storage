@@ -3,7 +3,7 @@
 use yii\helpers\Url;
 use yii\helpers\Json;
 use kartik\select2\Select2;
-use app\modules\media\assets\GroupsAsset;
+use DevGroup\MediaStorage\assets\GroupsAsset;
 
 /**
  * @var yii\web\View $this

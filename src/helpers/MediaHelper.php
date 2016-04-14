@@ -1,9 +1,9 @@
 <?php
 
-namespace app\modules\media\helpers;
+namespace DevGroup\MediaStorage\helpers;
 
 use Yii;
-use app\modules\media\models\MediaGroup;
+use DevGroup\MediaStorage\models\MediaGroup;
 
 class MediaHelper
 {

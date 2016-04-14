@@ -1,0 +1,41 @@
+{
+    "name": "devgroup/yii2-media-storage",
+    "description": "Helpers, utilities and widgets for media data",
+    "type": "yii2-extension",
+    "keywords": ["yii2","extension"],
+    "license": "MIT",
+    "minimum-stability": "dev",
+    "authors": [
+        {
+            "name": "Ivan Salnikov",
+            "email": "salnikov@devgroup.ru"
+        },
+        {
+            "name": "Andrey Tolkachev",
+            "email": "at@devgroup.ru"
+        }
+    ],
+    "require": {
+        "php": ">=5.5.0",
+        "yiisoft/yii2": "^2.0.6",
+        "creocoder/yii2-flysystem": "*",
+        "yiisoft/yii2-imagine": "*",
+        "branchonline/yii2-lightbox": "*"
+
+    },
+    "require-dev": {
+        "yiisoft/yii2-bootstrap": "^2.0@dev",
+        "devgroup/yii2-admin-utils": "dev-master",
+        "devgroup/dotplant-dev": "~1.0.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "DevGroup\\MediaStorage\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "DevGroup\\MediaStorage\\Tests\\": "tests/"
+        }
+    }
+}

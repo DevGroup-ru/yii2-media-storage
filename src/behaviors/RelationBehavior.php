@@ -1,12 +1,12 @@
 <?php
 
-namespace app\modules\media\behaviors;
+namespace DevGroup\MediaStorage\behaviors;
 
 use Yii;
 use yii\base\Behavior;
 use yii\db\ActiveRecord;
-use app\modules\media\models\MediaRelation;
-use app\modules\media\helpers\MediaHelper;
+use DevGroup\MediaStorage\models\MediaRelation;
+use DevGroup\MediaStorage\helpers\MediaHelper;
 
 class RelationBehavior extends Behavior
 {

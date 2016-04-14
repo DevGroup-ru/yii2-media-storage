@@ -1,10 +1,10 @@
 <?php
 
-namespace app\modules\media\models;
+namespace DevGroup\MediaStorage\models;
 
 use yii\db\ActiveRecord;
-use app\modules\media\models\Media;
-use app\modules\media\models\MediaPermission;
+use DevGroup\MediaStorage\models\Media;
+use DevGroup\MediaStorage\models\MediaPermission;
 
 class MediaGroup extends ActiveRecord
 {
