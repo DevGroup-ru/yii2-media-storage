@@ -13,7 +13,7 @@ class CleanController extends Controller
         $dir = MediaHelper::getTmpDir();
         $now = time();
 
-        foreach(scandir($dir) as $file) {
+        foreach (scandir($dir) as $file) {
             if (in_array($file, ['.', '..'])) {
                 continue;
             }

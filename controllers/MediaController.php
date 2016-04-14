@@ -51,7 +51,7 @@ class MediaController extends Controller
 
     public function actionAllGroups()
     {
-        $user_rights = Yii::$app->authManager->getAssignments( Yii::$app->user->getId() );
+        $user_rights = Yii::$app->authManager->getAssignments(Yii::$app->user->getId());
         $user_rights = array_keys($user_rights);
 
         return $this->render('all-groups', [
@@ -104,7 +104,7 @@ class MediaController extends Controller
     public function actionSaveItem($id)
     {
         $request = Yii::$app->request;
-        $title   = trim( $request->post('title', null) );
+        $title   = trim($request->post('title', null));
         $group   = $request->post('group', 1);
 
         if (empty($id)) {
@@ -119,7 +119,7 @@ class MediaController extends Controller
             $filename = $file->name;
             $i        = 1;
 
-            while(Yii::$app->fs->has($upl_dir.$filename)) {
+            while (Yii::$app->fs->has($upl_dir.$filename)) {
                 $filename = $file->baseName . '_' . $i++ . '.' . $file->extension;
             }
 
@@ -166,7 +166,7 @@ class MediaController extends Controller
             MediaPermission::deleteAll(['group_id' => $group->id]);
         }
 
-        foreach($permissions as $permission) {
+        foreach ($permissions as $permission) {
             $new_permissions = new MediaPermission([
                 'group_id' => $group->id,
                 'name'     => $permission,

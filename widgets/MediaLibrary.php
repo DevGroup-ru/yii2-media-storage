@@ -33,7 +33,7 @@ class MediaLibrary extends Widget
 
         echo Html::beginTag('div', ['class' => 'media-storage-widget row']);
 
-        foreach($media_library as $media) {
+        foreach ($media_library as $media) {
             echo Html::beginTag('div', ['class' => 'col-md-2']);
 
             echo Html::a(

@@ -44,14 +44,15 @@ class MediaGroup extends ActiveRecord
     {
         $permissions = $this->hasMany(MediaPermission::classname(), ['group_id' => 'id'])->select('name')->all();
 
-        foreach($permissions as &$p) {
+        foreach ($permissions as &$p) {
             $p = $p->name;
         }
 
         return $permissions;
     }
 
-    public function extraFields() {
+    public function extraFields()
+    {
         return ['permissions'];
     }
 }

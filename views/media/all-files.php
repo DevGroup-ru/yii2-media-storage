@@ -27,7 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <?php if (count($media_library) > 0) { ?>
 
             <div class="mt20">
-                <?php foreach($media_library as $media) { ?>
+                <?php foreach ($media_library as $media) { ?>
                 <?php /*may be convert '_title' to 'title' with model 'fields' method*/ ?>
                 <div class="thumbnail" data-all='<?= Json::encode($media->toArray()) ?>'>
                     <?= $media->showThumb(false) ?>

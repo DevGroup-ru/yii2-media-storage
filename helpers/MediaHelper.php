@@ -5,7 +5,8 @@ namespace app\modules\media\helpers;
 use Yii;
 use app\modules\media\models\MediaGroup;
 
-class MediaHelper {
+class MediaHelper
+{
     private static $upl_dir = null;
     private static $tmp_dir = null;
     private static $storage_folder_name = '/media-storage/';
@@ -46,11 +47,11 @@ class MediaHelper {
      *
      * @return array Dropdown items format
      */
-    static public function getMediaGroupsForDropdown()
+    public static function getMediaGroupsForDropdown()
     {
         $media_groups = [];
 
-        foreach(MediaGroup::find()->select(['id', 'name'])->orderBy(['name' => SORT_ASC])->all() as $group) {
+        foreach (MediaGroup::find()->select(['id', 'name'])->orderBy(['name' => SORT_ASC])->all() as $group) {
             $media_groups[] = [
                 'label'       => $group->name,
                 'url'         => '#',
@@ -68,7 +69,10 @@ class MediaHelper {
      */
     public static function getPermissionsForSelect()
     {
-        $get_names = function($item){return $item->name;};
+        $get_names = function ($item) {
+            return $item->name;
+
+        };
 
         return [
             'Roles' => array_map($get_names, Yii::$app->authManager->getRoles()),

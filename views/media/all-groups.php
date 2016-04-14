@@ -25,7 +25,7 @@ $this->params['breadcrumbs'][] = 'Groups';
                 <a class="btn btn-primary" href="<?= Url::to(['/media/media/all-files']) ?>">Items</a>
             </div>
             <ul class="list-group mt20">
-                <?php foreach($media_groups as $group) { ?>
+                <?php foreach ($media_groups as $group) { ?>
                 <li class="list-group-item" data-all='<?= Json::encode($group->toArray([], ['permissions'])) ?>'>
                     <a class="media-group-delete js-link btn btn-danger btn-xs pull-right" href="<?= Url::to(['media/media/delete-group', 'id' => $group->id]) ?>">Delete</a>
 
