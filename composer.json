@@ -20,7 +20,9 @@
         "yiisoft/yii2": "^2.0.6",
         "creocoder/yii2-flysystem": "*",
         "yiisoft/yii2-imagine": "*",
-        "branchonline/yii2-lightbox": "*"
+        "branchonline/yii2-lightbox": "*",
+        "devgroup/yii2-multilingual": "dev-master",
+        "devgroup/yii2-users-module": "dev-master"
 
     },
     "require-dev": {
@@ -37,5 +39,12 @@
         "psr-4": {
             "DevGroup\\MediaStorage\\Tests\\": "tests/"
         }
+    },
+    "extra": {
+        "asset-installer-paths": {
+            "npm-asset-library": "vendor/npm",
+            "bower-asset-library": "vendor/bower"
+        }
+
     }
 }

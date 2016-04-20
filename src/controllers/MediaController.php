@@ -94,8 +94,8 @@ class MediaController extends Controller
                 $filepath = $thumb_path;
             }
             # }
-
-            Yii::$app->response->xSendFile($filepath, null, ['inline' => true]);
+            Yii::$app->response->sendFile($filepath);
+//            Yii::$app->response->xSendFile($filepath, null, ['inline' => true]);
         } else {
             // Code for other types
         }

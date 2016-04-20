@@ -6,7 +6,7 @@ use yii\web\AssetBundle;
 
 class FilesAsset extends AssetBundle
 {
-    public $sourcePath = '@app/modules/media/assets/res';
+    public $sourcePath = __DIR__ . DIRECTORY_SEPARATOR . 'res';
 
     public $css = [
         'css/files.css',
