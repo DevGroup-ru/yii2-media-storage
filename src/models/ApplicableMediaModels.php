@@ -5,21 +5,20 @@ namespace DevGroup\MediaStorage\models;
 use Yii;
 
 /**
- * This is the model class for table "{{%media_group}}".
+ * This is the model class for table "{{%applicable_media_models}}".
  *
  * @property integer $id
+ * @property string $class
  * @property string $name
- *
- * @property MediaMediaGroup[] $mediaMediaGroups
  */
-class MediaGroup extends \yii\db\ActiveRecord
+class ApplicableMediaModels extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return '{{%media_group}}';
+        return '{{%applicable_media_models}}';
     }
 
     /**
@@ -28,8 +27,9 @@ class MediaGroup extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name'], 'string', 'max' => 255],
-            [['name'], 'unique'],
+            [['class', 'name'], 'required'],
+            [['class', 'name'], 'string', 'max' => 255],
+            [['class'], 'unique'],
         ];
     }
 
@@ -40,15 +40,8 @@ class MediaGroup extends \yii\db\ActiveRecord
     {
         return [
             'id' => Yii::t('app', 'ID'),
+            'class' => Yii::t('app', 'Class'),
             'name' => Yii::t('app', 'Name'),
         ];
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getMediaMediaGroups()
-    {
-        return $this->hasMany(MediaMediaGroup::className(), ['media_group_id' => 'id']);
     }
 }

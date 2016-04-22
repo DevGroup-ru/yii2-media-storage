@@ -22,7 +22,8 @@
         "yiisoft/yii2-imagine": "*",
         "branchonline/yii2-lightbox": "*",
         "devgroup/yii2-multilingual": "dev-master",
-        "devgroup/yii2-users-module": "dev-master"
+        "devgroup/yii2-users-module": "dev-master",
+        "devgroup/yii2-dropzone": "^1.0"
 
     },
     "require-dev": {

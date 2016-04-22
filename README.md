@@ -1,7 +1,26 @@
 Media Storage module for Yii2 
 ===================
 
+**WARNING:** This extension is under active development. Don't use it in production!
+
+
 ### Installing
+
+The preferred way to install this extension is through [composer](http://getcomposer.org/download/).
+
+Either run
+
+```
+php composer.phar require --prefer-dist devgroup/yii2-media-storage "*"
+```
+
+or add
+
+```
+"devgroup/yii2-media-storage": "*"
+```
+
+to the require section of your `composer.json` file.
 
 1. Media Storage required [creocoder/yii2-flysystem](https://github.com/creocoder/yii2-flysystem). It will be installed as dependency, but you still need to [configure](https://github.com/creocoder/yii2-flysystem#configuring) that module.
 
@@ -52,10 +71,4 @@ This module will store temporarily files in Yii runtime folder. For clean it, ad
  ```
 You can also create task for cron.
 
-### Dependencies
-creocoder/yii2-flysystem
-yiisoft/yii2-imagine
-branchonline/yii2-lightbox
 
-### Version
-0.1

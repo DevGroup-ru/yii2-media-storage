@@ -4,7 +4,7 @@ namespace DevGroup\MediaStorage;
 
 use Yii;
 
-class Module extends \yii\base\Module
+class MediaModule extends \yii\base\Module
 {
     public $controllerNamespace = 'DevGroup\MediaStorage\controllers';
     public $accessPermissions = ['@'];

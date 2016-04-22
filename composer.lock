@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "5f0f55c68f1828c08030f6630c0b62c5",
-    "content-hash": "f201f933d2492e3cadeeb3bf5507df8f",
+    "hash": "911fbce4b9cce4d15478d66dd5f89f8d",
+    "content-hash": "eeab0d569dce60d7dccef64a583b93d9",
     "packages": [
         {
             "name": "arogachev/yii2-sortable",
@@ -104,6 +104,34 @@
                 "responsive",
                 "web"
             ]
+        },
+        {
+            "name": "bower-asset/dropzone",
+            "version": "v4.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/enyo/dropzone.git",
+                "reference": "d8ef7a82e6ab5447c1f2d9512c8e1bfd4de5ac9e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/enyo/dropzone/zipball/d8ef7a82e6ab5447c1f2d9512c8e1bfd4de5ac9e",
+                "reference": "d8ef7a82e6ab5447c1f2d9512c8e1bfd4de5ac9e",
+                "shasum": ""
+            },
+            "type": "bower-asset-library",
+            "extra": {
+                "bower-asset-main": [
+                    "dist/min/dropzone.min.css",
+                    "dist/min/dropzone.min.js"
+                ],
+                "bower-asset-ignore": [
+                    "*",
+                    "!dist",
+                    "!dist/**/*"
+                ]
+            },
+            "description": "Dropzone is an easy to use drag'n'drop library. It supports image previews and shows nice progress bars."
         },
         {
             "name": "bower-asset/jquery",
@@ -662,6 +690,60 @@
                 "yii2"
             ],
             "time": "2016-04-20 06:27:13"
+        },
+        {
+            "name": "devgroup/yii2-dropzone",
+            "version": "1.0.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/DevGroup-ru/yii2-dropzone.git",
+                "reference": "ff65ec66717d386632d27f272162a7ecf69a01fe"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/DevGroup-ru/yii2-dropzone/zipball/ff65ec66717d386632d27f272162a7ecf69a01fe",
+                "reference": "ff65ec66717d386632d27f272162a7ecf69a01fe",
+                "shasum": ""
+            },
+            "require": {
+                "bower-asset/dropzone": "~4.0",
+                "yiisoft/yii2": "2.0.*",
+                "yiisoft/yii2-jui": "2.0.*"
+            },
+            "require-dev": {
+                "yiisoft/yii2-debug": "2.0.*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "devgroup\\dropzone\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0+"
+            ],
+            "authors": [
+                {
+                    "name": "Alexander Kozhevnikov",
+                    "email": "b37hr3z3n@gmail.com"
+                },
+                {
+                    "name": "Evgeny Dubovitsky",
+                    "email": "flynn068@gmail.com"
+                },
+                {
+                    "name": "Pavel Fedotov",
+                    "email": "fps.06@mail.ru"
+                }
+            ],
+            "description": "Yii2 Dropzone widget",
+            "keywords": [
+                "dropzone",
+                "upload",
+                "yii2"
+            ],
+            "time": "2015-11-02 06:26:37"
         },
         {
             "name": "devgroup/yii2-frontend-utils",

@@ -18,8 +18,7 @@ $config = [
             'class' => 'DevGroup\DataStructure\Properties\Module',
         ],
         'media' => [
-            'class' => 'DevGroup\MediaStorage\Module',
-            'accessPermissions' => ['@'],
+            'class' => 'DevGroup\MediaStorage\MediaModule',
         ],
     ],
     'components' => [

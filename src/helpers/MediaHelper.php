@@ -10,7 +10,7 @@ class MediaHelper
     private static $upl_dir = null;
     private static $tmp_dir = null;
     private static $storage_folder_name = '/media-storage/';
-
+    
     public static function getTmpDir()
     {
         if (self::$tmp_dir === null) {
