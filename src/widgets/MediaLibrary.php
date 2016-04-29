@@ -2,6 +2,8 @@
 
 namespace DevGroup\MediaStorage\widgets;
 
+use Yii;
+use yii\base\InvalidParamException;
 use yii\base\Widget;
 use yii\helpers\Html;
 use yii\helpers\Url;
@@ -12,8 +14,12 @@ use DevGroup\MediaStorage\helpers\MediaHelper;
 
 class MediaLibrary extends Widget
 {
+    public $form = null;
     public function init()
     {
+        if (is_null($this->form)) {
+            throw new InvalidParamException(Yii::t('app', 'Set form'));
+        }
         WidgetAsset::register($this->getView());
     }
 

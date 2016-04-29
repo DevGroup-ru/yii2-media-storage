@@ -1,5 +1,7 @@
 <?php
 
+use devgroup\dropzone\DropZone;
+use devgroup\dropzone\DropZoneAsset;
 use yii\helpers\Json;
 use yii\helpers\Url;
 use yii\bootstrap\Dropdown;
@@ -10,11 +12,39 @@ use DevGroup\MediaStorage\assets\FilesAsset;
  * @var yii\web\View $this
  */
 
+DropZoneAsset::register($this);
 FilesAsset::register($this);
-
 $this->title = 'Media Storage';
 $this->params['breadcrumbs'][] = $this->title;
+
 ?>
+<?= DropZone::widget(
+    [
+        //                            'name' => 'file',
+        //                            'url' => ['upload'],
+        ////                            'removeUrl' => ['remove'],
+        ////                            'uploadDir' => '/theme/resources/product-images',
+        //                            'sortable' => true,
+        //                            'sortableOptions' => [
+        //                                'items' => '.dz-image-preview',
+        //                            ],
+        //                            'htmlOptions' => [
+        //                                'class' => 'table table-striped files',
+        //                                'id' => 'previews',
+        //                            ],
+        //                            'options' => [
+        //                                'clickable' => ".fileinput-button",
+        //                            ],
+        'name' => 'file', // input name or 'model' and 'attribute'
+        'url' => '', // upload url
+        'storedFiles' => [], // stores files
+        'eventHandlers' => [], // dropzone event handlers
+        'sortable' => true, // sortable flag
+        'sortableOptions' => [], // sortable options
+        'htmlOptions' => [], // container html options
+        'options' => [], // dropzone js options
+    ]
+); ?>
 <div class="media-storage-view">
     <div class="row">
         <div class="col-md-8 media-storage-library">
@@ -26,45 +56,46 @@ $this->params['breadcrumbs'][] = $this->title;
 
             <?php if (count($media_library) > 0) { ?>
 
-            <div class="mt20">
-                <?php foreach ($media_library as $media) { ?>
-                <?php /*may be convert '_title' to 'title' with model 'fields' method*/ ?>
-                <div class="thumbnail" data-all='<?= Json::encode($media->toArray()) ?>'>
-                    <?= $media->showThumb(false) ?>
+                <div class="mt20">
+                    <?php foreach ($media_library as $media) { ?>
+                        <?php /*may be convert '_title' to 'title' with model 'fields' method*/ ?>
+                        <div class="thumbnail" data-all='<?= Json::encode($media->toArray()) ?>'>
+                            <?= $media->showThumb(false) ?>
 
-                    <div class="caption">
-                        <h3><?= $media->title ? : "File #{$media->id}" ?></h3>
+                            <div class="caption">
+                                <h3><?= $media->title ?: "File #{$media->id}" ?></h3>
 
-                        <p>
-                            File group: <?= $media->group->name ?> <br>
-                            File uploader: <?= $media->author_id ?>
-                        </p>
-                        <div class="mt20">
-                            <a class="js-link btn btn-default" href="#">Edit</a>
-                            <a class="js-link btn btn-danger" href="<?= Url::to(['/media/media/delete-item', 'id' => $media->id]) ?>">Delete</a>
+                                <p>
+                                    File group: <?= $media->group->name ?> <br>
+                                    File uploader: <?= $media->author_id ?>
+                                </p>
+                                <div class="mt20">
+                                    <a class="js-link btn btn-default" href="#">Edit</a>
+                                    <a class="js-link btn btn-danger" href="<?= Url::to(
+                                        ['/media/media/delete-item', 'id' => $media->id]
+                                    ) ?>">Delete</a>
+                                </div>
+                            </div>
                         </div>
-                    </div>
+                    <?php } ?>
                 </div>
-                <?php } ?>
-            </div>
 
             <?php } else { ?>
 
-            <p class="alert alert-warning mt20">Media library is empty.</p>
+                <p class="alert alert-warning mt20">Media library is empty.</p>
 
             <?php } ?>
         </div>
         <div class="media-item-new col-md-4">
             <h3 class="mt0">Add new item</h3>
             <div class="sidebar-form mt20">
-                <form method="post" action="<?= Url::to(['/media/media/save-item', 'id' => 0]) ?>" data-redirect="<?= Url::to(['/media/media/all-files']) ?>">
-                    <div class="dz-message">
-                        <p>Put files here</p>
-                    </div>
-
+                <form method="post" action="<?= Url::to(
+                    ['/media/media/save-item', 'id' => 0]
+                ) ?>" data-redirect="<?= Url::to(['/media/media/all-files']) ?>">
                     <input type="hidden" name="title" id="media-title-hidden" value="" autocomlete="off">
                     <input type="hidden" name="group" id="media-group-hidden" value="1" autocomlete="off">
-                    <input type="hidden" name="_csrf" value="<?= Yii::$app->request->getCsrfToken() ?>" autocomlete="off">
+                    <input type="hidden" name="_csrf" value="<?= Yii::$app->request->getCsrfToken(
+                    ) ?>" autocomlete="off">
                 </form>
                 <div class="media-item-fields mt20">
                     <div class="form-group">
@@ -78,9 +109,11 @@ $this->params['breadcrumbs'][] = $this->title;
                             <span class="caret"></span>
                         </button>
                         <?php
-                        echo Dropdown::widget([
-                            'items' => $media_groups,
-                        ]);
+                        echo Dropdown::widget(
+                            [
+                                'items' => $media_groups,
+                            ]
+                        );
                         ?>
                     </div>
 
@@ -90,10 +123,14 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
         <div class="media-item-edit hidden col-md-4">
             <h3 class="mt0">Update item</h3>
-            <form method="post" data-url="<?= Url::to(['/media/media/save-item', 'id' => 0]) ?>" class="sidebar-form mt20">
+            <form method="post" data-url="<?= Url::to(
+                ['/media/media/save-item', 'id' => 0]
+            ) ?>" class="sidebar-form mt20">
                 <?php Lightbox::widget([]) # Output to /dev/null. Need to load Lightbox assets ?>
 
-                <a class="lightbox-link" href="#" data-lightbox="media-item-edit-thumb" data-url="<?= Url::to(['/media/media/show-item', 'id' => 0]) ?>">
+                <a class="lightbox-link" href="#" data-lightbox="media-item-edit-thumb" data-url="<?= Url::to(
+                    ['/media/media/show-item', 'id' => 0]
+                ) ?>">
                     <img src="" alt="">
                 </a>
                 <hr>
@@ -107,9 +144,11 @@ $this->params['breadcrumbs'][] = $this->title;
                         <span class="caret"></span>
                     </button>
                     <?php
-                    echo Dropdown::widget([
-                        'items' => $media_groups,
-                    ]);
+                    echo Dropdown::widget(
+                        [
+                            'items' => $media_groups,
+                        ]
+                    );
                     ?>
                 </div>
 

@@ -13,7 +13,7 @@ class m160329_140554_init_media_storage extends Migration
             '{{%applicable_media_models}}',
             [
                 'id' => $this->primaryKey(),
-                'class' => $this->string(255)->notNull()->unique(),
+                'class_name' => $this->string(255)->notNull()->unique(),
                 'name' => $this->string(255)->notNull(),
             ],
             $table_options

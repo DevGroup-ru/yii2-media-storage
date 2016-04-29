@@ -1,20 +1,30 @@
 <?php
 
-use yii\helpers\Url;
+use yii\helpers\Html;
+use yii\grid\GridView;
 
-$this->title = 'Things';
+/* @var $this yii\web\View */
+/* @var $dataProvider yii\data\ActiveDataProvider */
+
+$this->title = Yii::t('app', 'Things');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="things-container">
-    <a class="btn btn-primary" href="<?= Url::to(['thing/new']) ?>">New</a>
+<div class="thing-index">
 
-    <div class="mt20">&nbsp;</div>
+    <h1><?= Html::encode($this->title) ?></h1>
 
-    <ul class="list-group">
-        <?php foreach($things as $thing) { ?>
-        <li class="list-group-item">
-            <?= "Thing #{$thing->id} has prop = {$thing->prop}" ?>
-        </li>
-        <?php } ?>
-    </ul>
+    <p>
+        <?= Html::a(Yii::t('app', 'Create Thing'), ['create'], ['class' => 'btn btn-success']) ?>
+    </p>
+    <?= GridView::widget([
+        'dataProvider' => $dataProvider,
+        'columns' => [
+            ['class' => 'yii\grid\SerialColumn'],
+
+            'id',
+            'prop',
+
+            ['class' => 'yii\grid\ActionColumn'],
+        ],
+    ]); ?>
 </div>

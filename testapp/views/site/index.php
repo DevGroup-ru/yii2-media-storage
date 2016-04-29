@@ -4,9 +4,14 @@
 
 /* @var $this yii\web\View */
 
+use app\models\Thing;
 use DevGroup\MediaStorage\models\Media;
 
 $this->title = 'My Yii Application';
+$thing = new Thing();
+$thing->loadDefaultValues();
+$thing->save();
+var_dump($thing->getBehaviors());die();
 ?>
 <div class="site-index">
 

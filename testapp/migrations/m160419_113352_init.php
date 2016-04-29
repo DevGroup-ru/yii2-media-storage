@@ -47,11 +47,12 @@ class m160419_113352_init extends Migration
         //            [['Main', null], ['Cats', '[\"media-admin\"]'], ['Books', '[\"random-item\"]']]
         //        );
 
-        (new MediaTableGenerator(['db'=>$this->db]))->generate(Thing::className());
+        (new MediaTableGenerator(['db' => $this->db]))->generate(Thing::className());
     }
 
     public function down()
     {
+        (new MediaTableGenerator(['db' => $this->db]))->drop(Thing::className());
         Yii::$app->runAction(
             'migrate/down',
             [

@@ -2,6 +2,7 @@
 
 namespace DevGroup\MediaStorage\controllers;
 
+use DevGroup\AdminUtils\controllers\BaseController;
 use Yii;
 use yii\base\Exception;
 use yii\web\Controller;
@@ -17,7 +18,7 @@ use DevGroup\MediaStorage\models\MediaPermission;
 use DevGroup\MediaStorage\events\MediaEvent;
 use DevGroup\MediaStorage\helpers\MediaHelper;
 
-class MediaController extends Controller
+class MediaController extends BaseController
 {
     const EVENT_ITEM_ADD     = 'media-item-add';
     const EVENT_ITEM_CHANGE  = 'media-item-change';
@@ -26,20 +27,20 @@ class MediaController extends Controller
     const EVENT_GROUP_CHANGE = 'media-group-change';
     const EVENT_GROUP_DELETE = 'media-group-delete';
 
-    public function behaviors()
-    {
-        return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'rules' => [
-                    [
-                        'allow' => true,
-                        'roles' => $this->module->accessPermissions,
-                    ],
-                ],
-            ],
-        ];
-    }
+//    public function behaviors()
+//    {
+//        return [
+//            'access' => [
+//                'class' => AccessControl::className(),
+//                'rules' => [
+//                    [
+//                        'allow' => true,
+//                        'roles' => $this->module->accessPermissions,
+//                    ],
+//                ],
+//            ],
+//        ];
+//    }
 
     public function actionAllFiles()
     {

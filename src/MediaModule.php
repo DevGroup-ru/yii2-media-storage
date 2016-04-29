@@ -7,7 +7,6 @@ use Yii;
 class MediaModule extends \yii\base\Module
 {
     public $controllerNamespace = 'DevGroup\MediaStorage\controllers';
-    public $accessPermissions = ['@'];
 
     public function init()
     {
@@ -21,9 +20,9 @@ class MediaModule extends \yii\base\Module
     public function registerTranslations()
     {
         //Yii::$app->i18n->translations['modules/media/*'] = [
-            //'class' => '',
-            //'sourceLanguage' => 'en_US',
-            //'basePath' => '@app/modules/media',
+        //'class' => '',
+        //'sourceLanguage' => 'en_US',
+        //'basePath' => '@app/modules/media',
         //];
     }
 }

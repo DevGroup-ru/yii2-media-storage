@@ -12,7 +12,7 @@ class FilesAsset extends AssetBundle
         'css/files.css',
     ];
     public $js = [
-        'js/dropzone.js',
+//        'js/dropzone.js',
         'js/files.js',
     ];
     public $depends = [
