@@ -10,7 +10,7 @@ $config = [
     'vendorPath' => '@app/../vendor',
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
-    'bootstrap' => ['log', 'multilingual', 'debug', 'media'],
+    'bootstrap' => ['log', 'multilingual', 'media'],
     'modules' => [
         'gii' => [
             'class' => 'yii\gii\Module',
@@ -97,12 +97,31 @@ $config = [
                 //'DELETE media/delete/group/<id:\d+>' => 'media/media/delete-group',
             ],
         ],
-        'fs' => [
+        'protectedFilesystem' => [
             'class' => 'creocoder\flysystem\LocalFilesystem',
-            'path' => '@app',
+            'path' => '@app/media',
         ],
+    ],
+    'controllerMap' => [
+        'elfinder' => [
+            'class' => 'mihaildev\elfinder\Controller',
+            'access' => ['@', '?'], //глобальный доступ к фаил менеджеру @ - для авторизорованных , ? - для гостей , чтоб открыть всем ['@', '?']
+            'disabledCommands' => ['netmount'], //отключение ненужных команд https://github.com/Studio-42/elFinder/wiki/Client-configuration-options#commands
+            'roots' => [
+                [
+                    'baseUrl'=>'@web',
+                    'basePath'=>'@webroot',
+                    'path' => 'files/global',
+                    'name' => 'Global'
+                ],
+            ],
+        ]
     ],
     'params' => $params,
 ];
+
+if (YII_DEBUG) {
+    $config['bootstrap'][] = 'debug';
+}
 
 return $config;

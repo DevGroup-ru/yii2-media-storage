@@ -2,7 +2,7 @@
 
 use devgroup\dropzone\DropZone;
 use devgroup\dropzone\DropZoneAsset;
-use yii\helpers\Json;
+use mihaildev\elfinder\ElFinder;
 use yii\helpers\Url;
 use yii\bootstrap\Dropdown;
 use branchonline\lightbox\Lightbox;
@@ -36,7 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
         //                                'clickable' => ".fileinput-button",
         //                            ],
         'name' => 'file', // input name or 'model' and 'attribute'
-        'url' => '', // upload url
+        'url' => Url::to('/media/media/upload'), // upload url
         'storedFiles' => [], // stores files
         'eventHandlers' => [], // dropzone event handlers
         'sortable' => true, // sortable flag
@@ -47,47 +47,23 @@ $this->params['breadcrumbs'][] = $this->title;
 ); ?>
 <div class="media-storage-view">
     <div class="row">
+        <?= ElFinder::widget(
+            [
+                'language' => 'ru',
+                'controller' => 'elfinder', // вставляем название контроллера, по умолчанию равен elfinder
+            ]
+        ) ?>
         <div class="col-md-8 media-storage-library">
             <div>
-                <a class="media-item-add js-link btn btn-primary" href="#">Add new item</a>
+                <a class="media-item-add js-link btn btn-primary" href="#"><?= Yii::t('app', 'Add new item') ?></a>
                 <div class="spacer"></div>
-                <a class="btn btn-primary" href="<?= Url::to(['/media/media/all-groups']) ?>">Groups</a>
+                <a class="btn btn-primary" href="<?= Url::to(['/media/media/all-groups']) ?>"><?= Yii::t('app', 'Groups') ?></a>
             </div>
 
-            <?php if (count($media_library) > 0) { ?>
 
-                <div class="mt20">
-                    <?php foreach ($media_library as $media) { ?>
-                        <?php /*may be convert '_title' to 'title' with model 'fields' method*/ ?>
-                        <div class="thumbnail" data-all='<?= Json::encode($media->toArray()) ?>'>
-                            <?= $media->showThumb(false) ?>
-
-                            <div class="caption">
-                                <h3><?= $media->title ?: "File #{$media->id}" ?></h3>
-
-                                <p>
-                                    File group: <?= $media->group->name ?> <br>
-                                    File uploader: <?= $media->author_id ?>
-                                </p>
-                                <div class="mt20">
-                                    <a class="js-link btn btn-default" href="#">Edit</a>
-                                    <a class="js-link btn btn-danger" href="<?= Url::to(
-                                        ['/media/media/delete-item', 'id' => $media->id]
-                                    ) ?>">Delete</a>
-                                </div>
-                            </div>
-                        </div>
-                    <?php } ?>
-                </div>
-
-            <?php } else { ?>
-
-                <p class="alert alert-warning mt20">Media library is empty.</p>
-
-            <?php } ?>
         </div>
         <div class="media-item-new col-md-4">
-            <h3 class="mt0">Add new item</h3>
+            <h3 class="mt0"><?= Yii::t('app', 'Add new item') ?></h3>
             <div class="sidebar-form mt20">
                 <form method="post" action="<?= Url::to(
                     ['/media/media/save-item', 'id' => 0]

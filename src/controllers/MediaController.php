@@ -3,6 +3,7 @@
 namespace DevGroup\MediaStorage\controllers;
 
 use DevGroup\AdminUtils\controllers\BaseController;
+use DevGroup\MediaStorage\actions\UploadFromDropZoneAction;
 use Yii;
 use yii\base\Exception;
 use yii\web\Controller;
@@ -41,6 +42,13 @@ class MediaController extends BaseController
 //            ],
 //        ];
 //    }
+    
+    public function actions()
+    {
+        return [
+            'upload' => UploadFromDropZoneAction::class
+        ];
+    }
 
     public function actionAllFiles()
     {

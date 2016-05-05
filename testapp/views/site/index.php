@@ -11,7 +11,7 @@ $this->title = 'My Yii Application';
 $thing = new Thing();
 $thing->loadDefaultValues();
 $thing->save();
-var_dump($thing->getBehaviors());die();
+//var_dump($thing->getBehaviors());die();
 ?>
 <div class="site-index">
 
@@ -29,7 +29,7 @@ var_dump($thing->getBehaviors());die();
             <div class="col-lg-4">
                 <?php
                 $media = Media::findOne(1);
-                $media->showThumb();
+//                $media->showThumb();
                 ?>
             </div>
         </div>
