@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use DevGroup\MediaStorage\models\Media;
 use Yii;
 
 /**

@@ -21,41 +21,44 @@ use DevGroup\MediaStorage\helpers\MediaHelper;
 
 class MediaController extends BaseController
 {
-    const EVENT_ITEM_ADD     = 'media-item-add';
-    const EVENT_ITEM_CHANGE  = 'media-item-change';
-    const EVENT_ITEM_DELETE  = 'media-item-delete';
-    const EVENT_GROUP_ADD    = 'media-group-add';
+    const EVENT_ITEM_ADD = 'media-item-add';
+    const EVENT_ITEM_CHANGE = 'media-item-change';
+    const EVENT_ITEM_DELETE = 'media-item-delete';
+    const EVENT_GROUP_ADD = 'media-group-add';
     const EVENT_GROUP_CHANGE = 'media-group-change';
     const EVENT_GROUP_DELETE = 'media-group-delete';
 
-//    public function behaviors()
-//    {
-//        return [
-//            'access' => [
-//                'class' => AccessControl::className(),
-//                'rules' => [
-//                    [
-//                        'allow' => true,
-//                        'roles' => $this->module->accessPermissions,
-//                    ],
-//                ],
-//            ],
-//        ];
-//    }
-    
+    //    public function behaviors()
+    //    {
+    //        return [
+    //            'access' => [
+    //                'class' => AccessControl::className(),
+    //                'rules' => [
+    //                    [
+    //                        'allow' => true,
+    //                        'roles' => $this->module->accessPermissions,
+    //                    ],
+    //                ],
+    //            ],
+    //        ];
+    //    }
+
     public function actions()
     {
         return [
-            'upload' => UploadFromDropZoneAction::class
+            'upload' => UploadFromDropZoneAction::class,
         ];
     }
 
     public function actionAllFiles()
     {
-        return $this->render('all-files', [
-            'media_library' => Media::find()->orderBy(['id' => SORT_DESC])->all(),
-            'media_groups' => MediaHelper::getMediaGroupsForDropdown(),
-        ]);
+        return $this->render(
+            'all-files',
+            [
+                'media_library' => Media::find()->orderBy(['id' => SORT_DESC])->all(),
+                'media_groups' => MediaHelper::getMediaGroupsForDropdown(),
+            ]
+        );
     }
 
     public function actionAllGroups()
@@ -63,10 +66,13 @@ class MediaController extends BaseController
         $user_rights = Yii::$app->authManager->getAssignments(Yii::$app->user->getId());
         $user_rights = array_keys($user_rights);
 
-        return $this->render('all-groups', [
-            'media_groups' => MediaGroup::find()->orderBy(['id' => SORT_DESC])->all(),
-            'permissions'  => MediaHelper::getPermissionsForSelect(),
-        ]);
+        return $this->render(
+            'all-groups',
+            [
+                'media_groups' => MediaGroup::find()->orderBy(['id' => SORT_DESC])->all(),
+                'permissions' => MediaHelper::getPermissionsForSelect(),
+            ]
+        );
     }
 
     # TODO: Add code for checking permissions
@@ -80,9 +86,9 @@ class MediaController extends BaseController
         }
 
         if ($media->isImage()) {
-            $tmpdir   = MediaHelper::getTmpDir();
-            $ext      = '.' . pathinfo($media->path, PATHINFO_EXTENSION);
-            $filepath = $tmpdir.$media->id.$ext;
+            $tmpdir = MediaHelper::getTmpDir();
+            $ext = '.' . pathinfo($media->path, PATHINFO_EXTENSION);
+            $filepath = $tmpdir . $media->id . $ext;
 
             if (!file_exists($filepath)) {
                 $file = Yii::$app->fs->read($media->path);
@@ -94,7 +100,7 @@ class MediaController extends BaseController
             $img_size = $request->get('size', 'full');
 
             if ($img_size === 'thumb') {
-                $thumb_path = $tmpdir.$media->id.'_thumb'.$ext;
+                $thumb_path = $tmpdir . $media->id . '_thumb' . $ext;
 
                 if (!file_exists($thumb_path)) {
                     Image::thumbnail($filepath, 300, 225)->save($thumb_path);
@@ -104,7 +110,7 @@ class MediaController extends BaseController
             }
             # }
             Yii::$app->response->sendFile($filepath);
-//            Yii::$app->response->xSendFile($filepath, null, ['inline' => true]);
+            //            Yii::$app->response->xSendFile($filepath, null, ['inline' => true]);
         } else {
             // Code for other types
         }
@@ -113,8 +119,8 @@ class MediaController extends BaseController
     public function actionSaveItem($id)
     {
         $request = Yii::$app->request;
-        $title   = trim($request->post('title', null));
-        $group   = $request->post('group', 1);
+        $title = trim($request->post('title', null));
+        $group = $request->post('group', 1);
 
         if (empty($id)) {
             $file = UploadedFile::getInstanceByName('file');
@@ -123,34 +129,36 @@ class MediaController extends BaseController
                 throw new HttpException(500, 'Upload error');
             }
 
-            $upl_dir  = MediaHelper::getUploadDir();
+            $upl_dir = MediaHelper::getUploadDir();
 
             $filename = $file->name;
-            $i        = 1;
+            $i = 1;
 
-            while (Yii::$app->fs->has($upl_dir.$filename)) {
+            while (Yii::$app->fs->has($upl_dir . $filename)) {
                 $filename = $file->baseName . '_' . $i++ . '.' . $file->extension;
             }
 
-            Yii::$app->fs->write($upl_dir.$filename, file_get_contents($file->tempName));
+            Yii::$app->fs->write($upl_dir . $filename, file_get_contents($file->tempName));
 
-            $media = new Media([
-                'path'      => $upl_dir.$filename,
-                '_title'    => $title,
-                'group_id'  => $group,
-                'author_id' => Yii::$app->user->getId(),
-            ]);
+            $media = new Media(
+                [
+                    'path' => $upl_dir . $filename,
+                    '_title' => $title,
+                    'group_id' => $group,
+                    'author_id' => Yii::$app->user->getId(),
+                ]
+            );
             $media->save();
         } else {
-            $media            = Media::findOne($id);
-            $media->_title    = $title;
-            $media->group_id  = $group;
+            $media = Media::findOne($id);
+            $media->_title = $title;
+            $media->group_id = $group;
             $media->save();
         }
 
         $event = new MediaEvent;
         $event->message = [
-            'id'   => $media->id,
+            'id' => $media->id,
             'mime' => $media->getType(),
         ];
         $this->trigger(self::EVENT_ITEM_ADD, $event);
@@ -169,17 +177,19 @@ class MediaController extends BaseController
         # }
 
         # Save permissions {
-        $permissions = $request->post('permissions', []) ? : [];
+        $permissions = $request->post('permissions', []) ?: [];
 
         if ($id) {
             MediaPermission::deleteAll(['group_id' => $group->id]);
         }
 
         foreach ($permissions as $permission) {
-            $new_permissions = new MediaPermission([
-                'group_id' => $group->id,
-                'name'     => $permission,
-            ]);
+            $new_permissions = new MediaPermission(
+                [
+                    'group_id' => $group->id,
+                    'name' => $permission,
+                ]
+            );
             $new_permissions->save();
         }
         # }

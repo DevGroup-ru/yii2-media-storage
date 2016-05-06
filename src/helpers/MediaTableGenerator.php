@@ -41,7 +41,10 @@ class MediaTableGenerator extends Object
 
         $this->migration->insert(
             ApplicableMediaModels::tableName(),
-            ['class_name' => $className::className(), 'name' => $className::tableName()]
+            [
+                'class_name' => $className::className(),
+                'name' => $this->db->getSchema()->getRawTableName($className::tableName()),
+            ]
         );
 
         $this->migration->createTable(

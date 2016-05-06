@@ -1,5 +1,6 @@
 <?php
 
+use DevGroup\MediaStorage\widgets\MediaForm;
 use DevGroup\MediaStorage\widgets\MediaLibrary;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
@@ -19,7 +20,7 @@ use yii\widgets\ActiveForm;
         <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
-    <?= MediaLibrary::widget(['form' => $form]) ?>
+    <?= MediaForm::widget(['model' => $model, 'form' => $form]) ?>
 
     <?php ActiveForm::end(); ?>
 

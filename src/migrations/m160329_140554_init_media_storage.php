@@ -23,6 +23,7 @@ class m160329_140554_init_media_storage extends Migration
             [
                 'id' => $this->primaryKey(),
                 'path' => $this->string()->notNull()->unique(),
+                'mime' => $this->string()->notNull(),
             ],
             $table_options
         );

@@ -9,6 +9,7 @@ use Yii;
  *
  * @property integer $id
  * @property string $path
+ * @property string $mime
  *
  * @property MediaMediaGroup[] $mediaMediaGroups
  */
@@ -28,8 +29,8 @@ class Media extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['path'], 'required'],
-            [['path'], 'string', 'max' => 255],
+            [['path', 'mime'], 'required'],
+            [['path', 'mime'], 'string', 'max' => 255],
             [['path'], 'unique'],
         ];
     }
@@ -42,6 +43,7 @@ class Media extends \yii\db\ActiveRecord
         return [
             'id' => Yii::t('app', 'ID'),
             'path' => Yii::t('app', 'Path'),
+            'mime' => Yii::t('app', 'Mime'),
         ];
     }
 
@@ -53,13 +55,8 @@ class Media extends \yii\db\ActiveRecord
         return $this->hasMany(MediaMediaGroup::className(), ['media_id' => 'id']);
     }
 
-    public function getType()
-    {
-        return Yii::$app->fs->getMimetype($this->path);
-    }
-
     public function isImage()
     {
-        return substr($this->getType(), 0, 5) === 'image';
+        return substr($this->mime, 0, 5) === 'image';
     }
 }

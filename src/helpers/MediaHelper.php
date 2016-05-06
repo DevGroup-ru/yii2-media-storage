@@ -2,6 +2,7 @@
 
 namespace DevGroup\MediaStorage\helpers;
 
+use creocoder\flysystem\Filesystem;
 use Yii;
 use DevGroup\MediaStorage\models\MediaGroup;
 use yii\base\Exception;
@@ -13,11 +14,17 @@ class MediaHelper extends Object
     private static $tmp_dir = null;
     private static $storage_folder_name = '/media-storage/';
 
+    /**
+     * @return Filesystem
+     */
     public static function getProtectedFilesystem()
     {
         return Yii::$app->protectedFilesystem;
     }
 
+    /**
+     * @return Filesystem
+     */
     public static function getPublicFilesystem()
     {
         return Yii::$app->publicFilesystem;
@@ -92,6 +99,14 @@ class MediaHelper extends Object
         ];
     }
 
+
+    /**
+     * @param string $filePath
+     * @param Filesystem $flysystem
+     *
+     * @return string
+     * @throws Exception
+     */
     public static function saveFileFromLocalToFlysystem($filePath, $flysystem)
     {
         $stream = fopen($filePath, 'r+');
@@ -103,11 +118,14 @@ class MediaHelper extends Object
         }
         if ($flysystem->putStream($filename, $stream)) {
             return $filename;
-        }else{
+        } else {
             throw new Exception(Yii::t('app', 'File not saved'));
         }
     }
 
+    /**
+     * @param string $filePath
+     */
     public static function removeTmpFile($filePath)
     {
         unlink($filePath);
