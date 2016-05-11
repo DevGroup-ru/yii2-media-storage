@@ -1,6 +1,7 @@
 <?php
 
 use app\models\Thing;
+use DevGroup\MediaStorage\controllers\ElfinderController;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 
@@ -83,14 +84,14 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
-//                'media' => 'media/media/all-files',
-//                'media/groups' => 'media/media/all-groups',
-//                'media/show/item/<id:\d+>' => 'media/media/show-item',
-//                'media/show/group/<id:\d+>' => 'media/media/show-group',
-//                'media/save/item/<id:\d+>' => 'media/media/save-item',
-//                'media/save/group/<id:\d+>' => 'media/media/save-group',
-//                'media/delete/item/<id:\d+>' => 'media/media/delete-item',
-//                'media/delete/group/<id:\d+>' => 'media/media/delete-group',
+                //                'media' => 'media/media/all-files',
+                //                'media/groups' => 'media/media/all-groups',
+                //                'media/show/item/<id:\d+>' => 'media/media/show-item',
+                //                'media/show/group/<id:\d+>' => 'media/media/show-group',
+                //                'media/save/item/<id:\d+>' => 'media/media/save-item',
+                //                'media/save/group/<id:\d+>' => 'media/media/save-group',
+                //                'media/delete/item/<id:\d+>' => 'media/media/delete-item',
+                //                'media/delete/group/<id:\d+>' => 'media/media/delete-group',
                 //'POST media/save/item<id:\d+>' => 'media/media/save-item',
                 //'POST media/save/group<id:\d+>' => 'media/media/save-group',
                 //'DELETE media/delete/item/<id:\d+>' => 'media/media/delete-item',
@@ -104,18 +105,38 @@ $config = [
     ],
     'controllerMap' => [
         'elfinder' => [
-            'class' => 'mihaildev\elfinder\Controller',
-            'access' => ['@', '?'], //глобальный доступ к фаил менеджеру @ - для авторизорованных , ? - для гостей , чтоб открыть всем ['@', '?']
-            'disabledCommands' => ['netmount'], //отключение ненужных команд https://github.com/Studio-42/elFinder/wiki/Client-configuration-options#commands
+            'class' => ElfinderController::class,
+            'access' => ['@', '?'],
+            //глобальный доступ к фаил менеджеру @ - для авторизорованных , ? - для гостей , чтоб открыть всем ['@', '?']
+            'disabledCommands' => ['netmount'],
+            //отключение ненужных команд https://github.com/Studio-42/elFinder/wiki/Client-configuration-options#commands
             'roots' => [
-                [
-                    'baseUrl'=>'@web',
-                    'basePath'=>'@webroot',
-                    'path' => 'files/global',
-                    'name' => 'Global'
+                'baseRoot' => [
+                    'basePath' => '@webroot/files/',
+                    'path' => '',
+                    'name' => '',
+                    'options' => [
+                        'attributes' => [
+                            [
+                                'pattern' => '#.*(\.tmb|\.quarantine)$#i',
+                                'read' => false,
+                                'write' => false,
+                                'hidden' => true,
+                                'locked' => false,
+                            ],
+                            [
+                                'pattern' => '#/.+[^/]$#',
+                                'read' => false,
+                                'write' => true,
+                                'hidden' => true,
+                                'locked' => false,
+                            ],
+                        ],
+                    ],
+
                 ],
             ],
-        ]
+        ],
     ],
     'params' => $params,
 ];
