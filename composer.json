@@ -24,9 +24,8 @@
         "devgroup/yii2-multilingual": "dev-master",
         "devgroup/yii2-users-module": "dev-master",
         "devgroup/yii2-dropzone": "^1.0",
-        "barryvdh/elfinder-flysystem-driver": "^0.2.0",
-        "mihaildev/yii2-elfinder": "^1.1"
-
+        "mihaildev/yii2-elfinder": "1.1.3",
+        "2amigos/yii2-transliterator-helper": "^0.1.0"
     },
     "require-dev": {
         "yiisoft/yii2-bootstrap": "^2.0@dev",

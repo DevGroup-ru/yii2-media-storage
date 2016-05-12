@@ -1,7 +1,6 @@
 <?php
 
-use app\models\Thing;
-use DevGroup\MediaStorage\controllers\ElfinderController;
+use mihaildev\elfinder\Controller as ElfinderController;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 
@@ -104,39 +103,7 @@ $config = [
         ],
     ],
     'controllerMap' => [
-        'elfinder' => [
-            'class' => ElfinderController::class,
-            'access' => ['@', '?'],
-            //глобальный доступ к фаил менеджеру @ - для авторизорованных , ? - для гостей , чтоб открыть всем ['@', '?']
-            'disabledCommands' => ['netmount'],
-            //отключение ненужных команд https://github.com/Studio-42/elFinder/wiki/Client-configuration-options#commands
-            'roots' => [
-                'baseRoot' => [
-                    'basePath' => '@webroot/files/',
-                    'path' => '',
-                    'name' => '',
-                    'options' => [
-                        'attributes' => [
-                            [
-                                'pattern' => '#.*(\.tmb|\.quarantine)$#i',
-                                'read' => false,
-                                'write' => false,
-                                'hidden' => true,
-                                'locked' => false,
-                            ],
-                            [
-                                'pattern' => '#/.+[^/]$#',
-                                'read' => false,
-                                'write' => true,
-                                'hidden' => true,
-                                'locked' => false,
-                            ],
-                        ],
-                    ],
 
-                ],
-            ],
-        ],
     ],
     'params' => $params,
 ];
