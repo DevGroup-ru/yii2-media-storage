@@ -8,6 +8,7 @@ use DevGroup\MediaStorage\models\Media;
 use dosamigos\transliterator\TransliteratorHelper;
 use mihaildev\elfinder\Controller;
 use yii\helpers\ArrayHelper;
+use yii\helpers\VarDumper;
 
 /**
  * Class BaseElfinderController
@@ -23,9 +24,9 @@ class BaseElfinderController extends Controller
         $this->roots = ArrayHelper::merge(
             [
                 'baseRoot' => [
-                    'basePath' => '@webroot/files/',
-                    'path' => '',
-                    'name' => '',
+                    'class' => 'mihaildev\elfinder\flysystem\Volume',
+                    'component' => 'protectedFilesystem',
+                    'name' => 'protected',
                     'options' => [
                         'attributes' => [
                             [
@@ -54,8 +55,14 @@ class BaseElfinderController extends Controller
         $this->connectOptions = ArrayHelper::merge(
             [
                 'bind' => [
-                    'mkfile mkdir upload' => [$this, 'createRecord'],
+                    'mkfile mkdir upload duplicate paste' => [$this, 'createRecord'],
                     'rm' => [$this, 'removeRecord'],
+                    'rename' => [$this, 'renameRecord'],
+                    //                    'extract' => [],
+                    //                    'archive' => [],
+                    /**
+                     * @todo duplicate create bad name of file "<file> copy N.ext" think how to rename it and write to db
+                     */
                     'mkdir.pre mkfile.pre rename.pre archive.pre' => [
                         'Plugin.Normalizer.cmdPreprocess',
                         'Plugin.Sanitizer.cmdPreprocess',
@@ -111,8 +118,8 @@ class BaseElfinderController extends Controller
              * @var \elFinderVolumeDriver $volume
              */
             $volume = $elfinder->getVolume($added['hash']);
-            $relatedPath = str_replace($volume->path($volume->defaultPath()) . '/', '', $volume->path($added['hash']));
-            $media->path = $relatedPath;
+//            $relatedPath = str_replace($volume->path($volume->defaultPath()) . '/', '', $volume->path($added['hash']));
+            $media->path = $volume->getPath($added['hash']);
             $media->save();
         }
         return true;
@@ -123,7 +130,6 @@ class BaseElfinderController extends Controller
      * @param  array $result command result
      * @param  array $args command arguments from client
      * @param  \elFinder $elfinder elFinder instance
-     **
      *
      * @return bool
      */
@@ -134,17 +140,35 @@ class BaseElfinderController extends Controller
              * @var \elFinderVolumeDriver $volume
              */
             $volume = $elfinder->getVolume($removed['hash']);
-            $relatedPath = str_replace(
-                $volume->path($volume->defaultPath()) . '/',
-                '',
-                $volume->path($removed['hash'])
-            );
+//            $relatedPath = str_replace(
+//                $volume->path($volume->defaultPath()) . '/',
+//                '',
+//                $volume->path($removed['hash'])
+//            );
             /**
-             * @todo tree fix
+             * @todo tree remove fix
              */
-            $media = Media::findOne(['path' => $relatedPath]);
+            $media = Media::findOne(['path' => $volume->getPath($removed['hash'])]);
             $media->delete();
         }
+        return true;
+    }
+
+    /**
+     * @param  string $cmd command name
+     * @param  array $result command result
+     * @param  array $args command arguments from client
+     * @param  \elFinder $elfinder elFinder instance
+     *
+     * @return bool
+     */
+    public function renameRecord($cmd, &$result, $args, $elfinder)
+    {
+        $this->removeRecord($cmd, $result, $args, $elfinder);
+        $this->createRecord($cmd, $result, $args, $elfinder);
+        /**
+         * @todo tree
+         */
         return true;
     }
 
@@ -157,9 +181,6 @@ class BaseElfinderController extends Controller
      */
     public function onUpLoadPreSaveNameTransliteration(&$path, &$name, $src, $elfinder, $volume)
     {
-        if ($path) {
-            $path = TransliteratorHelper::process($path, '', 'en');
-        }
         $name = TransliteratorHelper::process($name, '', 'en');
     }
 
@@ -186,9 +207,6 @@ class BaseElfinderController extends Controller
      */
     public function onUpLoadPreSaveNameToLowercase(&$path, &$name, $src, $elfinder, $volume)
     {
-        if ($path) {
-            $path = strtolower($path);
-        }
         $name = strtolower($name);
     }
 
