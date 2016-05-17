@@ -29,6 +29,10 @@ $config = [
             'class' => 'creocoder\flysystem\LocalFilesystem',
             'path' => '@app/media',
         ],
+        'multilingual' => [
+            'class' => 'DevGroup\Multilingual\Multilingual',
+            'default_language_id' => 1,
+        ],
     ],
     'params' => $params,
 ];

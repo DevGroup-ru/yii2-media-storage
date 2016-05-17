@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "1152c8cc2f0042dc8fd63a307f38c94a",
-    "content-hash": "bc1b13a2587ae93b6d6f0e1730c0724b",
+    "hash": "e3457a852956568ba3df33ed07a514d7",
+    "content-hash": "53715c286a871238e73ce39967e3fc7d",
     "packages": [
         {
             "name": "2amigos/yii2-transliterator-helper",

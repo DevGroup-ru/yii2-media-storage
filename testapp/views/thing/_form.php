@@ -22,6 +22,11 @@ use yii\widgets\ActiveForm;
 
     <?= MediaForm::widget(['model' => $model, 'form' => $form]) ?>
 
+    <?= \DevGroup\DataStructure\widgets\PropertiesForm::widget([
+        'model' => $model,
+        'form' => $form,
+    ]) ?>
+
     <?php ActiveForm::end(); ?>
 
 </div>

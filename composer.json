@@ -25,7 +25,9 @@
         "devgroup/yii2-dropzone": "^1.0",
         "mihaildev/yii2-elfinder": "^1.1.3",
         "2amigos/yii2-transliterator-helper": "^0.1.0",
-        "mihaildev/yii2-elfinder-flysystem": "^0.0.1"
+        "mihaildev/yii2-elfinder-flysystem": "^0.0.1",
+        "devgroup/yii2-data-structure-tools": "*",
+        "devgroup/yii2-tag-dependency-helper": "*"
     },
     "require-dev": {
         "yiisoft/yii2-bootstrap": "^2.0@dev",

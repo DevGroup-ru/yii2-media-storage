@@ -64,7 +64,7 @@ class ThingController extends Controller
     public function actionCreate()
     {
         $model = new Thing();
-
+        $model->autoSaveProperties = true;
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
@@ -83,7 +83,7 @@ class ThingController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
+        $model->autoSaveProperties = true;
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {

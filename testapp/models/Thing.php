@@ -4,6 +4,7 @@ namespace app\models;
 
 use DevGroup\MediaStorage\models\Media;
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "{{%thing}}".
@@ -16,6 +17,25 @@ use Yii;
  */
 class Thing extends \yii\db\ActiveRecord
 {
+    use \DevGroup\DataStructure\traits\PropertiesTrait;
+    use \DevGroup\TagDependencyHelper\TagDependencyTrait;
+    
+    public function behaviors()
+    {
+        return [
+            // other behaviors
+            'properties' => [
+                'class' => '\DevGroup\DataStructure\behaviors\HasProperties',
+                // 'class' => \DevGroup\DataStructure\behaviors\HasProperties::class, // Альтернативная версия
+                'autoFetchProperties' => true,
+            ],
+            'CacheableActiveRecord' => [
+                'class' => \DevGroup\TagDependencyHelper\CacheableActiveRecord::className(),
+            ],
+            // other behaviors
+        ];
+    }
+
     /**
      * @inheritdoc
      */
@@ -29,9 +49,12 @@ class Thing extends \yii\db\ActiveRecord
      */
     public function rules()
     {
-        return [
-            [['prop'], 'string', 'max' => 255],
-        ];
+        return ArrayHelper::merge(
+            [
+                [['prop'], 'string', 'max' => 255],
+            ],
+            $this->propertiesRules()
+        );
     }
 
     /**
