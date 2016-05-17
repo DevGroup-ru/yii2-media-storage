@@ -1,8 +1,8 @@
 <?php
-use devgroup\dropzone\DropZone;
+
 use mihaildev\elfinder\ElFinder;
+use mihaildev\elfinder\InputFile;
 use yii\db\ActiveRecord;
-use yii\helpers\Url;
 use yii\widgets\ActiveForm;
 
 /**
@@ -10,11 +10,22 @@ use yii\widgets\ActiveForm;
  * @var ActiveRecord $model
  */
 
-// add file(s) button
+foreach ($model->media as $key => $value) {
+    echo $form->field($model, 'media[' . $key . ']')->hiddenInput()->label(false);
+}
 
-// select from gallery button
-
-// files
+//echo $form->field($model, 'media[]')->widget(
+//    InputFile::className(),
+//    [
+//        'language' => 'ru',
+//        'controller' => 'media/elfinder',
+//        'template' => '<div class="input-group">{input}<span class="input-group-btn">{button}</span></div>',
+//        'options' => ['class' => 'form-control'],
+//        'buttonOptions' => ['class' => 'btn btn-default'],
+//        'buttonName' => '<i class="fa fa-plus"></i> ' . \Yii::t('app', 'Open gallery'),
+//        'multiple' => true,
+//    ]
+//);
 
 echo ElFinder::widget(
     [

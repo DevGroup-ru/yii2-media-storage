@@ -91,7 +91,7 @@ class MediaTableGenerator extends Object
      * @return string
      * @throws \yii\base\NotSupportedException
      */
-    protected function getMediaTableName($className)
+    public function getMediaTableName($className)
     {
         $mediaTable = $this->db->getSchema()->getRawTableName($className::tableName()) . '_media';
         return $mediaTable;

@@ -8,7 +8,6 @@ use DevGroup\MediaStorage\models\Media;
 use dosamigos\transliterator\TransliteratorHelper;
 use mihaildev\elfinder\Controller;
 use yii\helpers\ArrayHelper;
-use yii\helpers\VarDumper;
 
 /**
  * Class BaseElfinderController
@@ -61,7 +60,7 @@ class BaseElfinderController extends Controller
                     //                    'extract' => [],
                     //                    'archive' => [],
                     /**
-                     * @todo duplicate create bad name of file "<file> copy N.ext" think how to rename it and write to db
+                     * @todo duplicate create bad name of file "<file> copy N.ext" think how to rename it and write to db; archives
                      */
                     'mkdir.pre mkfile.pre rename.pre archive.pre' => [
                         'Plugin.Normalizer.cmdPreprocess',
@@ -69,6 +68,7 @@ class BaseElfinderController extends Controller
                         [$this, 'cmdPreprocessNameTransliteration'],
                         [$this, 'cmdPreprocessNameToLowercase'],
                     ],
+                    'info' => [$this, 'resultModifier'],
                     'upload.presave' => [
                         'Plugin.Normalizer.onUpLoadPreSave',
                         'Plugin.Sanitizer.onUpLoadPreSave',
@@ -85,17 +85,14 @@ class BaseElfinderController extends Controller
                     ],
                     'Sanitizer' => [
                         'enable' => true,
-                        'targets' => ['\\', '/', ':', '*', '?', '"', '<', '>', '|', ' ', '-'],
+                        'targets' => ['\\', '/', ':', '*', '?', '"', '<', '>', '|', ' ', '-', '(', ')'],
                         'replace' => '_',
                     ],
                 ],
             ],
             $this->connectOptions
         );
-        $this->roots = ArrayHelper::merge(
-            $this->roots,
-            ['baseRoot' => ['options' => ['attributes' => static::getAllMedias()]]]
-        );
+
 
     }
 
@@ -104,7 +101,6 @@ class BaseElfinderController extends Controller
      * @param  array $result command result
      * @param  array $args command arguments from client
      * @param  \elFinder $elfinder elFinder instance
-     **
      *
      * @return bool
      */
@@ -118,9 +114,27 @@ class BaseElfinderController extends Controller
              * @var \elFinderVolumeDriver $volume
              */
             $volume = $elfinder->getVolume($added['hash']);
-//            $relatedPath = str_replace($volume->path($volume->defaultPath()) . '/', '', $volume->path($added['hash']));
+            //            $relatedPath = str_replace($volume->path($volume->defaultPath()) . '/', '', $volume->path($added['hash']));
             $media->path = $volume->getPath($added['hash']);
             $media->save();
+        }
+        return true;
+    }
+
+    /**
+     * @param  string $cmd command name
+     * @param  array $result command result
+     * @param  array $args command arguments from client
+     * @param  \elFinder $elfinder elFinder instance
+     *
+     * @return bool
+     */
+    public function resultModifier($cmd, &$result, $args, $elfinder)
+    {
+        foreach (ArrayHelper::getValue($result, 'files', []) as $index => $item) {
+            $volume = $elfinder->getVolume($item['hash']);
+            $media = Media::findOne(['path' => $volume->getPath($item['hash'])]);
+            $result['files'][$index]['id'] = $media->id;
         }
         return true;
     }
@@ -140,11 +154,11 @@ class BaseElfinderController extends Controller
              * @var \elFinderVolumeDriver $volume
              */
             $volume = $elfinder->getVolume($removed['hash']);
-//            $relatedPath = str_replace(
-//                $volume->path($volume->defaultPath()) . '/',
-//                '',
-//                $volume->path($removed['hash'])
-//            );
+            //            $relatedPath = str_replace(
+            //                $volume->path($volume->defaultPath()) . '/',
+            //                '',
+            //                $volume->path($removed['hash'])
+            //            );
             /**
              * @todo tree remove fix
              */
@@ -189,7 +203,6 @@ class BaseElfinderController extends Controller
      * @param  array $args command arguments from client
      * @param  \elFinder $elfinder elFinder instance
      * @param \elFinderVolumeDriver $volume elFinderVolumeDriver instance
-     *
      **/
     public function cmdPreprocessNameTransliteration($cmd, &$args, $elfinder, $volume)
     {
@@ -215,7 +228,6 @@ class BaseElfinderController extends Controller
      * @param  array $args command arguments from client
      * @param  \elFinder $elfinder elFinder instance
      * @param \elFinderVolumeDriver $volume elFinderVolumeDriver instance
-     *
      **/
     public function cmdPreprocessNameToLowercase($cmd, &$args, $elfinder, $volume)
     {
@@ -224,9 +236,13 @@ class BaseElfinderController extends Controller
         }
     }
 
-    public static function getAllMedias()
+    public static function getAllMedias($where = null)
     {
-        $medias = Media::find()->all();
+        $mediasQuery = Media::find();
+        if (is_null($where) === false) {
+            $mediasQuery->where(['id' => $where]);
+        }
+        $medias = $mediasQuery->all();
         $result = array_reduce(
             $medias,
             function ($total, $item) {
