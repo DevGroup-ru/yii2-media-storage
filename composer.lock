@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "12f627988b6e3ccd6e8ece78d2e4e726",
+    "hash": "1152c8cc2f0042dc8fd63a307f38c94a",
     "content-hash": "bc1b13a2587ae93b6d6f0e1730c0724b",
     "packages": [
         {
@@ -850,12 +850,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/DevGroup-ru/yii2-frontend-utils.git",
-                "reference": "aa192628d60f6bda5d36c3dfc6f9d2ce3f7b2034"
+                "reference": "eb1ba6f2c4ff5051cfb695e72698c5de496d8096"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/DevGroup-ru/yii2-frontend-utils/zipball/aa192628d60f6bda5d36c3dfc6f9d2ce3f7b2034",
-                "reference": "aa192628d60f6bda5d36c3dfc6f9d2ce3f7b2034",
+                "url": "https://api.github.com/repos/DevGroup-ru/yii2-frontend-utils/zipball/eb1ba6f2c4ff5051cfb695e72698c5de496d8096",
+                "reference": "eb1ba6f2c4ff5051cfb695e72698c5de496d8096",
                 "shasum": ""
             },
             "require": {
@@ -864,9 +864,18 @@
                 "yiisoft/yii2": "^2.0.6"
             },
             "require-dev": {
-                "devgroup/dotplant-dev": "*"
+                "devgroup/dotplant-dev": "~1.0"
             },
             "type": "yii2-extension",
+            "extra": {
+                "yii2-extension": {
+                    "name": "Frontend utils",
+                    "name_ru": "Frontend утилиты",
+                    "iconUrl": "https://st-1.dotplant.ru/images/ext-sample.png",
+                    "description": "Various frontend components for yii2",
+                    "description_ru": "Различные компоненты для yii2"
+                }
+            },
             "autoload": {
                 "psr-4": {
                     "DevGroup\\Frontend\\": "src/"
@@ -889,7 +898,7 @@
                 "frontend-monster",
                 "yii2"
             ],
-            "time": "2016-01-31 10:25:08"
+            "time": "2016-05-15 12:10:24"
         },
         {
             "name": "devgroup/yii2-multilingual",
@@ -1907,12 +1916,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Studio-42/elFinder.git",
-                "reference": "82c0bd4509f49aa36c0398647346bf3fab2524a7"
+                "reference": "904fc3ee40fed472d9d08e76216ee2fd71d912a7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Studio-42/elFinder/zipball/82c0bd4509f49aa36c0398647346bf3fab2524a7",
-                "reference": "82c0bd4509f49aa36c0398647346bf3fab2524a7",
+                "url": "https://api.github.com/repos/Studio-42/elFinder/zipball/904fc3ee40fed472d9d08e76216ee2fd71d912a7",
+                "reference": "904fc3ee40fed472d9d08e76216ee2fd71d912a7",
                 "shasum": ""
             },
             "require": {
@@ -1957,7 +1966,7 @@
             ],
             "description": "File manager for web",
             "homepage": "http://elfinder.org",
-            "time": "2016-05-12 15:43:05"
+            "time": "2016-05-16 13:16:52"
         },
         {
             "name": "unclead/yii2-multiple-input",
@@ -2058,12 +2067,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-framework.git",
-                "reference": "fc07e4d2257437fb13e549b4c41ca4cd410022eb"
+                "reference": "5ed762ebf18945ef3282d0910d1a8b03603c7a7b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/fc07e4d2257437fb13e549b4c41ca4cd410022eb",
-                "reference": "fc07e4d2257437fb13e549b4c41ca4cd410022eb",
+                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/5ed762ebf18945ef3282d0910d1a8b03603c7a7b",
+                "reference": "5ed762ebf18945ef3282d0910d1a8b03603c7a7b",
                 "shasum": ""
             },
             "require": {
@@ -2144,7 +2153,7 @@
                 "framework",
                 "yii2"
             ],
-            "time": "2016-05-12 13:33:23"
+            "time": "2016-05-15 22:11:47"
         },
         {
             "name": "yiisoft/yii2-authclient",
@@ -2297,12 +2306,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-elasticsearch.git",
-                "reference": "2c4a708d13f4431ca4a0543ebfb021806f1b7c9d"
+                "reference": "18babbee27d8d6914b9e0b032fa6d3c3361229a4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-elasticsearch/zipball/2c4a708d13f4431ca4a0543ebfb021806f1b7c9d",
-                "reference": "2c4a708d13f4431ca4a0543ebfb021806f1b7c9d",
+                "url": "https://api.github.com/repos/yiisoft/yii2-elasticsearch/zipball/18babbee27d8d6914b9e0b032fa6d3c3361229a4",
+                "reference": "18babbee27d8d6914b9e0b032fa6d3c3361229a4",
                 "shasum": ""
             },
             "require": {
@@ -2338,7 +2347,7 @@
                 "search",
                 "yii2"
             ],
-            "time": "2016-05-11 17:33:57"
+            "time": "2016-05-16 15:24:39"
         },
         {
             "name": "yiisoft/yii2-imagine",
@@ -2469,26 +2478,26 @@
         },
         {
             "name": "devgroup/dotplant-dev",
-            "version": "1.0.0",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/DevGroup-ru/dotplant-dev.git",
-                "reference": "fbfec225fcfd75a30b6bcfffc0b66d4c986ac286"
+                "reference": "78c663dda6f381b483e9e6751ad1cbce0bf865e6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/DevGroup-ru/dotplant-dev/zipball/fbfec225fcfd75a30b6bcfffc0b66d4c986ac286",
-                "reference": "fbfec225fcfd75a30b6bcfffc0b66d4c986ac286",
+                "url": "https://api.github.com/repos/DevGroup-ru/dotplant-dev/zipball/78c663dda6f381b483e9e6751ad1cbce0bf865e6",
+                "reference": "78c663dda6f381b483e9e6751ad1cbce0bf865e6",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.5",
                 "phpunit/dbunit": "~2.0.2",
                 "phpunit/phpunit": "~4.8",
-                "yiisoft/yii2-codeception": "~2.0.4",
-                "yiisoft/yii2-debug": "~2.0.5",
+                "yiisoft/yii2-codeception": "~2.0.5",
+                "yiisoft/yii2-debug": "~2.0.6",
                 "yiisoft/yii2-faker": "~2.0.3",
-                "yiisoft/yii2-gii": "~2.0.4"
+                "yiisoft/yii2-gii": "~2.0.5"
             },
             "type": "metapackage",
             "notification-url": "https://packagist.org/downloads/",
@@ -2501,11 +2510,12 @@
                     "email": "b37hr3z3n@gmail.com"
                 }
             ],
-            "description": "DotPlant2 is an open-source E-Commerce CMS for shops build with Yii2",
+            "description": "DotPlant is an open-source CMS build with Yii2 including E-Commerce features for shops",
             "homepage": "http://dotplant.ru/",
             "keywords": [
                 "dotplant",
                 "dotplant2",
+                "dotplant3",
                 "yii",
                 "yii cms",
                 "yii e-commerce",
@@ -2515,7 +2525,7 @@
                 "yii2 e-commerce",
                 "yii2 shop"
             ],
-            "time": "2016-01-31 10:51:47"
+            "time": "2016-05-15 11:55:47"
         },
         {
             "name": "doctrine/instantiator",
@@ -3074,12 +3084,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "cb07302bcc264a177461bd8112c73eb2cd19aed6"
+                "reference": "fc1d8cd5b5de11625979125c5639347896ac2c74"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/cb07302bcc264a177461bd8112c73eb2cd19aed6",
-                "reference": "cb07302bcc264a177461bd8112c73eb2cd19aed6",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/fc1d8cd5b5de11625979125c5639347896ac2c74",
+                "reference": "fc1d8cd5b5de11625979125c5639347896ac2c74",
                 "shasum": ""
             },
             "require": {
@@ -3138,7 +3148,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2016-05-10 17:50:22"
+            "time": "2016-05-17 03:09:28"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
@@ -3318,12 +3328,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/environment.git",
-                "reference": "2292b116f43c272ff4328083096114f84ea46a56"
+                "reference": "4e8f0da10ac5802913afc151413bc8c53b6c2716"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/environment/zipball/2292b116f43c272ff4328083096114f84ea46a56",
-                "reference": "2292b116f43c272ff4328083096114f84ea46a56",
+                "url": "https://api.github.com/repos/sebastianbergmann/environment/zipball/4e8f0da10ac5802913afc151413bc8c53b6c2716",
+                "reference": "4e8f0da10ac5802913afc151413bc8c53b6c2716",
                 "shasum": ""
             },
             "require": {
@@ -3360,7 +3370,7 @@
                 "environment",
                 "hhvm"
             ],
-            "time": "2016-05-04 07:59:13"
+            "time": "2016-05-17 03:18:57"
         },
         {
             "name": "sebastian/exporter",
@@ -3574,12 +3584,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "407e31ad9742ace5c3d01642f02a3b2e6062bae5"
+                "reference": "641bbd0fc1b671f896f7815169587dced3588f5c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/407e31ad9742ace5c3d01642f02a3b2e6062bae5",
-                "reference": "407e31ad9742ace5c3d01642f02a3b2e6062bae5",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/641bbd0fc1b671f896f7815169587dced3588f5c",
+                "reference": "641bbd0fc1b671f896f7815169587dced3588f5c",
                 "shasum": ""
             },
             "require": {
@@ -3588,7 +3598,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.1-dev"
+                    "dev-master": "3.2-dev"
                 }
             },
             "autoload": {
@@ -3615,7 +3625,7 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
-            "time": "2016-03-30 14:44:34"
+            "time": "2016-05-14 15:06:20"
         },
         {
             "name": "yiisoft/yii2-codeception",

@@ -8,7 +8,7 @@ $config = [
     'vendorPath' => '@app/../vendor',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
-    'controllerNamespace' => 'app\commands',
+    'controllerNamespace' => 'DevGroup\MediaStorage\commands',
     'components' => [
         'cache' => [
             'class' => 'yii\caching\FileCache',
@@ -24,6 +24,10 @@ $config = [
         'db' => $db,
         'authManager' => [
             'class' => 'yii\rbac\DbManager',
+        ],
+        'protectedFilesystem' => [
+            'class' => 'creocoder\flysystem\LocalFilesystem',
+            'path' => '@app/media',
         ],
     ],
     'params' => $params,

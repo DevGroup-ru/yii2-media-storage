@@ -1,19 +1,9 @@
 <?php
-
-use devgroup\dropzone\DropZone;
-use devgroup\dropzone\DropZoneAsset;
 use mihaildev\elfinder\ElFinder;
-use yii\helpers\Url;
-use yii\bootstrap\Dropdown;
-use branchonline\lightbox\Lightbox;
-use DevGroup\MediaStorage\assets\FilesAsset;
-
 /**
  * @var yii\web\View $this
  */
 
-DropZoneAsset::register($this);
-FilesAsset::register($this);
 $this->title = 'Media Storage';
 $this->params['breadcrumbs'][] = $this->title;
 

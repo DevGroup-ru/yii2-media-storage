@@ -234,7 +234,7 @@ class BaseElfinderController extends Controller
                  * @var Media $item
                  */
                 $total[] = [
-                    'pattern' => '#^/' . $item->path . '$#',
+                    'pattern' => '#^/' . preg_quote($item->path) . '$#',
                     'read' => true,
                     'write' => true,
                     'hidden' => false,
