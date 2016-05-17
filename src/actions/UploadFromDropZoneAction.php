@@ -3,7 +3,6 @@
 
 namespace DevGroup\MediaStorage\actions;
 
-
 use devgroup\dropzone\UploadAction;
 use DevGroup\MediaStorage\helpers\MediaHelper;
 use DevGroup\MediaStorage\models\Media;
@@ -42,5 +41,4 @@ class UploadFromDropZoneAction extends UploadAction
             // \Yii::$app->trigger(Media::class, 'afterUploadEvent');
         };
     }
-
 }

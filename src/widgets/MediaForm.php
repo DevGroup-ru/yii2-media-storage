@@ -2,6 +2,7 @@
 
 namespace DevGroup\MediaStorage\widgets;
 
+use DevGroup\DataStructure\models\Property;
 use Yii;
 use yii\base\Exception;
 use yii\base\Widget;
@@ -18,6 +19,10 @@ class MediaForm extends Widget
      * @var ActiveForm
      */
     public $form = null;
+    /**
+     * @var Property
+     */
+    public $property = null;
     /**
      * @var string
      */
@@ -42,6 +47,9 @@ class MediaForm extends Widget
      */
     public function run()
     {
-        return $this->render($this->viewFile, ['form' => $this->form, 'model' => $this->model]);
+        return $this->render(
+            $this->viewFile,
+            ['form' => $this->form, 'model' => $this->model, 'property' => $this->property]
+        );
     }
 }

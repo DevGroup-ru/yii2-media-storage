@@ -3,10 +3,10 @@
 
 namespace DevGroup\MediaStorage\controllers;
 
-
 use DevGroup\MediaStorage\models\Media;
 use dosamigos\transliterator\TransliteratorHelper;
 use mihaildev\elfinder\Controller;
+use Yii;
 use yii\helpers\ArrayHelper;
 
 /**
@@ -20,6 +20,7 @@ class BaseElfinderController extends Controller
 
     public function init()
     {
+        $this->managerOptions = Yii::$app->request->get('managerOptions', []);
         $this->roots = ArrayHelper::merge(
             [
                 'baseRoot' => [
@@ -56,6 +57,7 @@ class BaseElfinderController extends Controller
                 'bind' => [
                     'mkfile mkdir upload duplicate paste' => [$this, 'createRecord'],
                     'rm' => [$this, 'removeRecord'],
+                    'rm.pre' => [$this, 'removePre'],
                     'rename' => [$this, 'renameRecord'],
                     //                    'extract' => [],
                     //                    'archive' => [],
@@ -102,6 +104,7 @@ class BaseElfinderController extends Controller
      * @param  array $args command arguments from client
      * @param  \elFinder $elfinder elFinder instance
      *
+     * @todo tree add
      * @return bool
      */
     public function createRecord($cmd, &$result, $args, $elfinder)
@@ -149,23 +152,33 @@ class BaseElfinderController extends Controller
      */
     public function removeRecord($cmd, &$result, $args, $elfinder)
     {
-        foreach (ArrayHelper::getValue($result, 'removed', []) as $index => $removed) {
-            /**
-             * @var \elFinderVolumeDriver $volume
-             */
-            $volume = $elfinder->getVolume($removed['hash']);
-            //            $relatedPath = str_replace(
-            //                $volume->path($volume->defaultPath()) . '/',
-            //                '',
-            //                $volume->path($removed['hash'])
-            //            );
-            /**
-             * @todo tree remove fix
-             */
-            $media = Media::findOne(['path' => $volume->getPath($removed['hash'])]);
-            $media->delete();
+        $data = $this->getCustomData();
+        if (count($data) > 0) {
+            return false;
+        } else {
+            foreach (ArrayHelper::getValue($result, 'removed', []) as $index => $removed) {
+                /**
+                 * @var \elFinderVolumeDriver $volume
+                 */
+                $volume = $elfinder->getVolume($removed['hash']);
+                //            $relatedPath = str_replace(
+                //                $volume->path($volume->defaultPath()) . '/',
+                //                '',
+                //                $volume->path($removed['hash'])
+                //            );
+                /**
+                 * @todo tree remove fix
+                 */
+                $media = Media::findOne(['path' => $volume->getPath($removed['hash'])]);
+                $data = $this->getCustomData();
+                if (count($data) > 0) {
+
+                } else {
+                    $media->delete();
+                }
+            }
+            return true;
         }
-        return true;
     }
 
     /**
@@ -208,6 +221,20 @@ class BaseElfinderController extends Controller
     {
         if (ArrayHelper::keyExists('name', $args)) {
             $args['name'] = TransliteratorHelper::process($args['name'], '', 'en');
+        }
+    }
+
+    /**
+     * @param  string $cmd command name
+     * @param  array $args command arguments from client
+     * @param  \elFinder $elfinder elFinder instance
+     * @param \elFinderVolumeDriver $volume elFinderVolumeDriver instance
+     **/
+    public function removePre($cmd, &$args, $elfinder, $volume)
+    {
+        $data = $this->getCustomData();
+        if (count($data) > 0) {
+            $args = [];
         }
     }
 
@@ -262,5 +289,17 @@ class BaseElfinderController extends Controller
         );
         return $result;
 
+    }
+
+    protected function getCustomData($getKeys = ['model', 'model_id', 'property_id'])
+    {
+        $result = [];
+        $get = Yii::$app->request->get();
+        foreach ($getKeys as $key) {
+            if (ArrayHelper::keyExists($key, $get)) {
+                $result[$key] = $get[$key];
+            }
+        }
+        return $result;
     }
 }

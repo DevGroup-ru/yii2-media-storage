@@ -2,7 +2,6 @@
 
 namespace DevGroup\MediaStorage\commands;
 
-
 use creocoder\flysystem\Filesystem;
 use DevGroup\MediaStorage\models\Media;
 use Yii;

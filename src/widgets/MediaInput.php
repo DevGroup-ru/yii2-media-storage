@@ -3,7 +3,6 @@
 
 namespace DevGroup\MediaStorage\widgets;
 
-
 use mihaildev\elfinder\AssetsCallBack;
 use mihaildev\elfinder\InputFile;
 use yii\helpers\Html;
@@ -11,6 +10,12 @@ use yii\helpers\Json;
 
 class MediaInput extends InputFile
 {
+    public function init()
+    {
+        parent::init();
+
+    }
+
     public function run()
     {
         if ($this->hasModel()) {
@@ -30,7 +35,25 @@ class MediaInput extends InputFile
             $this->getView()->registerJs(
                 "mihaildev.elFinder.register(" . Json::encode(
                     $this->options['id']
-                ) . ", function(files, id){ var _f = []; console.log(files); for (var i in files) { _f.push(files[i].url); } \$('#' + id).val(_f.join(', ')).trigger('change', [files, id]); return true;}); $(document).on('click','#" . $this->buttonOptions['id'] . "', function(){mihaildev.elFinder.openManager(" . Json::encode(
+                ) . ", function(files, id){ var _f = []; console.log(files); for (var i in files) {
+        _f.push(files[i].hash);
+    }
+    $.getJSON('/media/elfinder/connect', {
+        cmd: \"info\",
+        targets: _f
+    }, function(data) {
+            console.log(data);
+            data.files.every(function(i) {
+                console.log(i);
+                if ($('.multi-media input[value=\"' + i.id + '\"]').length === 0) {
+                    $('.multi-media').append('<input type=\"hidden\" id=\"thing-test-' + i.id + '\" class=\"form-control\" name=\"Thing[test][]\" value=\"' + i.id + '\">');
+                }
+                return true;
+            });
+        });
+        return true;
+    });    
+    $(document).on('click','#" . $this->buttonOptions['id'] . "', function(){mihaildev.elFinder.openManager(" . Json::encode(
                     $this->_managerOptions
                 ) . ");});"
             );

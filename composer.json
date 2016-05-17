@@ -15,6 +15,16 @@
             "email": "at@devgroup.ru"
         }
     ],
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/DevGroup-ru/yii2-elfinder-flysystem"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/DevGroup-ru/yii2-flysystem"
+        }
+    ],
     "require": {
         "php": ">=5.5.0",
         "yiisoft/yii2": "^2.0.6",
@@ -25,9 +35,12 @@
         "devgroup/yii2-dropzone": "^1.0",
         "mihaildev/yii2-elfinder": "^1.1.3",
         "2amigos/yii2-transliterator-helper": "^0.1.0",
-        "mihaildev/yii2-elfinder-flysystem": "^0.0.1",
+        "mihaildev/yii2-elfinder-flysystem": "dev-master",
         "devgroup/yii2-data-structure-tools": "*",
-        "devgroup/yii2-tag-dependency-helper": "*"
+        "devgroup/yii2-tag-dependency-helper": "*",
+        "rmrevin/yii2-fontawesome": "~2.14",
+        "league/glide": "^1.0",
+        "creocoder/yii2-flysystem": "dev-master"
     },
     "require-dev": {
         "yiisoft/yii2-bootstrap": "^2.0@dev",

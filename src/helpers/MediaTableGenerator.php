@@ -2,6 +2,7 @@
 
 namespace DevGroup\MediaStorage\helpers;
 
+use DevGroup\DataStructure\models\Property;
 use DevGroup\MediaStorage\models\ApplicableMediaModels;
 use DevGroup\MediaStorage\models\Media;
 use Yii;
@@ -50,6 +51,7 @@ class MediaTableGenerator extends Object
         $this->migration->createTable(
             $mediaTable,
             [
+                'property_id' => $this->migration->integer()->notNull(),
                 'model_id' => $this->migration->integer()->notNull(),
                 'media_id' => $this->migration->integer()->notNull(),
                 'sort_order' => $this->migration->integer()->notNull()->defaultValue(0),
@@ -64,6 +66,15 @@ class MediaTableGenerator extends Object
             ['model_id'],
             $className::tableName(),
             ['id'],
+            'CASCADE',
+            'CASCADE'
+        );
+        $this->migration->addForeignKey(
+            'fk' . crc32("from-{$mediaTable}-to-" . Property::tableName()) . 'PV',
+            $mediaTable,
+            'property_id',
+            Property::tableName(),
+            'id',
             'CASCADE',
             'CASCADE'
         );
@@ -96,5 +107,4 @@ class MediaTableGenerator extends Object
         $mediaTable = $this->db->getSchema()->getRawTableName($className::tableName()) . '_media';
         return $mediaTable;
     }
-
 }
