@@ -2,6 +2,7 @@
 
 namespace DevGroup\MediaStorage;
 
+use DevGroup\MediaStorage\components\MediaRule;
 use Yii;
 
 class MediaModule extends \yii\base\Module
@@ -11,9 +12,18 @@ class MediaModule extends \yii\base\Module
     public function init()
     {
         parent::init();
-        
+
         if (Yii::$app instanceof \yii\console\Application) {
             $this->controllerNamespace = 'DevGroup\MediaStorage\commands';
+        } elseif (Yii::$app instanceof \yii\web\Application) {
+            Yii::$app->getUrlManager()->addRules(
+                [
+                    [
+                        'class' => MediaRule::class,
+                    ],
+                ],
+                false
+            );
         }
     }
 
