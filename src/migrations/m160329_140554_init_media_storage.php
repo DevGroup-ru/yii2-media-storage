@@ -63,6 +63,16 @@ class m160329_140554_init_media_storage extends Migration
             'CASCADE',
             'CASCADE'
         );
+        $this->createTable(
+            '{%media_route}}',
+            [
+                'id' => $this->primaryKey(),
+                'media_id' => $this->integer(),
+                'url' => $this->string(255)->unique(),
+                'params' => $this->text(),
+            ],
+            $table_options
+        );
     }
 
     public function down()
