@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "01df75d3f9767a0c312b17389027d5e2",
-    "content-hash": "5957bb244300d4131aa2a7ee5d59a15b",
+    "hash": "52ed6a79fd5d9fcfc517aefd490a0261",
+    "content-hash": "6b7c58736c75a47df2c6e569135c1e67",
     "packages": [
         {
             "name": "2amigos/yii2-transliterator-helper",
@@ -625,12 +625,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/lipis/flag-icon-css.git",
-                "reference": "836eca11ecf437ae3d0f0c93dd245ab00d94cee1"
+                "reference": "fc2002547cc287faa2bc5748f1b1d6a594f843cc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lipis/flag-icon-css/zipball/836eca11ecf437ae3d0f0c93dd245ab00d94cee1",
-                "reference": "836eca11ecf437ae3d0f0c93dd245ab00d94cee1",
+                "url": "https://api.github.com/repos/lipis/flag-icon-css/zipball/fc2002547cc287faa2bc5748f1b1d6a594f843cc",
+                "reference": "fc2002547cc287faa2bc5748f1b1d6a594f843cc",
                 "shasum": ""
             },
             "type": "component",
@@ -655,20 +655,20 @@
                 }
             ],
             "description": "CSS for vector based country flags",
-            "time": "2016-05-18 13:50:30"
+            "time": "2016-05-23 16:30:24"
         },
         {
             "name": "creocoder/yii2-flysystem",
-            "version": "dev-master",
+            "version": "0.8.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/DevGroup-ru/yii2-flysystem.git",
-                "reference": "e92db1b59621f530856bef9e226d140b9d41b7d0"
+                "url": "https://github.com/creocoder/yii2-flysystem.git",
+                "reference": "9ca837c8ceb1535f722969f6a9cbbcb0f267667a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/DevGroup-ru/yii2-flysystem/zipball/e92db1b59621f530856bef9e226d140b9d41b7d0",
-                "reference": "e92db1b59621f530856bef9e226d140b9d41b7d0",
+                "url": "https://api.github.com/repos/creocoder/yii2-flysystem/zipball/9ca837c8ceb1535f722969f6a9cbbcb0f267667a",
+                "reference": "9ca837c8ceb1535f722969f6a9cbbcb0f267667a",
                 "shasum": ""
             },
             "require": {
@@ -694,6 +694,7 @@
                     "creocoder\\flysystem\\": "src"
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
@@ -705,25 +706,22 @@
             ],
             "description": "The flysystem extension for the Yii framework",
             "keywords": [
+                "Flysystem",
+                "GridFS",
+                "WebDAV",
                 "aws",
                 "azure",
                 "copy.com",
                 "dropbox",
                 "files",
                 "filesystem",
-                "flysystem",
                 "ftp",
-                "gridfs",
                 "rackspace",
                 "s3",
                 "sftp",
-                "webdav",
                 "yii2"
             ],
-            "support": {
-                "source": "https://github.com/DevGroup-ru/yii2-flysystem/tree/master"
-            },
-            "time": "2016-05-23 09:24:40"
+            "time": "2015-05-12 08:36:25"
         },
         {
             "name": "devgroup/yii2-admin-utils",
@@ -2032,21 +2030,21 @@
         },
         {
             "name": "mihaildev/yii2-elfinder-flysystem",
-            "version": "dev-master",
+            "version": "0.0.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/DevGroup-ru/yii2-elfinder-flysystem.git",
-                "reference": "50a9eff32f039e6ece266169483599f1b5b76cc0"
+                "url": "https://github.com/MihailDev/yii2-elfinder-flysystem.git",
+                "reference": "aa5b7d613eb49c8f6448256e953c3ca4395dcb16"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/DevGroup-ru/yii2-elfinder-flysystem/zipball/50a9eff32f039e6ece266169483599f1b5b76cc0",
-                "reference": "50a9eff32f039e6ece266169483599f1b5b76cc0",
+                "url": "https://api.github.com/repos/MihailDev/yii2-elfinder-flysystem/zipball/aa5b7d613eb49c8f6448256e953c3ca4395dcb16",
+                "reference": "aa5b7d613eb49c8f6448256e953c3ca4395dcb16",
                 "shasum": ""
             },
             "require": {
                 "barryvdh/elfinder-flysystem-driver": "^0.2.0",
-                "creocoder/yii2-flysystem": "dev-master",
+                "creocoder/yii2-flysystem": "^0.8.1",
                 "mihaildev/yii2-elfinder": "*"
             },
             "type": "library",
@@ -2061,6 +2059,7 @@
                     "mihaildev\\elfinder\\flysystem\\": ""
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3-Clause"
             ],
@@ -2075,14 +2074,11 @@
             "description": "Yii2 ElFinder Flysystem",
             "homepage": "https://github.com/MihailDev/yii2-elfinder-flysystem",
             "keywords": [
+                "Flysystem",
                 "elfinder",
-                "flysystem",
                 "yii"
             ],
-            "support": {
-                "source": "https://github.com/DevGroup-ru/yii2-elfinder-flysystem/tree/master"
-            },
-            "time": "2016-05-23 10:40:43"
+            "time": "2016-05-11 15:00:59"
         },
         {
             "name": "psr/cache",
@@ -2327,12 +2323,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Studio-42/elFinder.git",
-                "reference": "c44bd7009b204476bec96388415acedb7bf5c58f"
+                "reference": "8e00a1ef667fea621959023ce50e6d4cfb425ebc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Studio-42/elFinder/zipball/c44bd7009b204476bec96388415acedb7bf5c58f",
-                "reference": "c44bd7009b204476bec96388415acedb7bf5c58f",
+                "url": "https://api.github.com/repos/Studio-42/elFinder/zipball/8e00a1ef667fea621959023ce50e6d4cfb425ebc",
+                "reference": "8e00a1ef667fea621959023ce50e6d4cfb425ebc",
                 "shasum": ""
             },
             "require": {
@@ -2377,7 +2373,7 @@
             ],
             "description": "File manager for web",
             "homepage": "http://elfinder.org",
-            "time": "2016-05-23 07:58:48"
+            "time": "2016-05-24 12:02:29"
         },
         {
             "name": "unclead/yii2-multiple-input",
@@ -2430,12 +2426,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/yii2tech/filedb.git",
-                "reference": "adf4610f38ae940a7abfd3a7bbb72c9b5c0cd9e6"
+                "reference": "a55960a8957b87e923c11250562761f683f1fe59"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yii2tech/filedb/zipball/adf4610f38ae940a7abfd3a7bbb72c9b5c0cd9e6",
-                "reference": "adf4610f38ae940a7abfd3a7bbb72c9b5c0cd9e6",
+                "url": "https://api.github.com/repos/yii2tech/filedb/zipball/a55960a8957b87e923c11250562761f683f1fe59",
+                "reference": "a55960a8957b87e923c11250562761f683f1fe59",
                 "shasum": ""
             },
             "require": {
@@ -2470,7 +2466,7 @@
                 "static",
                 "yii2"
             ],
-            "time": "2016-02-19 15:06:52"
+            "time": "2016-05-25 09:31:12"
         },
         {
             "name": "yiisoft/yii2",
@@ -2478,12 +2474,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-framework.git",
-                "reference": "b37b14b8112cc981dd17adda555dca63b70154a9"
+                "reference": "db2beed44c4fe0fabc4de7f89e5dde6492d720c0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/b37b14b8112cc981dd17adda555dca63b70154a9",
-                "reference": "b37b14b8112cc981dd17adda555dca63b70154a9",
+                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/db2beed44c4fe0fabc4de7f89e5dde6492d720c0",
+                "reference": "db2beed44c4fe0fabc4de7f89e5dde6492d720c0",
                 "shasum": ""
             },
             "require": {
@@ -2564,7 +2560,7 @@
                 "framework",
                 "yii2"
             ],
-            "time": "2016-05-22 10:13:24"
+            "time": "2016-05-25 09:40:40"
         },
         {
             "name": "yiisoft/yii2-authclient",
@@ -3947,12 +3943,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "641bbd0fc1b671f896f7815169587dced3588f5c"
+                "reference": "c7a7ec3a2726c5859017349589c89b3b85fe7c17"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/641bbd0fc1b671f896f7815169587dced3588f5c",
-                "reference": "641bbd0fc1b671f896f7815169587dced3588f5c",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/c7a7ec3a2726c5859017349589c89b3b85fe7c17",
+                "reference": "c7a7ec3a2726c5859017349589c89b3b85fe7c17",
                 "shasum": ""
             },
             "require": {
@@ -3988,7 +3984,7 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
-            "time": "2016-05-14 15:06:20"
+            "time": "2016-05-24 10:07:02"
         },
         {
             "name": "yiisoft/yii2-codeception",
@@ -4188,8 +4184,6 @@
     "stability-flags": {
         "devgroup/yii2-multilingual": 20,
         "devgroup/yii2-users-module": 20,
-        "mihaildev/yii2-elfinder-flysystem": 20,
-        "creocoder/yii2-flysystem": 20,
         "yiisoft/yii2-bootstrap": 20,
         "devgroup/yii2-admin-utils": 20
     },
