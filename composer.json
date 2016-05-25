@@ -33,10 +33,10 @@
         "devgroup/dotplant-dev": "~1.0.0"
     },
     "autoload": {
+        "classmap" : ["Filesystem.php"],
         "psr-4": {
             "DevGroup\\MediaStorage\\": "src/"
-        },
-        "classmap" : ["Filesystem.php"]
+        }
     },
     "autoload-dev": {
         "psr-4": {
@@ -49,5 +49,10 @@
             "bower-asset-library": "vendor/bower"
         }
 
+    },
+    "scripts": {
+        "pre-autoload-dump": [
+            "rm -rf vendor/creocoder/yii2-flysystem/src/Filesystem.php"
+        ]
     }
 }
