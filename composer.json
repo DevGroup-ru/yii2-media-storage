@@ -2,7 +2,10 @@
     "name": "devgroup/yii2-media-storage",
     "description": "Helpers, utilities and widgets for media data",
     "type": "yii2-extension",
-    "keywords": ["yii2","extension"],
+    "keywords": [
+        "yii2",
+        "extension"
+    ],
     "license": "MIT",
     "minimum-stability": "dev",
     "authors": [
@@ -33,7 +36,9 @@
         "devgroup/dotplant-dev": "~1.0.0"
     },
     "autoload": {
-        "classmap" : ["Filesystem.php"],
+        "classmap": [
+            "Filesystem.php"
+        ],
         "psr-4": {
             "DevGroup\\MediaStorage\\": "src/"
         }
@@ -47,12 +52,17 @@
         "asset-installer-paths": {
             "npm-asset-library": "vendor/npm",
             "bower-asset-library": "vendor/bower"
-        }
-
-    },
-    "scripts": {
-        "pre-autoload-dump": [
-            "rm -rf vendor/creocoder/yii2-flysystem/src/Filesystem.php"
-        ]
+        },
+        "yii2-extension": {
+            "name": "Yii2 media data storage",
+            "name_ru": "Медиа хранилище",
+            "iconUrl": "",
+            "description_ru": "Расширение для работы с медиа данными"
+        },
+        "migrationPath": [
+            "src/migrations"
+        ],
+        "configurables": "src/configurables.php",
+        "translationCategory": "yii2.media"
     }
 }
