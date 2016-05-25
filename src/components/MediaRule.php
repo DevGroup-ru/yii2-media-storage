@@ -5,6 +5,8 @@ namespace DevGroup\MediaStorage\components;
 
 
 use DevGroup\MediaStorage\models\MediaRoute;
+use yii\helpers\ArrayHelper;
+use yii\helpers\Json;
 use yii\web\Request;
 use yii\web\UrlManager;
 use yii\web\UrlRuleInterface;
@@ -44,8 +46,18 @@ class MediaRule implements UrlRuleInterface
      */
     public function createUrl($manager, $route, $params)
     {
-
-        
+        if ($route !== '/media/file/send' || false === isset($params['mediaId'])) {
+            return false;
+        }
+        $condition = ['media_id' => $params['mediaId'],];
+        if (ArrayHelper::keyExists('config', $params)) {
+            $condition['params'] = Json::encode(ArrayHelper::remove($params, 'config'));
+        }
+        $url = MediaRoute::find()->select('url')->where($condition)->scalar();
+        if (false !== $url) {
+            unset($params['mediaId']);
+            return $url . (count($params) > 0 ? '?' . http_build_query($params) : '');
+        }
         return false;
     }
 }
