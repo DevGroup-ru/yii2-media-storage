@@ -12,6 +12,8 @@ class MediaModule extends \yii\base\Module
     public function init()
     {
         parent::init();
+        
+        Yii::$classMap['creocoder\flysystem\Filesystem'] = __DIR__ . '/../Filesystem.php';
 
         if (Yii::$app instanceof \yii\console\Application) {
             $this->controllerNamespace = 'DevGroup\MediaStorage\commands';
