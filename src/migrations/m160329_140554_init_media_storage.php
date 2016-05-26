@@ -64,7 +64,7 @@ class m160329_140554_init_media_storage extends Migration
             'CASCADE'
         );
         $this->createTable(
-            '{%media_route}}',
+            '{{%media_route}}',
             [
                 'id' => $this->primaryKey(),
                 'media_id' => $this->integer(),
@@ -77,6 +77,7 @@ class m160329_140554_init_media_storage extends Migration
 
     public function down()
     {
+        $this->dropTable('{{%media_route}}');
         $this->dropTable('{{%media_media_group}}');
         $this->dropTable('{{%media_group}}');
         $this->dropTable('{{%media}}');
