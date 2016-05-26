@@ -55,6 +55,9 @@ class MediaStorageConfiguration extends BaseConfigurationModel
                     'class' => 'creocoder\flysystem\LocalFilesystem',
                     'path' => '@app/media',
                 ],
+                'urlManager' => [
+                    'excludeRoutes' => ['media/file/send', 'media/file/xsend'],
+                ],
             ],
         ];
     }
