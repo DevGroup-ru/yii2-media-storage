@@ -18,13 +18,15 @@ class MediaStorageConfiguration extends BaseConfigurationModel
     public $defaultComponents = [];
     public $defaultComponent;
     public $components = [];
+    
+    public $activeFS = [];
 
     public function rules()
     {
         return [
             [['noImageSrc', 'defaultThumbnailSize', 'thumbnailsDirectory', 'watermarkDirectory'], 'string'],
             ['useWatermark', 'boolean'],
-            [['components', 'defaultComponents'], 'isArray'],
+            [['components', 'defaultComponents', 'activeFS'], 'isArray'],
         ];
     }
 

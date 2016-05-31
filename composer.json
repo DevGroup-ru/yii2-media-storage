@@ -28,7 +28,8 @@
         "devgroup/yii2-data-structure-tools": "*",
         "devgroup/yii2-tag-dependency-helper": "*",
         "rmrevin/yii2-fontawesome": "~2.14",
-        "league/glide": "^1.0"
+        "league/glide": "^1.0",
+        "unclead/yii2-multiple-input": "~1.0"
     },
     "require-dev": {
         "yiisoft/yii2-bootstrap": "^2.0@dev",
