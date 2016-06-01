@@ -18,7 +18,7 @@ class MediaStorageConfiguration extends BaseConfigurationModel
     public $defaultComponents = [];
     public $defaultComponent;
     public $components = [];
-    
+
     public $activeFS = [];
 
     public function rules()
@@ -47,21 +47,6 @@ class MediaStorageConfiguration extends BaseConfigurationModel
             'watermarkDirectory' => Yii::t('app', 'Watermark directory'),
             'components' => Yii::t('app', 'Components'),
         ];
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function defaultValues()
-    {
-        $module = Yii::$app->getModule('image');
-        $attributes = array_keys($this->getAttributes());
-        foreach ($attributes as $attribute) {
-            $this->{$attribute} = $module->{$attribute};
-        }
-        foreach ($this->defaultComponents as $name => $values) {
-            $this->defaultComponents[$name]['name'] = $name;
-        }
     }
 
     public function getAttributesForStateSaving()
@@ -180,7 +165,68 @@ class MediaStorageConfiguration extends BaseConfigurationModel
      */
     public function appParams()
     {
-        return [];
+        return [
+            'flysystemDefaultConfigs' => [
+                'fs' => [
+                    'class' => 'creocoder\flysystem\LocalFilesystem',
+                    'necessary' => [
+                        'path' => '@app/media',
+                        'srcAdapter' => 'app\modules\image\components\Local',
+                    ],
+                ],
+                'ftpFs' => [
+                    'class' => 'creocoder\flysystem\FtpFilesystem',
+                    'necessary' => [
+                        'host' => 'ftp.example.com',
+                        'srcAdapter' => 'app\modules\image\components\Ftp',
+                    ],
+                    'unnecessary' => [
+                        'port' => '',
+                        'username' => '',
+                        'password' => '',
+                        'ssl' => '',
+                        'timeout' => '',
+                        'root' => '',
+                        'permPrivate' => '',
+                        'permPublic' => '',
+                        'passive' => '',
+                        'transferMode' => '',
+                    ],
+                ],
+                'awss3Fs' => [
+                    'class' => 'creocoder\flysystem\AwsS3Filesystem',
+                    'necessary' => [
+                        'key' => 'your-key',
+                        'secret' => 'your-secret',
+                        'bucket' => 'your-bucket',
+                        'srcAdapter' => 'app\modules\image\components\Awss3',
+                    ],
+                    'unnecessary' => [
+                        'region' => '',
+                        'baseUrl' => '',
+                        'prefix' => '',
+                        'options' => '',
+                    ],
+                ],
+                'sftpFs' => [
+                    'class' => 'creocoder\flysystem\SftpFilesystem',
+                    'necessary' => [
+                        'host' => 'sftp.example.com',
+                        'username' => 'your-username',
+                        'password' => 'your-password',
+                        'srcAdapter' => 'app\modules\image\components\Ftp',
+                    ],
+                    'unnecessary' => [
+                        'port' => '',
+                        'privateKey' => '',
+                        'timeout' => '',
+                        'root' => '',
+                        'permPrivate' => '',
+                        'permPublic' => '',
+                    ],
+                ],
+            ],
+        ];
     }
 
     /**

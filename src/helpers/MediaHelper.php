@@ -7,6 +7,9 @@ use Yii;
 use DevGroup\MediaStorage\models\MediaGroup;
 use yii\base\Exception;
 use yii\base\Object;
+use yii\bootstrap\Tabs;
+use yii\helpers\ArrayHelper;
+use yii\helpers\Json;
 
 class MediaHelper extends Object
 {
@@ -129,5 +132,57 @@ class MediaHelper extends Object
     public static function removeTmpFile($filePath)
     {
         unlink($filePath);
+    }
+
+    public static function getFsDefaultCfg()
+    {
+        return Yii::$app->params['flysystemDefaultConfigs'];
+    }
+
+    public static function getFsCfgDropdown()
+    {
+        $cfg = self::getFsDefaultCfg();
+        $res = [];
+        foreach ($cfg as $name => $item) {
+            $res[$item['class']] = $name;
+        }
+        return $res;
+    }
+
+    public static function getConfigurationTpl($form, $model)
+    {
+        $res = [];
+        $cfg = self::getFsDefaultCfg();
+        foreach ($cfg as $name => $item) {
+
+            $necessaryContent = "";
+            foreach ($item['necessary'] as $necessaryConfName => $necessaryConfVal) {
+                $content = $form->field(
+                    $model,
+                    "activeFS[{{number}}][necessary][{$necessaryConfName}]"
+                )->textInput(['value' => $necessaryConfVal])->label(
+                    $necessaryConfName
+                );
+                $necessaryContent .= $content;
+            }
+            $unnecessaryContent = '';
+            foreach ($item['unnecessary'] as $unnecessaryConfName => $unnecessaryConfVal) {
+                $unnecessaryContent .= $form->field(
+                    $model,
+                    "activeFS[{{number}}][unnecessary][{$unnecessaryConfName}]"
+                )->textInput(['value' => $unnecessaryConfVal])->label(
+                    $unnecessaryConfName
+                );
+            }
+            $res[$item['class']] = Tabs::widget(
+                [
+                    'items' => [
+                        ['label' => Yii::t('app', 'necessary'), 'content' => $necessaryContent],
+                        ['label' => Yii::t('app', 'unnecessary'), 'content' => $unnecessaryContent],
+                    ],
+                ]
+            );
+        }
+        return Json::encode($res);
     }
 }
