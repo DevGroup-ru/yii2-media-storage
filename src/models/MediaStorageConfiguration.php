@@ -4,30 +4,35 @@
 namespace DevGroup\MediaStorage\models;
 
 use DevGroup\ExtensionsManager\models\BaseConfigurationModel;
+use DevGroup\MediaStorage\MediaModule;
 use Yii;
 use yii\helpers\ArrayHelper;
 
 class MediaStorageConfiguration extends BaseConfigurationModel
 {
 
-    public $defaultThumbnailSize;
-    public $noImageSrc;
-    public $thumbnailsDirectory;
-    public $useWatermark;
-    public $watermarkDirectory;
-    public $defaultComponents = [];
-    public $defaultComponent;
     public $components = [];
-
-    public $activeFS = [];
 
     public function rules()
     {
         return [
-            [['noImageSrc', 'defaultThumbnailSize', 'thumbnailsDirectory', 'watermarkDirectory'], 'string'],
-            ['useWatermark', 'boolean'],
-            [['components', 'defaultComponents', 'activeFS'], 'isArray'],
+            ['activeFS', 'isArray'],
         ];
+    }
+
+    /**
+     * @param array $config
+     */
+    public function __construct($config = [])
+    {
+        $attributes = [
+            'activeFS',
+        ];
+
+        parent::__construct($attributes, $config);
+        /** @var MediaModule $module */
+        $module = MediaModule::getModuleInstance();
+        $this->activeFS = $module->activeFS;
     }
 
     public function isArray($attribute, $params)
@@ -49,37 +54,28 @@ class MediaStorageConfiguration extends BaseConfigurationModel
         ];
     }
 
-    public function getAttributesForStateSaving()
-    {
-        $attributes = $this->getAttributes();
-        if (isset($attributes['components'])) {
-            foreach ($attributes['components'] as $name => $component) {
-                if (isset($component['necessary']) && isset($component['necessary']['active']) && $component['necessary']['active'] == false) {
-                    unset($attributes['components'][$name]);
-                }
-            }
-        }
-        if (isset($attributes['defaultComponents'])) {
-            foreach ($attributes['defaultComponents'] as $component) {
-                if (isset($component['necessary']) && isset($component['necessary']['active']) && $component['necessary']['active'] == true && !isset($attributes['components'][$component['name']])) {
-                    $newData = $component;
-                    unset($newData['name']);
-                    $attributes['components'][$component['name']] = $newData;
-                }
-            }
-            unset($attributes['defaultComponents']);
-        }
-        return $attributes;
-    }
-
-    /**
-     * Returns array of key=>values for configuration.
-     * @return mixed
-     */
-    public function keyValueAttributes()
-    {
-        return [];
-    }
+    //    public function getAttributesForStateSaving()
+    //    {
+    //        $attributes = $this->getAttributes();
+    //        if (isset($attributes['components'])) {
+    //            foreach ($attributes['components'] as $name => $component) {
+    //                if (isset($component['necessary']) && isset($component['necessary']['active']) && $component['necessary']['active'] == false) {
+    //                    unset($attributes['components'][$name]);
+    //                }
+    //            }
+    //        }
+    //        if (isset($attributes['defaultComponents'])) {
+    //            foreach ($attributes['defaultComponents'] as $component) {
+    //                if (isset($component['necessary']) && isset($component['necessary']['active']) && $component['necessary']['active'] == true && !isset($attributes['components'][$component['name']])) {
+    //                    $newData = $component;
+    //                    unset($newData['name']);
+    //                    $attributes['components'][$component['name']] = $newData;
+    //                }
+    //            }
+    //            unset($attributes['defaultComponents']);
+    //        }
+    //        return $attributes;
+    //    }
 
 
     /**
@@ -150,7 +146,7 @@ class MediaStorageConfiguration extends BaseConfigurationModel
                 'urlManager' => [
                     'excludeRoutes' => ['media/file/send', 'media/file/xsend'],
                 ],
-                $components,
+                //                $components,
             ],
             'modules' => [
                 'image' => $attributes,

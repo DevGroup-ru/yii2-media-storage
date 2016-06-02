@@ -3,6 +3,7 @@
 namespace DevGroup\MediaStorage\helpers;
 
 use creocoder\flysystem\Filesystem;
+use DevGroup\MediaStorage\MediaModule;
 use Yii;
 use DevGroup\MediaStorage\models\MediaGroup;
 use yii\base\Exception;
@@ -134,9 +135,15 @@ class MediaHelper extends Object
         unlink($filePath);
     }
 
-    public static function getFsDefaultCfg()
+    public static function getFsDefaultCfg($number = '')
     {
-        return Yii::$app->params['flysystemDefaultConfigs'];
+        $result = Yii::$app->params['flysystemDefaultConfigs'];
+        if (is_int($number)) {
+            var_dump(MediaModule::getModuleInstance());die();
+            $configured = MediaModule::getModuleInstance()->activeFS[$number];
+            $result = [ArrayHelper::merge($result[self::getFsCfgDropdown()[$configured['class']]], $configured)];
+        }
+        return $result;
     }
 
     public static function getFsCfgDropdown()
@@ -149,17 +156,17 @@ class MediaHelper extends Object
         return $res;
     }
 
-    public static function getConfigurationTpl($form, $model)
+    public static function getConfigurationTpl($form, $model, $number = '{{number}}')
     {
         $res = [];
-        $cfg = self::getFsDefaultCfg();
+        $cfg = self::getFsDefaultCfg($number);
         foreach ($cfg as $name => $item) {
 
             $necessaryContent = "";
             foreach ($item['necessary'] as $necessaryConfName => $necessaryConfVal) {
                 $content = $form->field(
                     $model,
-                    "activeFS[{{number}}][necessary][{$necessaryConfName}]"
+                    "activeFS[{$number}][necessary][{$necessaryConfName}]"
                 )->textInput(['value' => $necessaryConfVal])->label(
                     $necessaryConfName
                 );
@@ -169,7 +176,7 @@ class MediaHelper extends Object
             foreach ($item['unnecessary'] as $unnecessaryConfName => $unnecessaryConfVal) {
                 $unnecessaryContent .= $form->field(
                     $model,
-                    "activeFS[{{number}}][unnecessary][{$unnecessaryConfName}]"
+                    "activeFS[{$number}][unnecessary][{$unnecessaryConfName}]"
                 )->textInput(['value' => $unnecessaryConfVal])->label(
                     $unnecessaryConfName
                 );
