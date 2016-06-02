@@ -11,8 +11,6 @@ use yii\helpers\ArrayHelper;
 class MediaStorageConfiguration extends BaseConfigurationModel
 {
 
-    public $components = [];
-
     public function rules()
     {
         return [
@@ -54,30 +52,6 @@ class MediaStorageConfiguration extends BaseConfigurationModel
         ];
     }
 
-    //    public function getAttributesForStateSaving()
-    //    {
-    //        $attributes = $this->getAttributes();
-    //        if (isset($attributes['components'])) {
-    //            foreach ($attributes['components'] as $name => $component) {
-    //                if (isset($component['necessary']) && isset($component['necessary']['active']) && $component['necessary']['active'] == false) {
-    //                    unset($attributes['components'][$name]);
-    //                }
-    //            }
-    //        }
-    //        if (isset($attributes['defaultComponents'])) {
-    //            foreach ($attributes['defaultComponents'] as $component) {
-    //                if (isset($component['necessary']) && isset($component['necessary']['active']) && $component['necessary']['active'] == true && !isset($attributes['components'][$component['name']])) {
-    //                    $newData = $component;
-    //                    unset($newData['name']);
-    //                    $attributes['components'][$component['name']] = $newData;
-    //                }
-    //            }
-    //            unset($attributes['defaultComponents']);
-    //        }
-    //        return $attributes;
-    //    }
-
-
     /**
      * Returns array of module configuration that should be stored in application config.
      * Array should be ready to merge in app config.
@@ -93,7 +67,6 @@ class MediaStorageConfiguration extends BaseConfigurationModel
                     'class' => 'DevGroup\MediaStorage\MediaModule',
                 ],
             ],
-            //            'bootstrap' => ['media'],
         ];
     }
 
@@ -121,35 +94,20 @@ class MediaStorageConfiguration extends BaseConfigurationModel
     public function commonApplicationAttributes()
     {
         $attributes = $this->getAttributesForStateSaving();
-        $components = [];
-        foreach ($this->components as $name => $component) {
-            $necessary = ArrayHelper::getValue($component, 'necessary', []);
-            $unnecessary = ArrayHelper::getValue($component, 'unnecessary', []);
-            $active = ArrayHelper::remove($necessary, 'active', false);
-            ArrayHelper::remove($necessary, 'srcAdapter');
-            if ($active === true || $active === '1' || $name == 'fs') {
-                foreach ($unnecessary as $confName => $confVal) {
-                    if ($confVal === '') {
-                        ArrayHelper::remove($unnecessary, $confName);
-                    }
-                }
-                $components[$name] = ArrayHelper::merge($necessary, $unnecessary);
-            }
-        }
+        $active = [];
+        //        var_dump($attributes);die();
 
         return [
             'components' => [
-                'protectedFilesystem' => [
-                    'class' => 'creocoder\flysystem\LocalFilesystem',
-                    'path' => '@app/media',
-                ],
                 'urlManager' => [
                     'excludeRoutes' => ['media/file/send', 'media/file/xsend'],
                 ],
-                //                $components,
             ],
             'modules' => [
                 'media' => $attributes,
+            ],
+            'params' => [
+                'activeFsNames' => $active,
             ],
         ];
     }

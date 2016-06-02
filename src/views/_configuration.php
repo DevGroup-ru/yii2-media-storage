@@ -35,8 +35,6 @@ $this->registerJs(
 };'
 );
 
-//VarDumper::dump(json_decode(MediaHelper::getConfigurationTpl($form, $model, 1)), 10, true);
-
 echo $form->field(
     $model,
     'activeFS',
