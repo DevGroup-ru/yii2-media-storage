@@ -11,7 +11,15 @@ use yii\web\View;
 
 $activeComponents = [];
 
-$this->registerJs('window.cofgTpl = ' . MediaHelper::getConfigurationTpl($form, $model), View::POS_HEAD);
+$this->registerJs('window.configTpl = ' . MediaHelper::getConfigurationTpl($form, $model), View::POS_HEAD);
+if (count($model->activeFS) > 0) {
+    foreach (array_keys($model->activeFS) as $array_key) {
+        $this->registerJs(
+            'window.configTpl.i' . $array_key . ' = ' . MediaHelper::getConfigurationTpl($form, $model, $array_key),
+            View::POS_HEAD
+        );
+    }
+}
 $this->registerJs(
 /** @lang JavaScript */
     'String.prototype.strtr = function (replacePairs) {
@@ -24,9 +32,10 @@ $this->registerJs(
         }
     }
     return str;
-}'
+};'
 );
-VarDumper::dump(json_decode(MediaHelper::getConfigurationTpl($form, $model, 1)), 10, true);
+
+//VarDumper::dump(json_decode(MediaHelper::getConfigurationTpl($form, $model, 1)), 10, true);
 
 echo $form->field(
     $model,
@@ -62,7 +71,7 @@ $parentRow.next(\'.jsable-row\').remove();
 var template = \'<tr class="jsable-row"><td colspan="{{cols}}">{{configInputs}}</td></tr>\';
 $(template.strtr({
     "{{cols}}"        : 3,
-    "{{configInputs}}": window.cofgTpl[$(this).val()].strtr({
+    "{{configInputs}}": window.configTpl[$(this).val()].strtr({
         "{{number}}": $(this).attr(\'name\').split(\'[\')[2].slice(0, -1)
     })
 })).insertAfter($parentRow);'
@@ -88,4 +97,21 @@ $(template.strtr({
             ],
         ],
     ]
+);
+$this->registerJs(
+/** @lang JavaScript */
+    '$(\'#mediastorageconfiguration-activefs\').on(\'afterInit\', function () {
+    $(\'#mediastorageconfiguration-activefs select\').each(function () {
+        var $parentRow = $(this).closest(\'.multiple-input-list__item\');
+        $parentRow.next(\'.jsable-row\').remove();
+        var template = \'<tr class="jsable-row"><td colspan="{{cols}}">{{configInputs}}</td></tr>\';
+        var number = $(this).attr(\'name\').split(\'[\')[2].slice(0, -1);
+        $(template.strtr({
+            "{{cols}}"        : 3,
+            "{{configInputs}}": window.configTpl[\'i\' + number][$(this).val()].strtr({
+                "{{number}}": number
+            })
+        })).insertAfter($parentRow);
+    });
+});'
 );

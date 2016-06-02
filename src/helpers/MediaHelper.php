@@ -139,7 +139,7 @@ class MediaHelper extends Object
     {
         $result = Yii::$app->params['flysystemDefaultConfigs'];
         if (is_int($number)) {
-            var_dump(MediaModule::getModuleInstance());die();
+            //            var_dump(MediaModule::getModuleInstance());die();
             $configured = MediaModule::getModuleInstance()->activeFS[$number];
             $result = [ArrayHelper::merge($result[self::getFsCfgDropdown()[$configured['class']]], $configured)];
         }
@@ -161,9 +161,8 @@ class MediaHelper extends Object
         $res = [];
         $cfg = self::getFsDefaultCfg($number);
         foreach ($cfg as $name => $item) {
-
             $necessaryContent = "";
-            foreach ($item['necessary'] as $necessaryConfName => $necessaryConfVal) {
+            foreach (ArrayHelper::getValue($item, 'necessary', []) as $necessaryConfName => $necessaryConfVal) {
                 $content = $form->field(
                     $model,
                     "activeFS[{$number}][necessary][{$necessaryConfName}]"
@@ -173,7 +172,7 @@ class MediaHelper extends Object
                 $necessaryContent .= $content;
             }
             $unnecessaryContent = '';
-            foreach ($item['unnecessary'] as $unnecessaryConfName => $unnecessaryConfVal) {
+            foreach (ArrayHelper::getValue($item, 'unnecessary', []) as $unnecessaryConfName => $unnecessaryConfVal) {
                 $unnecessaryContent .= $form->field(
                     $model,
                     "activeFS[{$number}][unnecessary][{$unnecessaryConfName}]"

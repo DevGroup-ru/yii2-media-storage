@@ -149,7 +149,7 @@ class MediaStorageConfiguration extends BaseConfigurationModel
                 //                $components,
             ],
             'modules' => [
-                'image' => $attributes,
+                'media' => $attributes,
             ],
         ];
     }
