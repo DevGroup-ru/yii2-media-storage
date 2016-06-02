@@ -93,7 +93,7 @@ class MediaStorageConfiguration extends BaseConfigurationModel
                     'class' => 'DevGroup\MediaStorage\MediaModule',
                 ],
             ],
-            'bootstrap' => ['media'],
+            //            'bootstrap' => ['media'],
         ];
     }
 
@@ -107,7 +107,7 @@ class MediaStorageConfiguration extends BaseConfigurationModel
     public function consoleApplicationAttributes()
     {
         return [
-            'controllerNamespace' => 'DevGroup\MediaStorage\commands',
+            'controllerMap' => ['media' => 'DevGroup\MediaStorage\commands'],
         ];
     }
 

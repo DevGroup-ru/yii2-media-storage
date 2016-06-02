@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "699643eab97a07346907b44f91be67a4",
-    "content-hash": "1d9a5343a15ed275d78c82bb3016fbcb",
+    "hash": "b0dc2e821a0f599b4bfdd19bbc2a0414",
+    "content-hash": "87fe206b80f9530bce2d5159748615f5",
     "packages": [
         {
             "name": "2amigos/yii2-transliterator-helper",
@@ -951,16 +951,16 @@
         },
         {
             "name": "devgroup/yii2-multilingual",
-            "version": "0.1.0",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/DevGroup-ru/yii2-multilingual.git",
-                "reference": "ecc6e0ab3d00f805e342a435cf159f182b28d54f"
+                "reference": "167884534baaa2b65293cbd0f3183bce3a9f40c2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/DevGroup-ru/yii2-multilingual/zipball/ecc6e0ab3d00f805e342a435cf159f182b28d54f",
-                "reference": "ecc6e0ab3d00f805e342a435cf159f182b28d54f",
+                "url": "https://api.github.com/repos/DevGroup-ru/yii2-multilingual/zipball/167884534baaa2b65293cbd0f3183bce3a9f40c2",
+                "reference": "167884534baaa2b65293cbd0f3183bce3a9f40c2",
                 "shasum": ""
             },
             "require": {
@@ -999,7 +999,7 @@
                 "multilingual",
                 "yii2"
             ],
-            "time": "2016-05-27 07:36:13"
+            "time": "2016-06-02 08:24:56"
         },
         {
             "name": "devgroup/yii2-polyglot",
@@ -4182,6 +4182,7 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
+        "devgroup/yii2-multilingual": 20,
         "devgroup/yii2-users-module": 20,
         "yiisoft/yii2-bootstrap": 20,
         "devgroup/yii2-admin-utils": 20
