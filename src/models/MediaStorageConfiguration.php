@@ -7,6 +7,7 @@ use DevGroup\ExtensionsManager\models\BaseConfigurationModel;
 use DevGroup\MediaStorage\MediaModule;
 use Yii;
 use yii\helpers\ArrayHelper;
+use yii\helpers\VarDumper;
 
 class MediaStorageConfiguration extends BaseConfigurationModel
 {
@@ -94,22 +95,43 @@ class MediaStorageConfiguration extends BaseConfigurationModel
     public function commonApplicationAttributes()
     {
         $attributes = $this->getAttributesForStateSaving();
-        $active = [];
-        //        var_dump($attributes);die();
+        $allFsConfig = ArrayHelper::index(ArrayHelper::getValue($attributes, 'activeFS', []), 'name');
 
-        return [
-            'components' => [
-                'urlManager' => [
-                    'excludeRoutes' => ['media/file/send', 'media/file/xsend'],
+        $active = [];
+        $allFs = [];
+        foreach ($allFsConfig as $attribute) {
+            $fs = $attribute;
+            foreach (ArrayHelper::remove($fs, 'necessary', []) as $key => $item) {
+                $fs[$key] = $item;
+            }
+            foreach (ArrayHelper::remove($fs, 'unnecessary', []) as $key => $item) {
+                if ($item !== '') {
+                    $fs[$key] = $item;
+                }
+            }
+            $name = ArrayHelper::remove($fs, 'name');
+            unset($fs['options']);
+            if (ArrayHelper::getValue($attribute, 'options.0', false)) {
+                $active[] = $name;
+            }
+            $allFs[$name] = $fs;
+        }
+        return ArrayHelper::merge(
+            ['components' => $allFs],
+            [
+                'components' => [
+                    'urlManager' => [
+                        'excludeRoutes' => ['media/file/send', 'media/file/xsend'],
+                    ],
                 ],
-            ],
-            'modules' => [
-                'media' => $attributes,
-            ],
-            'params' => [
-                'activeFsNames' => $active,
-            ],
-        ];
+                'modules' => [
+                    'media' => $attributes,
+                ],
+                'params' => [
+                    'activeFsNames' => $active,
+                ],
+            ]
+        );
     }
 
     /**
