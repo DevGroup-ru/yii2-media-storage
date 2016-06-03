@@ -62,13 +62,7 @@ class MediaStorageConfiguration extends BaseConfigurationModel
      */
     public function webApplicationAttributes()
     {
-        return [
-            'modules' => [
-                'media' => [
-                    'class' => 'DevGroup\MediaStorage\MediaModule',
-                ],
-            ],
-        ];
+        return [];
     }
 
     /**
@@ -117,19 +111,22 @@ class MediaStorageConfiguration extends BaseConfigurationModel
             $allFs[$name] = $fs;
         }
         return ArrayHelper::merge(
-            ['components' => $allFs],
             [
-                'components' => [
-                    'urlManager' => [
-                        'excludeRoutes' => ['media/file/send', 'media/file/xsend'],
-                    ],
-                ],
+                'components' => $allFs,
                 'modules' => [
                     'media' => $attributes,
                 ],
                 'params' => [
                     'activeFsNames' => $active,
                 ],
+            ],
+            [
+                'components' => [
+                    'urlManager' => [
+                        'excludeRoutes' => ['media/file/send', 'media/file/xsend'],
+                    ],
+                ],
+                'modules' => ['media' => ['class' => MediaModule::class]],
             ]
         );
     }
