@@ -3,6 +3,7 @@ Media Storage module for Yii2
 
 > **WARNING:** This extension is under active development. Don't use it in production!
 
+Extension to manage media data through web interface. Use [MihailDev/yii2-elfinder](https://github.com/MihailDev/yii2-elfinder)  as file manager, [creocoder/yii2-flysystem](https://github.com/creocoder/yii2-flysystem) as abstract file system, [thephpleague/glide](https://github.com/thephpleague/glide) as image manipulator, [DevGroup-ru/yii2-data-structure-tools](https://github.com/DevGroup-ru/yii2-data-structure-tools) to store relations in DB.
 
 ### Installing
 
@@ -24,6 +25,7 @@ or add
 
 to the require section of your `composer.json` file.
 
+> Because this is `yii2-extension` you should run migrations manually
 
 ### Configure
 
@@ -67,3 +69,4 @@ If extension installed throw  [composer](http://getcomposer.org/download/) you n
     ],
 ];
 ```
+
