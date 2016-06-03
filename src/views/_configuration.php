@@ -13,6 +13,7 @@ $activeComponents = [];
 
 $this->registerJs('window.configTpl = ' . MediaHelper::getConfigurationTpl($form, $model), View::POS_HEAD);
 if (count($model->activeFS) > 0) {
+
     foreach (array_keys($model->activeFS) as $array_key) {
         $this->registerJs(
             'window.configTpl.i' . $array_key . ' = ' . MediaHelper::getConfigurationTpl($form, $model, $array_key),
@@ -111,5 +112,7 @@ $this->registerJs(
             })
         })).insertAfter($parentRow);
     });
+}).on(\'beforeDeleteRow\', function (e, item) {    
+    item.next(\'.jsable-row\').remove();
 });'
 );

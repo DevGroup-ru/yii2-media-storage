@@ -89,6 +89,7 @@ class MediaStorageConfiguration extends BaseConfigurationModel
     public function commonApplicationAttributes()
     {
         $attributes = $this->getAttributesForStateSaving();
+        $attributes['activeFS'] = array_values($attributes['activeFS']);
         $allFsConfig = ArrayHelper::index(ArrayHelper::getValue($attributes, 'activeFS', []), 'name');
 
         $active = [];
