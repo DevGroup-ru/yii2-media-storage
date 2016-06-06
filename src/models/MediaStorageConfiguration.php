@@ -93,6 +93,7 @@ class MediaStorageConfiguration extends BaseConfigurationModel
         $allFsConfig = ArrayHelper::index(ArrayHelper::getValue($attributes, 'activeFS', []), 'name');
 
         $active = [];
+        $cache = [];
         $allFs = [];
         foreach ($allFsConfig as $attribute) {
             $fs = $attribute;
@@ -107,7 +108,11 @@ class MediaStorageConfiguration extends BaseConfigurationModel
             $name = ArrayHelper::remove($fs, 'name');
             unset($fs['options']);
             if (ArrayHelper::getValue($attribute, 'options.0', false)) {
-                $active[] = $name;
+                if (ArrayHelper::getValue($attribute, 'options.1', false)) {
+                    $cache[] = $name;
+                } else {
+                    $active[] = $name;
+                }
             }
             $allFs[$name] = $fs;
         }
@@ -119,6 +124,7 @@ class MediaStorageConfiguration extends BaseConfigurationModel
                 ],
                 'params' => [
                     'activeFsNames' => $active,
+                    'glideCacheFsNames' => $cache,
                 ],
             ],
             [
