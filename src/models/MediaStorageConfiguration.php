@@ -151,14 +151,12 @@ class MediaStorageConfiguration extends BaseConfigurationModel
                     'class' => 'creocoder\flysystem\LocalFilesystem',
                     'necessary' => [
                         'path' => '@app/media',
-                        'srcAdapter' => 'app\modules\image\components\Local',
                     ],
                 ],
                 'ftpFs' => [
                     'class' => 'creocoder\flysystem\FtpFilesystem',
                     'necessary' => [
                         'host' => 'ftp.example.com',
-                        'srcAdapter' => 'app\modules\image\components\Ftp',
                     ],
                     'unnecessary' => [
                         'port' => '',
@@ -179,7 +177,6 @@ class MediaStorageConfiguration extends BaseConfigurationModel
                         'key' => 'your-key',
                         'secret' => 'your-secret',
                         'bucket' => 'your-bucket',
-                        'srcAdapter' => 'app\modules\image\components\Awss3',
                     ],
                     'unnecessary' => [
                         'region' => '',
@@ -194,7 +191,6 @@ class MediaStorageConfiguration extends BaseConfigurationModel
                         'host' => 'sftp.example.com',
                         'username' => 'your-username',
                         'password' => 'your-password',
-                        'srcAdapter' => 'app\modules\image\components\Ftp',
                     ],
                     'unnecessary' => [
                         'port' => '',
