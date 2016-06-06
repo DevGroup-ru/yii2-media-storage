@@ -3,6 +3,7 @@
 
 namespace DevGroup\MediaStorage\controllers;
 
+use DevGroup\MediaStorage\helpers\MediaHelper;
 use DevGroup\MediaStorage\models\Media;
 use dosamigos\transliterator\TransliteratorHelper;
 use mihaildev\elfinder\Controller;
@@ -21,37 +22,8 @@ class BaseElfinderController extends Controller
     public function init()
     {
         $this->managerOptions = Yii::$app->request->get('managerOptions', []);
-        $this->roots = ArrayHelper::merge(
-            [
-                'baseRoot' => [
-                    'class' => 'mihaildev\elfinder\flysystem\Volume',
-                    'component' => 'protectedFilesystem',
-                    'name' => 'protected',
-                    'options' => [
-                        'attributes' => [
-                            [
-                                'pattern' => '#.*(\.tmb|\.quarantine)$#i',
-                                'read' => false,
-                                'write' => false,
-                                'hidden' => true,
-                                'locked' => false,
-                            ],
-                            [
-                                'pattern' => '#.+[^/]$#',
-                                'read' => false,
-                                'write' => true,
-                                'hidden' => true,
-                                'locked' => false,
-                            ],
-                        ],
-                        'uploadOverwrite' => false,
-                    ],
-
-                ],
-            ],
-            $this->roots
-        );
-
+        $this->roots = ArrayHelper::merge(MediaHelper::loadRoots(), $this->roots);
+        
         $this->connectOptions = ArrayHelper::merge(
             [
                 'bind' => [

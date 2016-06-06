@@ -4,6 +4,7 @@ namespace DevGroup\MediaStorage\helpers;
 
 use creocoder\flysystem\Filesystem;
 use DevGroup\MediaStorage\MediaModule;
+use DevGroup\MediaStorage\models\Media;
 use Yii;
 use DevGroup\MediaStorage\models\MediaGroup;
 use yii\base\Exception;
@@ -166,9 +167,7 @@ class MediaHelper extends Object
                 $content = $form->field(
                     $model,
                     "activeFS[{$number}][necessary][{$necessaryConfName}]"
-                )->textInput(['value' => $necessaryConfVal])->label(
-                    $necessaryConfName
-                );
+                )->textInput(['value' => $necessaryConfVal])->label($necessaryConfName);
                 $necessaryContent .= $content;
             }
             $unnecessaryContent = '';
@@ -176,9 +175,7 @@ class MediaHelper extends Object
                 $unnecessaryContent .= $form->field(
                     $model,
                     "activeFS[{$number}][unnecessary][{$unnecessaryConfName}]"
-                )->textInput(['value' => $unnecessaryConfVal])->label(
-                    $unnecessaryConfName
-                );
+                )->textInput(['value' => $unnecessaryConfVal])->label($unnecessaryConfName);
             }
             $res[$item['class']] = Tabs::widget(
                 [
@@ -190,5 +187,104 @@ class MediaHelper extends Object
             );
         }
         return Json::encode($res);
+    }
+
+    public static function loadRoots()
+    {
+        $configuredFSnames = ArrayHelper::getValue(Yii::$app->params, 'activeFsNames', []);
+        if (count($configuredFSnames) === 0) {
+            return [
+                'baseRoot' => [
+                    'class' => 'mihaildev\elfinder\flysystem\Volume',
+                    'component' => 'protectedFilesystem',
+                    'name' => 'protected',
+                    'options' => [
+                        'attributes' => [
+                            [
+                                'pattern' => '#.*(\.tmb|\.quarantine)$#i',
+                                'read' => false,
+                                'write' => false,
+                                'hidden' => true,
+                                'locked' => false,
+                            ],
+                            [
+                                'pattern' => '#.+[^/]$#',
+                                'read' => false,
+                                'write' => true,
+                                'hidden' => true,
+                                'locked' => false,
+                            ],
+                        ],
+                        'uploadOverwrite' => false,
+                    ],
+
+                ],
+            ];
+        }
+        $res = [];
+        foreach ($configuredFSnames as $configuredFSname) {
+            $res[$configuredFSname] = [
+                'class' => 'mihaildev\elfinder\flysystem\Volume',
+                'component' => $configuredFSname,
+                'name' => $configuredFSname,
+                'options' => [
+                    'attributes' => static::loadAttrs(),
+                    'uploadOverwrite' => false,
+                ],
+            ];
+        }
+        return $res;
+    }
+
+    public static function loadAttrs($where = null)
+    {
+        $ini = ArrayHelper::merge(
+            [
+                [
+                    'pattern' => '#.*(\.tmb|\.quarantine)$#i',
+                    'read' => false,
+                    'write' => false,
+                    'hidden' => true,
+                    'locked' => false,
+                ],
+                [
+                    'pattern' => '#.+[^/]$#',
+                    'read' => false,
+                    'write' => true,
+                    'hidden' => true,
+                    'locked' => false,
+                ],
+            ],
+            static::loadMediasAttrs($where)
+        );
+        return $ini;
+    }
+
+    public static function loadMediasAttrs($where = null)
+    {
+        $mediasQuery = Media::find();
+        if (is_null($where) === false) {
+            $mediasQuery->where(['id' => $where]);
+        }
+        $medias = $mediasQuery->all();
+        $result = array_reduce(
+            $medias,
+            function ($total, $item) {
+                /**
+                 * @var Media $item
+                 */
+                $total[] = [
+                    'pattern' => '#^/' . preg_quote($item->path) . '$#',
+                    'read' => true,
+                    'write' => true,
+                    'hidden' => false,
+                    'locked' => false,
+                ];
+                return $total;
+            },
+            []
+        );
+        return $result;
+
     }
 }
