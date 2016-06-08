@@ -26,6 +26,7 @@ class FileController extends Controller
             exit; // cause of Yii rewrite headers by it's own Response object. Rewrite if Yii will use PSR-7 or HttpFoundation or write custom http://glide.thephpleague.com/1.0/config/responses/
         } else {
             //@todo from conf
+            //@todo no more protected FS
             $filename = basename($media->path);
             Yii::$app->response->sendContentAsFile(
                 MediaHelper::getProtectedFilesystem()->read($media->path),
@@ -44,6 +45,7 @@ class FileController extends Controller
             Yii::$app->response->setStatusCode(403);
         } else {
             //@todo from conf
+            //@todo no more protected FS
             $filename = basename($media->path);
             Yii::$app->response->sendContentAsFile(
                 MediaHelper::getProtectedFilesystem()->read($media->path),

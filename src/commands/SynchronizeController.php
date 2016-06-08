@@ -12,6 +12,7 @@ class SynchronizeController extends Controller
     public function actionIndex()
     {
         /**
+         * @todo config
          * @var Filesystem $fs
          */
         $fs = Yii::$app->protectedFilesystem;
