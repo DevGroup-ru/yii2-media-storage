@@ -92,6 +92,7 @@ $(template.strtr({
                 'items' => [
                     1 => 'active',
                     2 => 'use as Glide cache',
+                    3 => 'Web acceptable',
                 ],
             ],
         ],

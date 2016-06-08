@@ -149,12 +149,29 @@ class MediaStorageConfiguration extends BaseConfigurationModel
             'flysystemDefaultConfigs' => [
                 'fs' => [
                     'class' => 'creocoder\flysystem\LocalFilesystem',
+                    'urlRule' => '/img/{{path}}',
                     'necessary' => [
                         'path' => '@app/media',
                     ],
                 ],
+                'awss3Fs' => [
+                    'class' => 'creocoder\flysystem\AwsS3Filesystem',
+                    'urlRule' => 'http://{{bucket}}.s3.amazonaws.com/{{path}}',
+                    'necessary' => [
+                        'key' => 'your-key',
+                        'secret' => 'your-secret',
+                        'bucket' => 'your-bucket',
+                    ],
+                    'unnecessary' => [
+                        'region' => '',
+                        'baseUrl' => '',
+                        'prefix' => '',
+                        'options' => '',
+                    ],
+                ],
                 'ftpFs' => [
                     'class' => 'creocoder\flysystem\FtpFilesystem',
+                    'urlRule' => '{{host}}/{{path}}',
                     'necessary' => [
                         'host' => 'ftp.example.com',
                     ],
@@ -171,22 +188,9 @@ class MediaStorageConfiguration extends BaseConfigurationModel
                         'transferMode' => '',
                     ],
                 ],
-                'awss3Fs' => [
-                    'class' => 'creocoder\flysystem\AwsS3Filesystem',
-                    'necessary' => [
-                        'key' => 'your-key',
-                        'secret' => 'your-secret',
-                        'bucket' => 'your-bucket',
-                    ],
-                    'unnecessary' => [
-                        'region' => '',
-                        'baseUrl' => '',
-                        'prefix' => '',
-                        'options' => '',
-                    ],
-                ],
                 'sftpFs' => [
                     'class' => 'creocoder\flysystem\SftpFilesystem',
+                    'urlRule' => '{{host}}/{{path}}',
                     'necessary' => [
                         'host' => 'sftp.example.com',
                         'username' => 'your-username',
