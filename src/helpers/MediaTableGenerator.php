@@ -3,7 +3,6 @@
 namespace DevGroup\MediaStorage\helpers;
 
 use DevGroup\DataStructure\models\Property;
-use DevGroup\MediaStorage\models\ApplicableMediaModels;
 use DevGroup\MediaStorage\models\Media;
 use Yii;
 use yii\base\Object;
@@ -39,14 +38,6 @@ class MediaTableGenerator extends Object
         $tableOptions = $this->db->driverName === 'mysql' ? 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB' : null;
 
         $mediaTable = $this->getMediaTableName($className);
-
-        $this->migration->insert(
-            ApplicableMediaModels::tableName(),
-            [
-                'class_name' => $className::className(),
-                'name' => $this->db->getSchema()->getRawTableName($className::tableName()),
-            ]
-        );
 
         $this->migration->createTable(
             $mediaTable,
@@ -93,7 +84,6 @@ class MediaTableGenerator extends Object
     public function drop($className)
     {
         $this->migration->dropTable($this->getMediaTableName($className));
-        $this->migration->delete(ApplicableMediaModels::tableName(), ['class_name' => $className::className()]);
     }
 
     /**
