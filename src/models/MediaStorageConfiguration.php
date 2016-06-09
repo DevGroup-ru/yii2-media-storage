@@ -44,12 +44,12 @@ class MediaStorageConfiguration extends BaseConfigurationModel
     public function attributeLabels()
     {
         return [
-            'defaultThumbnailSize' => Yii::t('app', 'Default thumbnail size'),
-            'noImageSrc' => Yii::t('app', 'No image src'),
-            'thumbnailsDirectory' => Yii::t('app', 'Thumbnails directory'),
-            'useWatermark' => Yii::t('app', 'Use watermark'),
-            'watermarkDirectory' => Yii::t('app', 'Watermark directory'),
-            'components' => Yii::t('app', 'Components'),
+            'defaultThumbnailSize' => Yii::t('devgroup.media-storage', 'Default thumbnail size'),
+            'noImageSrc' => Yii::t('devgroup.media-storage', 'No image src'),
+            'thumbnailsDirectory' => Yii::t('devgroup.media-storage', 'Thumbnails directory'),
+            'useWatermark' => Yii::t('devgroup.media-storage', 'Use watermark'),
+            'watermarkDirectory' => Yii::t('devgroup.media-storage', 'Watermark directory'),
+            'components' => Yii::t('devgroup.media-storage', 'Components'),
         ];
     }
 
@@ -133,6 +133,14 @@ class MediaStorageConfiguration extends BaseConfigurationModel
                 'components' => [
                     'urlManager' => [
                         'excludeRoutes' => ['media/file/send', 'media/file/xsend'],
+                    ],
+                    'i18n' => [
+                        'translations' => [
+                            'devgroup.media-storage' => [
+                                'class' => 'yii\i18n\PhpMessageSource',
+                                'basePath' => dirname(__DIR__) . DIRECTORY_SEPARATOR . 'messages',
+                            ]
+                        ]
                     ],
                 ],
                 'modules' => ['media' => ['class' => MediaModule::class]],

@@ -6,6 +6,7 @@ namespace DevGroup\MediaStorage\widgets;
 use DevGroup\DataStructure\models\Property;
 use DevGroup\MediaStorage\models\Media;
 use League\Glide\ServerFactory;
+use Yii;
 use yii\base\Exception;
 use yii\base\Widget;
 
@@ -23,10 +24,10 @@ class ImageWidget extends Widget
     public function init()
     {
         if (is_null($this->model)) {
-            throw new Exception('Set model');
+            throw new Exception(Yii::t('devgroup.media-storage', 'Set model'));
         }
         if (is_null($this->propertyId)) {
-            throw new Exception('Set property id');
+            throw new Exception(Yii::t('devgroup.media-storage', 'Set property id'));
         }
     }
 

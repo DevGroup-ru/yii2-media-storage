@@ -39,12 +39,4 @@ class MediaModule extends \yii\base\Module
         }
     }
 
-    public function registerTranslations()
-    {
-        //Yii::$app->i18n->translations['modules/media/*'] = [
-        //'class' => '',
-        //'sourceLanguage' => 'en_US',
-        //'basePath' => '@app/modules/media',
-        //];
-    }
 }

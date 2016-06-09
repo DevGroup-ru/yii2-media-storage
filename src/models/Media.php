@@ -11,7 +11,6 @@ use Yii;
  * @property string $path
  * @property string $mime
  *
- * @property MediaMediaGroup[] $mediaMediaGroups
  */
 class Media extends \yii\db\ActiveRecord
 {
@@ -41,18 +40,10 @@ class Media extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
-            'path' => Yii::t('app', 'Path'),
-            'mime' => Yii::t('app', 'Mime'),
+            'id' => Yii::t('devgroup.media-storage', 'ID'),
+            'path' => Yii::t('devgroup.media-storage', 'Path'),
+            'mime' => Yii::t('devgroup.media-storage', 'Mime'),
         ];
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getMediaMediaGroups()
-    {
-        return $this->hasMany(MediaMediaGroup::className(), ['media_id' => 'id']);
     }
 
     public function isImage()

@@ -5,7 +5,7 @@ use mihaildev\elfinder\ElFinder;
  * @var yii\web\View $this
  */
 
-$this->title = 'Media Storage';
+$this->title = Yii::t('devgroup.media-storage', 'Media Storage');
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>

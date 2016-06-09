@@ -52,12 +52,14 @@ class MediaHelper extends Object
         foreach ($cfg as $name => $item) {
             $necessaryContent = $form->field($model, "activeFS[{$number}][urlRule]")->textInput(
                 ['value' => $item['urlRule']]
-            )->label('urlRule');
+            )->label(Yii::t('devgroup.media-storage', 'Url rule'));
             foreach (ArrayHelper::getValue($item, 'necessary', []) as $necessaryConfName => $necessaryConfVal) {
                 $content = $form->field(
                     $model,
                     "activeFS[{$number}][necessary][{$necessaryConfName}]"
-                )->textInput(['value' => $necessaryConfVal])->label($necessaryConfName);
+                )->textInput(['value' => $necessaryConfVal])->label(
+                    Yii::t('devgroup.media-storage', $necessaryConfName)
+                );
                 $necessaryContent .= $content;
             }
             $unnecessaryContent = '';
@@ -65,13 +67,15 @@ class MediaHelper extends Object
                 $unnecessaryContent .= $form->field(
                     $model,
                     "activeFS[{$number}][unnecessary][{$unnecessaryConfName}]"
-                )->textInput(['value' => $unnecessaryConfVal])->label($unnecessaryConfName);
+                )->textInput(['value' => $unnecessaryConfVal])->label(
+                    Yii::t('devgroup.media-storage', $unnecessaryConfName)
+                );
             }
             $res[$item['class']] = Tabs::widget(
                 [
                     'items' => [
-                        ['label' => Yii::t('app', 'necessary'), 'content' => $necessaryContent],
-                        ['label' => Yii::t('app', 'unnecessary'), 'content' => $unnecessaryContent],
+                        ['label' => Yii::t('devgroup.media-storage', 'necessary'), 'content' => $necessaryContent],
+                        ['label' => Yii::t('devgroup.media-storage', 'unnecessary'), 'content' => $unnecessaryContent],
                     ],
                 ]
             );

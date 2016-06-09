@@ -21,7 +21,7 @@ if (count($model->activeFS) > 0) {
     }
 }
 $this->registerJs(
-    /** @lang JavaScript */
+/** @lang JavaScript */
     'String.prototype.strtr = function (replacePairs) {
     "use strict";
     var str = this.toString(), key, re;
@@ -57,13 +57,13 @@ echo $form->field(
                 'name' => 'class',
                 'type' => MultipleInputColumn::TYPE_DROPDOWN,
                 'enableError' => true,
-                'title' => 'FS',
+                'title' => Yii::t('devgroup.media-storage', 'FS'),
                 'items' => function ($data) {
                     return ArrayHelper::merge([0 => ''], MediaHelper::getFsCfgDropdown());
                 },
                 'options' => [
                     'onchange' => new JsExpression(
-                        /** @lang JavaScript */
+                    /** @lang JavaScript */
                         'var $parentRow = $(this).closest(\'.multiple-input-list__item\');
 $parentRow.next(\'.jsable-row\').remove();
 var template = \'<tr class="jsable-row"><td colspan="{{cols}}">{{configInputs}}</td></tr>\';
@@ -78,27 +78,28 @@ $(template.strtr({
             ],
             [
                 'name' => 'name',
-                'title' => 'name',
+                'title' => Yii::t('devgroup.media-storage', 'name'),
                 'defaultValue' => 'fs',
                 'enableError' => true,
             ],
             [
                 'type' => MultipleInputColumn::TYPE_CHECKBOX_LIST,
                 'name' => 'options',
+                'title' => Yii::t('devgroup.media-storage', 'options'),
                 'headerOptions' => [
                     'style' => 'width: 80px;',
                 ],
                 'items' => [
-                    1 => 'active',
-                    2 => 'use as Glide cache',
-                    3 => 'Web acceptable',
+                    1 => Yii::t('devgroup.media-storage', 'active'),
+                    2 => Yii::t('devgroup.media-storage', 'use as Glide cache'),
+                    3 => Yii::t('devgroup.media-storage', 'Web acceptable'),
                 ],
             ],
         ],
     ]
 );
 $this->registerJs(
-    /** @lang JavaScript */
+/** @lang JavaScript */
     '$(\'#mediastorageconfiguration-activefs\').on(\'afterInit\', function () {
     $(\'#mediastorageconfiguration-activefs select\').each(function () {
         var $parentRow = $(this).closest(\'.multiple-input-list__item\');

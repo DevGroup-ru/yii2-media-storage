@@ -3,6 +3,7 @@
 use DevGroup\MediaStorage\widgets\ElfinderWidget;
 use DevGroup\MediaStorage\widgets\ImageWidget;
 use DevGroup\MediaStorage\widgets\MediaInput;
+use Yii;
 use yii\db\ActiveRecord;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
@@ -15,12 +16,12 @@ use yii\widgets\ActiveForm;
 
 echo MediaInput::widget(
     [
-        'language' => 'ru',
+        'language' => Yii::$app->language,
         'controller' => 'media/elfinder',
         'template' => '<div class="input-group">{input}<span class="input-group-btn">{button}</span></div>',
         'options' => ['class' => 'form-control'],
         'buttonOptions' => ['class' => 'btn btn-default'],
-        'buttonName' => '<i class="fa fa-plus"></i> ' . \Yii::t('app', 'Open gallery'),
+        'buttonName' => '<i class="fa fa-plus"></i> ' . Yii::t('devgroup.media-storage', 'Open gallery'),
         'multiple' => true,
         'name' => $property->key . '_tmp',
     ]

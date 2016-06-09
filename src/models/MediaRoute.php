@@ -45,10 +45,10 @@ class MediaRoute extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
-            'media_id' => Yii::t('app', 'Media ID'),
-            'url' => Yii::t('app', 'Url'),
-            'params' => Yii::t('app', 'Params'),
+            'id' => Yii::t('devgroup.media-storage', 'ID'),
+            'media_id' => Yii::t('devgroup.media-storage', 'Media ID'),
+            'url' => Yii::t('devgroup.media-storage', 'Url'),
+            'params' => Yii::t('devgroup.media-storage', 'Params'),
         ];
     }
 

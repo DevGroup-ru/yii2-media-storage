@@ -34,10 +34,10 @@ class MediaForm extends Widget
     public function init()
     {
         if (is_null($this->model)) {
-            throw new Exception(Yii::t('app', 'Set model'));
+            throw new Exception(Yii::t('devgroup.media-storage', 'Set model'));
         }
         if (is_null($this->form)) {
-            throw new Exception(Yii::t('app', 'Set form'));
+            throw new Exception(Yii::t('devgroup.media-storage', 'Set form'));
         }
         //@todo check instance
     }
