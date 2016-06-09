@@ -1,7 +1,5 @@
 <?php
 
-use DevGroup\MediaStorage\widgets\MediaForm;
-use DevGroup\MediaStorage\widgets\MediaLibrary;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
