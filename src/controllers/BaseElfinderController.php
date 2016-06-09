@@ -23,7 +23,7 @@ class BaseElfinderController extends Controller
     {
         $this->managerOptions = Yii::$app->request->get('managerOptions', []);
         $this->roots = ArrayHelper::merge(MediaHelper::loadRoots(), $this->roots);
-        
+
         $this->connectOptions = ArrayHelper::merge(
             [
                 'bind' => [
@@ -233,34 +233,6 @@ class BaseElfinderController extends Controller
         if (ArrayHelper::keyExists('name', $args)) {
             $args['name'] = strtolower($args['name']);
         }
-    }
-
-    public static function getAllMedias($where = null)
-    {
-        $mediasQuery = Media::find();
-        if (is_null($where) === false) {
-            $mediasQuery->where(['id' => $where]);
-        }
-        $medias = $mediasQuery->all();
-        $result = array_reduce(
-            $medias,
-            function ($total, $item) {
-                /**
-                 * @var Media $item
-                 */
-                $total[] = [
-                    'pattern' => '#^/' . preg_quote($item->path) . '$#',
-                    'read' => true,
-                    'write' => true,
-                    'hidden' => false,
-                    'locked' => false,
-                ];
-                return $total;
-            },
-            []
-        );
-        return $result;
-
     }
 
     protected function getCustomData($getKeys = ['model', 'model_id', 'property_id'])

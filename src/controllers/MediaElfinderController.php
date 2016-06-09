@@ -3,6 +3,7 @@
 
 namespace DevGroup\MediaStorage\controllers;
 
+use DevGroup\MediaStorage\helpers\MediaHelper;
 use DevGroup\MediaStorage\helpers\MediaTableGenerator;
 use DevGroup\MediaStorage\models\ApplicableMediaModels;
 use Yii;
@@ -28,12 +29,12 @@ class MediaElfinderController extends BaseElfinderController
                 // @todo show folders
                 $this->roots = ArrayHelper::merge(
                     $this->roots,
-                    ['baseRoot' => ['options' => ['attributes' => static::getAllMedias($ids)]]]
+                    ['baseRoot' => ['options' => ['attributes' => MediaHelper::loadMediasAttrs($ids)]]]
                 );
             } else {
                 $this->roots = ArrayHelper::merge(
                     $this->roots,
-                    ['baseRoot' => ['options' => ['attributes' => static::getAllMedias()]]]
+                    ['baseRoot' => ['options' => ['attributes' => MediaHelper::loadMediasAttrs()]]]
                 );
             }
         }
