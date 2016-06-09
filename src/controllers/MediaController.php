@@ -3,7 +3,6 @@
 namespace DevGroup\MediaStorage\controllers;
 
 use DevGroup\AdminUtils\controllers\BaseController;
-use DevGroup\MediaStorage\actions\UploadFromDropZoneAction;
 use Yii;
 use yii\base\Exception;
 use yii\web\Controller;
@@ -28,27 +27,6 @@ class MediaController extends BaseController
     const EVENT_GROUP_CHANGE = 'media-group-change';
     const EVENT_GROUP_DELETE = 'media-group-delete';
 
-    //    public function behaviors()
-    //    {
-    //        return [
-    //            'access' => [
-    //                'class' => AccessControl::className(),
-    //                'rules' => [
-    //                    [
-    //                        'allow' => true,
-    //                        'roles' => $this->module->accessPermissions,
-    //                    ],
-    //                ],
-    //            ],
-    //        ];
-    //    }
-
-    public function actions()
-    {
-        return [
-            'upload' => UploadFromDropZoneAction::class,
-        ];
-    }
 
     public function actionAllFiles()
     {

@@ -289,4 +289,9 @@ class MediaHelper extends Object
         return $result;
 
     }
+
+    public static function compileUrl($mediaId)
+    {
+
+    }
 }

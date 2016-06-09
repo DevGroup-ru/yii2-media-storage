@@ -107,8 +107,10 @@ class MediaStorageConfiguration extends BaseConfigurationModel
             }
             $name = ArrayHelper::remove($fs, 'name');
             unset($fs['options']);
-            if (ArrayHelper::getValue($attribute, 'options.0', false)) {
-                if (ArrayHelper::getValue($attribute, 'options.1', false)) {
+            unset($fs['urlRule']);
+            $options = ArrayHelper::remove($attribute, 'options', []);
+            if (array_search(1, $options) !== false) {
+                if (array_search(2, $options) !== false) {
                     $cache[] = $name;
                 } else {
                     $active[] = $name;
