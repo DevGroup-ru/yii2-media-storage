@@ -3,7 +3,6 @@
 
 namespace DevGroup\MediaStorage\controllers;
 
-
 use DevGroup\MediaStorage\helpers\GlideHelper;
 use DevGroup\MediaStorage\helpers\MediaHelper;
 use DevGroup\MediaStorage\models\Media;
@@ -62,4 +61,3 @@ class FileController extends Controller
 
     }
 }
-

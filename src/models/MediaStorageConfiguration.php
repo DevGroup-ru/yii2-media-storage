@@ -219,5 +219,4 @@ class MediaStorageConfiguration extends BaseConfigurationModel
     {
         return ['@DevGroup/MediaStorage' => realpath(dirname(__DIR__)),];
     }
-
 }

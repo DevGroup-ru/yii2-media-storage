@@ -13,7 +13,6 @@ $activeComponents = [];
 
 $this->registerJs('window.configTpl = ' . MediaHelper::getConfigurationTpl($form, $model), View::POS_HEAD);
 if (count($model->activeFS) > 0) {
-
     foreach (array_keys($model->activeFS) as $array_key) {
         $this->registerJs(
             'window.configTpl.i' . $array_key . ' = ' . MediaHelper::getConfigurationTpl($form, $model, $array_key),
@@ -22,7 +21,7 @@ if (count($model->activeFS) > 0) {
     }
 }
 $this->registerJs(
-/** @lang JavaScript */
+    /** @lang JavaScript */
     'String.prototype.strtr = function (replacePairs) {
     "use strict";
     var str = this.toString(), key, re;
@@ -64,7 +63,7 @@ echo $form->field(
                 },
                 'options' => [
                     'onchange' => new JsExpression(
-                    /** @lang JavaScript */
+                        /** @lang JavaScript */
                         'var $parentRow = $(this).closest(\'.multiple-input-list__item\');
 $parentRow.next(\'.jsable-row\').remove();
 var template = \'<tr class="jsable-row"><td colspan="{{cols}}">{{configInputs}}</td></tr>\';
@@ -99,7 +98,7 @@ $(template.strtr({
     ]
 );
 $this->registerJs(
-/** @lang JavaScript */
+    /** @lang JavaScript */
     '$(\'#mediastorageconfiguration-activefs\').on(\'afterInit\', function () {
     $(\'#mediastorageconfiguration-activefs select\').each(function () {
         var $parentRow = $(this).closest(\'.multiple-input-list__item\');

@@ -144,7 +144,6 @@ class BaseElfinderController extends Controller
                 $media = Media::findOne(['path' => $volume->getPath($removed['hash'])]);
                 $data = $this->getCustomData();
                 if (count($data) > 0) {
-
                 } else {
                     $media->delete();
                 }

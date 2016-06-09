@@ -19,5 +19,4 @@ class MediaController extends BaseController
     {
         return $this->render('all-files');
     }
-
 }

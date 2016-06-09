@@ -3,7 +3,6 @@
 
 namespace DevGroup\MediaStorage\widgets;
 
-
 use DevGroup\DataStructure\models\Property;
 use DevGroup\MediaStorage\models\Media;
 use League\Glide\ServerFactory;
@@ -45,7 +44,6 @@ class ImageWidget extends Widget
         foreach ($imageMedias as $imageMedia) {
             $path = $imageMedia->path;
             switch ($this->response) {
-                
             }
         }
     }

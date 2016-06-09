@@ -1,5 +1,6 @@
 <?php
 use yii\helpers\Html;
+
 /** @var DevGroup\Multilingual\models\Language[] $languages */
 /** @var integer $currentLanguageId */
 /** @var \DevGroup\Multilingual\Multilingual $multilingual */
@@ -15,7 +16,7 @@ use yii\helpers\Html;
         </a>
         <ul class="sub-menu">
             <?php
-            foreach ($languages as $language):
+            foreach ($languages as $language) :
                 if ($language->id === $currentLanguageId) {
                     continue;
                 }

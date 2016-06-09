@@ -3,7 +3,6 @@
 
 namespace DevGroup\MediaStorage\helpers;
 
-
 use yii\helpers\Url;
 
 class ImageUrlHelper
@@ -16,5 +15,4 @@ class ImageUrlHelper
 
         return Url::to(['/media/file/' . $action, $config]);
     }
-
 }

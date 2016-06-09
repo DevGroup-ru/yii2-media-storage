@@ -3,7 +3,6 @@
 
 namespace DevGroup\MediaStorage\helpers;
 
-
 use League\Glide\Server;
 use League\Glide\ServerFactory;
 use yii\helpers\ArrayHelper;

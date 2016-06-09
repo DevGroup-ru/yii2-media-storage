@@ -50,7 +50,6 @@ class MediaHelper extends Object
         $res = [];
         $cfg = self::getFsDefaultCfg($number);
         foreach ($cfg as $name => $item) {
-
             $necessaryContent = $form->field($model, "activeFS[{$number}][urlRule]")->textInput(
                 ['value' => $item['urlRule']]
             )->label('urlRule');
