@@ -3,9 +3,7 @@
 use DevGroup\MediaStorage\helpers\MediaHelper;
 use unclead\widgets\MultipleInput;
 use unclead\widgets\MultipleInputColumn;
-use yii\bootstrap\Tabs;
 use yii\helpers\ArrayHelper;
-use yii\helpers\VarDumper;
 use yii\web\JsExpression;
 use yii\web\View;
 

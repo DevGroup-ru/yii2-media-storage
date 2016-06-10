@@ -5,11 +5,12 @@ namespace DevGroup\MediaStorage\helpers;
 use creocoder\flysystem\Filesystem;
 use DevGroup\MediaStorage\MediaModule;
 use DevGroup\MediaStorage\models\Media;
+use DevGroup\MediaStorage\models\MediaStorageConfiguration;
 use Yii;
-use DevGroup\MediaStorage\models\MediaGroup;
-use yii\base\Exception;
 use yii\base\Object;
+use yii\bootstrap\ActiveForm;
 use yii\bootstrap\Tabs;
+use yii\db\ActiveRecord;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Json;
 
@@ -17,14 +18,14 @@ class MediaHelper extends Object
 {
 
     /**
-     * @return Filesystem
+     * return default configuration from app params @see
+     * DevGroup\MediaStorage\models\MediaStorageConfiguration::appParams
+     *
+     * @param int|string $number if isset and is int change logic - return only default configuration for current FS
+     *     with this index
+     *
+     * @return array
      */
-    public static function getProtectedFilesystem()
-    {
-        return Yii::$app->protectedFilesystem;
-    }
-
-
     public static function getFsDefaultCfg($number = '')
     {
         $result = Yii::$app->params['flysystemDefaultConfigs'];
@@ -35,6 +36,10 @@ class MediaHelper extends Object
         return $result;
     }
 
+    /**
+     * return array of available flysystems
+     * @return array
+     */
     public static function getFsCfgDropdown()
     {
         $cfg = self::getFsDefaultCfg();
@@ -45,6 +50,16 @@ class MediaHelper extends Object
         return $res;
     }
 
+    /**
+     * return replaceable tpl in configuration form
+     *
+     * @param ActiveForm $form
+     * @param ActiveRecord $model
+     * @param string $number
+     *
+     * @return string
+     * @throws \Exception
+     */
     public static function getConfigurationTpl($form, $model, $number = '{{number}}')
     {
         $res = [];
@@ -83,6 +98,10 @@ class MediaHelper extends Object
         return Json::encode($res);
     }
 
+    /**
+     * return roots config from app config
+     * @return array
+     */
     public static function loadRoots()
     {
         $configuredFSnames = ArrayHelper::getValue(Yii::$app->params, 'activeFsNames', []);
@@ -130,6 +149,11 @@ class MediaHelper extends Object
         return $res;
     }
 
+    /**
+     * @param null|string|array $where
+     *
+     * @return array
+     */
     public static function loadAttrs($where = null)
     {
         $ini = ArrayHelper::merge(
@@ -154,6 +178,11 @@ class MediaHelper extends Object
         return $ini;
     }
 
+    /**
+     * @param null|string|array $where
+     *
+     * @return mixed
+     */
     public static function loadMediasAttrs($where = null)
     {
         $mediasQuery = Media::find();
@@ -179,6 +208,16 @@ class MediaHelper extends Object
             []
         );
         return $result;
+
+    }
+
+    /**
+     * @param Media $media
+     *
+     * @return Filesystem
+     */
+    public static function getFlysystemByMedia($media)
+    {
 
     }
 
