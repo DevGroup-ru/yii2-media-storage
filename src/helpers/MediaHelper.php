@@ -5,7 +5,6 @@ namespace DevGroup\MediaStorage\helpers;
 use creocoder\flysystem\Filesystem;
 use DevGroup\MediaStorage\MediaModule;
 use DevGroup\MediaStorage\models\Media;
-use DevGroup\MediaStorage\models\MediaStorageConfiguration;
 use Yii;
 use yii\base\Object;
 use yii\bootstrap\ActiveForm;
@@ -218,7 +217,12 @@ class MediaHelper extends Object
      */
     public static function getFlysystemByMedia($media)
     {
-        
+        return Yii::$app->cache->lazy(
+            function () {
+
+            },
+            'MediaFlysystem:' . $media->id
+        );
     }
 
     public static function compileUrl($mediaId)

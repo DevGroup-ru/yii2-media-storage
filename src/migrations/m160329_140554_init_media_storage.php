@@ -1,7 +1,6 @@
 <?php
 
 use yii\db\Migration;
-use yii\db\Connection;
 
 class m160329_140554_init_media_storage extends Migration
 {
