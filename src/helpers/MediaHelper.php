@@ -74,8 +74,8 @@ class MediaHelper extends Object
             $res[$item['class']] = Tabs::widget(
                 [
                     'items' => [
-                        ['label' => Yii::t('devgroup.media-storage', 'necessary'), 'content' => $necessaryContent],
-                        ['label' => Yii::t('devgroup.media-storage', 'unnecessary'), 'content' => $unnecessaryContent],
+                        ['label' => Yii::t('devgroup.media-storage', 'Necessary'), 'content' => $necessaryContent],
+                        ['label' => Yii::t('devgroup.media-storage', 'Unnecessary'), 'content' => $unnecessaryContent],
                     ],
                 ]
             );

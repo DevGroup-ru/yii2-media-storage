@@ -41,18 +41,6 @@ class MediaStorageConfiguration extends BaseConfigurationModel
         }
     }
 
-    public function attributeLabels()
-    {
-        return [
-            'defaultThumbnailSize' => Yii::t('devgroup.media-storage', 'Default thumbnail size'),
-            'noImageSrc' => Yii::t('devgroup.media-storage', 'No image src'),
-            'thumbnailsDirectory' => Yii::t('devgroup.media-storage', 'Thumbnails directory'),
-            'useWatermark' => Yii::t('devgroup.media-storage', 'Use watermark'),
-            'watermarkDirectory' => Yii::t('devgroup.media-storage', 'Watermark directory'),
-            'components' => Yii::t('devgroup.media-storage', 'Components'),
-        ];
-    }
-
     /**
      * Returns array of module configuration that should be stored in application config.
      * Array should be ready to merge in app config.

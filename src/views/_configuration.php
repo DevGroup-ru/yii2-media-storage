@@ -78,20 +78,20 @@ $(template.strtr({
             ],
             [
                 'name' => 'name',
-                'title' => Yii::t('devgroup.media-storage', 'name'),
+                'title' => Yii::t('devgroup.media-storage', 'Name'),
                 'defaultValue' => 'fs',
                 'enableError' => true,
             ],
             [
                 'type' => MultipleInputColumn::TYPE_CHECKBOX_LIST,
                 'name' => 'options',
-                'title' => Yii::t('devgroup.media-storage', 'options'),
+                'title' => Yii::t('devgroup.media-storage', 'Options'),
                 'headerOptions' => [
                     'style' => 'width: 80px;',
                 ],
                 'items' => [
-                    1 => Yii::t('devgroup.media-storage', 'active'),
-                    2 => Yii::t('devgroup.media-storage', 'use as Glide cache'),
+                    1 => Yii::t('devgroup.media-storage', 'Active'),
+                    2 => Yii::t('devgroup.media-storage', 'Use as Glide cache'),
                     3 => Yii::t('devgroup.media-storage', 'Web acceptable'),
                 ],
             ],
