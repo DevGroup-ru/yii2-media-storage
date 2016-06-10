@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "b0dc2e821a0f599b4bfdd19bbc2a0414",
-    "content-hash": "87fe206b80f9530bce2d5159748615f5",
+    "hash": "2851c742c7d56d699382259b821c14a3",
+    "content-hash": "690c8b1de26f517a6db07d89a6573841",
     "packages": [
         {
             "name": "2amigos/yii2-transliterator-helper",
@@ -206,34 +206,6 @@
             "time": "2016-04-15 19:11:23"
         },
         {
-            "name": "bower-asset/dropzone",
-            "version": "v4.3.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/enyo/dropzone.git",
-                "reference": "d8ef7a82e6ab5447c1f2d9512c8e1bfd4de5ac9e"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/enyo/dropzone/zipball/d8ef7a82e6ab5447c1f2d9512c8e1bfd4de5ac9e",
-                "reference": "d8ef7a82e6ab5447c1f2d9512c8e1bfd4de5ac9e",
-                "shasum": ""
-            },
-            "type": "bower-asset-library",
-            "extra": {
-                "bower-asset-main": [
-                    "dist/min/dropzone.min.css",
-                    "dist/min/dropzone.min.js"
-                ],
-                "bower-asset-ignore": [
-                    "*",
-                    "!dist",
-                    "!dist/**/*"
-                ]
-            },
-            "description": "Dropzone is an easy to use drag'n'drop library. It supports image previews and shows nice progress bars."
-        },
-        {
             "name": "bower-asset/jquery",
             "version": "1.11.3",
             "source": {
@@ -346,44 +318,6 @@
                 "jquery",
                 "mask",
                 "plugins"
-            ]
-        },
-        {
-            "name": "bower-asset/lightbox2",
-            "version": "2.7.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/lokesh/lightbox2.git",
-                "reference": "2e7daa84b9cf6412084ed5c97fdb448942c62d31"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/lokesh/lightbox2/zipball/2e7daa84b9cf6412084ed5c97fdb448942c62d31",
-                "reference": "2e7daa84b9cf6412084ed5c97fdb448942c62d31",
-                "shasum": ""
-            },
-            "type": "bower-asset-library",
-            "extra": {
-                "bower-asset-main": "js/lightbox.js",
-                "bower-asset-ignore": [
-                    "**/.*",
-                    "Gruntfile.js",
-                    "node_modules",
-                    "bower_components",
-                    "test",
-                    "tests"
-                ]
-            },
-            "license": [
-                "CC BY 2.5"
-            ],
-            "description": "The original Lightbox script. Uses jQuery.",
-            "keywords": [
-                "gallery",
-                "images",
-                "jquery",
-                "lightbox",
-                "overlay"
             ]
         },
         {
@@ -517,47 +451,6 @@
             "license": [
                 "MIT"
             ]
-        },
-        {
-            "name": "branchonline/yii2-lightbox",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/BranchOnline/yii2-lightbox.git",
-                "reference": "b69f71586d6504663131ab39fbce81a5ec8fe1e7"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/BranchOnline/yii2-lightbox/zipball/b69f71586d6504663131ab39fbce81a5ec8fe1e7",
-                "reference": "b69f71586d6504663131ab39fbce81a5ec8fe1e7",
-                "shasum": ""
-            },
-            "require": {
-                "bower-asset/lightbox2": "2.7.1",
-                "yiisoft/yii2": "*"
-            },
-            "type": "yii2-extension",
-            "autoload": {
-                "psr-4": {
-                    "branchonline\\lightbox\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "Apache-2.0"
-            ],
-            "authors": [
-                {
-                    "name": "Jap Mul",
-                    "email": "jap@branchonline.nl"
-                }
-            ],
-            "description": "Lightbox widget for Yii2",
-            "keywords": [
-                "module",
-                "yii2"
-            ],
-            "time": "2016-01-26 14:59:08"
         },
         {
             "name": "cebe/markdown",
@@ -780,12 +673,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/DevGroup-ru/yii2-data-structure-tools.git",
-                "reference": "bd968e37cc7e6753f97191649ead2c62708374e8"
+                "reference": "40af51c86931ce799b0d2c970eeaead891e6e3ef"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/DevGroup-ru/yii2-data-structure-tools/zipball/bd968e37cc7e6753f97191649ead2c62708374e8",
-                "reference": "bd968e37cc7e6753f97191649ead2c62708374e8",
+                "url": "https://api.github.com/repos/DevGroup-ru/yii2-data-structure-tools/zipball/40af51c86931ce799b0d2c970eeaead891e6e3ef",
+                "reference": "40af51c86931ce799b0d2c970eeaead891e6e3ef",
                 "shasum": ""
             },
             "require": {
@@ -837,61 +730,7 @@
                 "tree",
                 "yii2"
             ],
-            "time": "2016-06-07 09:24:37"
-        },
-        {
-            "name": "devgroup/yii2-dropzone",
-            "version": "1.0.5",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/DevGroup-ru/yii2-dropzone.git",
-                "reference": "ff65ec66717d386632d27f272162a7ecf69a01fe"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/DevGroup-ru/yii2-dropzone/zipball/ff65ec66717d386632d27f272162a7ecf69a01fe",
-                "reference": "ff65ec66717d386632d27f272162a7ecf69a01fe",
-                "shasum": ""
-            },
-            "require": {
-                "bower-asset/dropzone": "~4.0",
-                "yiisoft/yii2": "2.0.*",
-                "yiisoft/yii2-jui": "2.0.*"
-            },
-            "require-dev": {
-                "yiisoft/yii2-debug": "2.0.*"
-            },
-            "type": "yii2-extension",
-            "autoload": {
-                "psr-4": {
-                    "devgroup\\dropzone\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-3.0+"
-            ],
-            "authors": [
-                {
-                    "name": "Alexander Kozhevnikov",
-                    "email": "b37hr3z3n@gmail.com"
-                },
-                {
-                    "name": "Evgeny Dubovitsky",
-                    "email": "flynn068@gmail.com"
-                },
-                {
-                    "name": "Pavel Fedotov",
-                    "email": "fps.06@mail.ru"
-                }
-            ],
-            "description": "Yii2 Dropzone widget",
-            "keywords": [
-                "dropzone",
-                "upload",
-                "yii2"
-            ],
-            "time": "2015-11-02 06:26:37"
+            "time": "2016-06-09 08:00:58"
         },
         {
             "name": "devgroup/yii2-frontend-utils",
@@ -1791,12 +1630,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/flysystem.git",
-                "reference": "39a0a2154c76f12061e6632648a8e370030f9ee7"
+                "reference": "b75910a746d1f3ae4b347bd95e86553b4d2e81cc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/39a0a2154c76f12061e6632648a8e370030f9ee7",
-                "reference": "39a0a2154c76f12061e6632648a8e370030f9ee7",
+                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/b75910a746d1f3ae4b347bd95e86553b4d2e81cc",
+                "reference": "b75910a746d1f3ae4b347bd95e86553b4d2e81cc",
                 "shasum": ""
             },
             "require": {
@@ -1866,7 +1705,7 @@
                 "sftp",
                 "storage"
             ],
-            "time": "2016-06-07 21:12:23"
+            "time": "2016-06-09 08:23:13"
         },
         {
             "name": "league/flysystem-cached-adapter",
@@ -2323,12 +2162,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Studio-42/elFinder.git",
-                "reference": "aa2e424789584528493e996959c1ef6645116b18"
+                "reference": "fb918e177dc01cf2aa1fb97f7c76e8e426fa30ba"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Studio-42/elFinder/zipball/aa2e424789584528493e996959c1ef6645116b18",
-                "reference": "aa2e424789584528493e996959c1ef6645116b18",
+                "url": "https://api.github.com/repos/Studio-42/elFinder/zipball/fb918e177dc01cf2aa1fb97f7c76e8e426fa30ba",
+                "reference": "fb918e177dc01cf2aa1fb97f7c76e8e426fa30ba",
                 "shasum": ""
             },
             "require": {
@@ -2373,7 +2212,7 @@
             ],
             "description": "File manager for web",
             "homepage": "http://elfinder.org",
-            "time": "2016-06-08 08:03:43"
+            "time": "2016-06-10 08:55:05"
         },
         {
             "name": "unclead/yii2-multiple-input",
@@ -2474,12 +2313,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-framework.git",
-                "reference": "a3cf6302cb1ce9ef2446f88ccf97cb9b1a7d4428"
+                "reference": "bf4ec06b68c30cd9b7c5bfea5ed35c510b6f531e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/a3cf6302cb1ce9ef2446f88ccf97cb9b1a7d4428",
-                "reference": "a3cf6302cb1ce9ef2446f88ccf97cb9b1a7d4428",
+                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/bf4ec06b68c30cd9b7c5bfea5ed35c510b6f531e",
+                "reference": "bf4ec06b68c30cd9b7c5bfea5ed35c510b6f531e",
                 "shasum": ""
             },
             "require": {
@@ -2560,7 +2399,7 @@
                 "framework",
                 "yii2"
             ],
-            "time": "2016-06-07 11:20:56"
+            "time": "2016-06-09 12:30:48"
         },
         {
             "name": "yiisoft/yii2-authclient",
@@ -2991,38 +2830,87 @@
             "time": "2016-06-01 11:19:16"
         },
         {
-            "name": "phpdocumentor/reflection-docblock",
-            "version": "2.0.4",
+            "name": "phpdocumentor/reflection-common",
+            "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/phpDocumentor/ReflectionDocBlock.git",
-                "reference": "d68dbdc53dc358a816f00b300704702b2eaff7b8"
+                "url": "https://github.com/phpDocumentor/ReflectionCommon.git",
+                "reference": "144c307535e82c8fdcaacbcfc1d6d8eeb896687c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/d68dbdc53dc358a816f00b300704702b2eaff7b8",
-                "reference": "d68dbdc53dc358a816f00b300704702b2eaff7b8",
+                "url": "https://api.github.com/repos/phpDocumentor/ReflectionCommon/zipball/144c307535e82c8fdcaacbcfc1d6d8eeb896687c",
+                "reference": "144c307535e82c8fdcaacbcfc1d6d8eeb896687c",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.3"
+                "php": ">=5.5"
             },
             "require-dev": {
-                "phpunit/phpunit": "~4.0"
-            },
-            "suggest": {
-                "dflydev/markdown": "~1.0",
-                "erusev/parsedown": "~1.0"
+                "phpunit/phpunit": "^4.6"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.0.x-dev"
+                    "dev-master": "1.0.x-dev"
                 }
             },
             "autoload": {
-                "psr-0": {
-                    "phpDocumentor": [
+                "psr-4": {
+                    "phpDocumentor\\Reflection\\": [
+                        "src"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jaap van Otterdijk",
+                    "email": "opensource@ijaap.nl"
+                }
+            ],
+            "description": "Common reflection classes used by phpdocumentor to reflect the code structure",
+            "homepage": "http://www.phpdoc.org",
+            "keywords": [
+                "FQSEN",
+                "phpDocumentor",
+                "phpdoc",
+                "reflection",
+                "static analysis"
+            ],
+            "time": "2015-12-27 11:43:31"
+        },
+        {
+            "name": "phpdocumentor/reflection-docblock",
+            "version": "3.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phpDocumentor/ReflectionDocBlock.git",
+                "reference": "9270140b940ff02e58ec577c237274e92cd40cdd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/9270140b940ff02e58ec577c237274e92cd40cdd",
+                "reference": "9270140b940ff02e58ec577c237274e92cd40cdd",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5",
+                "phpdocumentor/reflection-common": "^1.0@dev",
+                "phpdocumentor/type-resolver": "^0.2.0",
+                "webmozart/assert": "^1.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "^0.9.4",
+                "phpunit/phpunit": "^4.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "phpDocumentor\\Reflection\\": [
                         "src/"
                     ]
                 }
@@ -3034,10 +2922,58 @@
             "authors": [
                 {
                     "name": "Mike van Riel",
-                    "email": "mike.vanriel@naenius.com"
+                    "email": "me@mikevanriel.com"
                 }
             ],
-            "time": "2015-02-03 12:10:50"
+            "description": "With this component, a library can provide support for annotations via DocBlocks or otherwise retrieve information that is embedded in a DocBlock.",
+            "time": "2016-06-10 09:48:41"
+        },
+        {
+            "name": "phpdocumentor/type-resolver",
+            "version": "0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phpDocumentor/TypeResolver.git",
+                "reference": "b39c7a5b194f9ed7bd0dd345c751007a41862443"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phpDocumentor/TypeResolver/zipball/b39c7a5b194f9ed7bd0dd345c751007a41862443",
+                "reference": "b39c7a5b194f9ed7bd0dd345c751007a41862443",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5",
+                "phpdocumentor/reflection-common": "^1.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "^0.9.4",
+                "phpunit/phpunit": "^5.2||^4.8.24"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "phpDocumentor\\Reflection\\": [
+                        "src/"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mike van Riel",
+                    "email": "me@mikevanriel.com"
+                }
+            ],
+            "time": "2016-06-10 07:14:17"
         },
         {
             "name": "phpspec/php-diff",
@@ -3145,12 +3081,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/dbunit.git",
-                "reference": "76adbf67d800f9e275e4bb70f1106d02f152c7a4"
+                "reference": "1174eec88a8300487675b78a090a3fc4ce9b4e76"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/dbunit/zipball/76adbf67d800f9e275e4bb70f1106d02f152c7a4",
-                "reference": "76adbf67d800f9e275e4bb70f1106d02f152c7a4",
+                "url": "https://api.github.com/repos/sebastianbergmann/dbunit/zipball/1174eec88a8300487675b78a090a3fc4ce9b4e76",
+                "reference": "1174eec88a8300487675b78a090a3fc4ce9b4e76",
                 "shasum": ""
             },
             "require": {
@@ -3192,7 +3128,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2015-11-03 14:01:44"
+            "time": "2016-06-09 07:00:08"
         },
         {
             "name": "phpunit/php-code-coverage",
@@ -3985,6 +3921,56 @@
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
             "time": "2016-06-06 11:53:30"
+        },
+        {
+            "name": "webmozart/assert",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/webmozart/assert.git",
+                "reference": "3a8e045064f294992a13966b6c892fb9d64853a3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/webmozart/assert/zipball/3a8e045064f294992a13966b6c892fb9d64853a3",
+                "reference": "3a8e045064f294992a13966b6c892fb9d64853a3",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.3.3|^7.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.6",
+                "sebastian/version": "^1.0.1"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.1-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Webmozart\\Assert\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Bernhard Schussek",
+                    "email": "bschussek@gmail.com"
+                }
+            ],
+            "description": "Assertions to validate method input/output with nice error messages.",
+            "keywords": [
+                "assert",
+                "check",
+                "validate"
+            ],
+            "time": "2016-03-04 13:27:44"
         },
         {
             "name": "yiisoft/yii2-codeception",

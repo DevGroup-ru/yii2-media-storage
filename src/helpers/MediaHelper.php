@@ -218,7 +218,7 @@ class MediaHelper extends Object
      */
     public static function getFlysystemByMedia($media)
     {
-
+        
     }
 
     public static function compileUrl($mediaId)
