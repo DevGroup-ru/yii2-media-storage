@@ -7,7 +7,6 @@ use DevGroup\ExtensionsManager\models\BaseConfigurationModel;
 use DevGroup\MediaStorage\MediaModule;
 use Yii;
 use yii\helpers\ArrayHelper;
-use yii\helpers\VarDumper;
 
 class MediaStorageConfiguration extends BaseConfigurationModel
 {
