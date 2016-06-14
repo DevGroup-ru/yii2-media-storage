@@ -158,7 +158,7 @@ class MediaHelper extends Object
         $ini = ArrayHelper::merge(
             [
                 [
-                    'pattern' => '#.*(\.tmb|\.quarantine)$#i',
+                    'pattern' => '#.*(\.tmb|\.quarantine|\.cache)$#i',
                     'read' => false,
                     'write' => false,
                     'hidden' => true,
@@ -213,13 +213,25 @@ class MediaHelper extends Object
     /**
      * @param Media $media
      *
-     * @return Filesystem
+     * @return Filesystem|null
+     * @todo dependency
      */
     public static function getFlysystemByMedia($media)
     {
         return Yii::$app->cache->lazy(
-            function () {
-
+            function () use ($media) {
+                $activeFsNames = ArrayHelper::getValue(Yii::$app->params, 'activeFsNames', ['protectedFilesystem']);
+                foreach ($activeFsNames as $activeFsName) {
+                    /**
+                     * @var Filesystem $fs
+                     */
+                    $fs = Yii::$app->get($activeFsName);
+                    if ($fs->has($media->path)) {
+                        return $fs;
+                    }
+                }
+                var_dump($activeFsNames);
+                return null;
             },
             'MediaFlysystem:' . $media->id
         );

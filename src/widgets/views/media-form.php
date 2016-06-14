@@ -74,8 +74,7 @@ echo ImageWidget::widget(
         'model' => $model,
         'propertyId' => $property->id,
         'config' => [
-            'sourceFS' => Yii::$app->protectedFilesystem->getFilesystem(),
-            'cacheFS' => Yii::$app->protectedFilesystem->getFilesystem(),
+            
         ],
     ]
 );

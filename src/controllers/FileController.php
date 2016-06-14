@@ -8,30 +8,32 @@ use DevGroup\MediaStorage\helpers\MediaHelper;
 use DevGroup\MediaStorage\models\Media;
 use Yii;
 use yii\helpers\ArrayHelper;
+use yii\helpers\Url;
 use yii\web\Controller;
+use yii\web\NotFoundHttpException;
 
 class FileController extends Controller
 {
     public function actionSend($mediaId, $config = [])
     {
+        var_dump(Url::toRoute(['/media/file/send', 'mediaId' => 1, 'config' => ['imageConfig' => ['h' => 10]]]));die();
         $media = Media::findOne($mediaId);
+        $fs = MediaHelper::getFlysystemByMedia($media);
+        if (is_null($fs)) {
+            throw new NotFoundHttpException();
+        }
         if (is_null($media)) {
             Yii::$app->response->setStatusCode(400);
         } elseif ($media->mime === 'directory') {
             Yii::$app->response->setStatusCode(403);
         } elseif ($media->isImage()) {
+            $config = ArrayHelper::merge(['serverConfig' => ['source' => $fs->getFilesystem()]], $config);
             $server = GlideHelper::getServerByConfig(ArrayHelper::getValue($config, 'serverConfig', []));
             $server->outputImage($media->path, ArrayHelper::getValue($config, 'imageConfig', []));
             exit; // cause of Yii rewrite headers by it's own Response object. Rewrite if Yii will use PSR-7 or HttpFoundation or write custom http://glide.thephpleague.com/1.0/config/responses/
         } else {
-            //@todo from conf
-            //@todo no more protected FS
             $filename = basename($media->path);
-            Yii::$app->response->sendContentAsFile(
-                MediaHelper::getProtectedFilesystem()->read($media->path),
-                $filename,
-                ['mimeType' => $media->mime]
-            );
+            Yii::$app->response->sendContentAsFile($fs->read($media->path), $filename, ['mimeType' => $media->mime]);
         }
     }
 

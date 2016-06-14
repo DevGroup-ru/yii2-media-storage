@@ -18,8 +18,30 @@ class ImageWidget extends Widget
 
     public $model = null;
     public $propertyId = null;
-    public $response = self::RETURN_SRC;
     public $config = [];
+
+    /**
+     * @var string
+     */
+    public $viewFile = self::RETURN_SRC;
+    /**
+     * @var string
+     */
+    public $noImageViewFile = 'noimage';
+    /**
+     * @var null|int
+     */
+    public $limit = null;
+    /**
+     * @var int
+     */
+    public $offset = 0;
+    /**
+     * @var bool if true and images array empty show "No image"
+     */
+    public $noImageOnEmptyImages = false;
+    /** @var array $additional Additional data passed to view */
+    public $additional = [];
 
     public function init()
     {
@@ -29,6 +51,7 @@ class ImageWidget extends Widget
         if (is_null($this->propertyId)) {
             throw new Exception(Yii::t('devgroup.media-storage', 'Set property id'));
         }
+        //@todo default config merge
     }
 
     public function run()
@@ -36,16 +59,17 @@ class ImageWidget extends Widget
         $property = Property::findById($this->propertyId);
         $propValues = (array) $this->model->{$property->key};
         $imageMedias = Media::find()->where(['id' => $propValues])->andWhere(['like', 'mime', 'image'])->all();
-        $server = ServerFactory::create(
-            [
-                'source' => $this->config['sourceFS'],
-                'cache' => $this->config['cacheFS'],
-            ]
-        );
+
         foreach ($imageMedias as $imageMedia) {
+            // each media each server but cache server only one
+            $server = ServerFactory::create(
+                [
+                    'source' => $this->config['sourceFS'],
+                    'cache' => $this->config['cacheFS'],
+                ]
+            );
             $path = $imageMedia->path;
-            switch ($this->response) {
-            }
+
         }
     }
 }
