@@ -61,9 +61,7 @@ class MediaStorageConfiguration extends BaseConfigurationModel
      */
     public function consoleApplicationAttributes()
     {
-        return [
-            'controllerMap' => ['media' => 'DevGroup\MediaStorage\commands'],
-        ];
+        return [];
     }
 
     /**
@@ -126,8 +124,8 @@ class MediaStorageConfiguration extends BaseConfigurationModel
                             'devgroup.media-storage' => [
                                 'class' => 'yii\i18n\PhpMessageSource',
                                 'basePath' => dirname(__DIR__) . DIRECTORY_SEPARATOR . 'messages',
-                            ]
-                        ]
+                            ],
+                        ],
                     ],
                 ],
                 'modules' => ['media' => ['class' => MediaModule::class]],

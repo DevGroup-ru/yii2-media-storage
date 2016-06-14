@@ -14,9 +14,8 @@ use yii\web\NotFoundHttpException;
 
 class FileController extends Controller
 {
-    public function actionSend($mediaId, $config = [])
+    public function actionSend($mediaId, array $config = [])
     {
-        var_dump(Url::toRoute(['/media/file/send', 'mediaId' => 1, 'config' => ['imageConfig' => ['h' => 10]]]));die();
         $media = Media::findOne($mediaId);
         $fs = MediaHelper::getFlysystemByMedia($media);
         if (is_null($fs)) {

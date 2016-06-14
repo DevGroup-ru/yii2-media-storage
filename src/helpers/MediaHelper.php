@@ -230,7 +230,6 @@ class MediaHelper extends Object
                         return $fs;
                     }
                 }
-                var_dump($activeFsNames);
                 return null;
             },
             'MediaFlysystem:' . $media->id

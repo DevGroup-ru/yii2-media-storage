@@ -33,7 +33,7 @@ class MediaStorage extends AbstractPropertyStorage
 
         /** @var \yii\db\Command $command */
         $query = new Query();
-        // @todo models can be in different db (for DST also)
+        // @todo models can be in different db (for DST also) (Global problem)
         $tableName = (new MediaTableGenerator(['db' => $firstModel->getDb()]))->getMediaTableName($firstModel->className());
         $query->select('*')->from($tableName)->where(PropertiesHelper::getInCondition($models))->orderBy(
             [

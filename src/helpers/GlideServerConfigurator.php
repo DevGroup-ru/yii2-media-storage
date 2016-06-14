@@ -16,7 +16,7 @@ class GlideServerConfigurator extends Object
             $this->config['cache'] = $this->config['source'];
         }
         if ($this->config['source'] == $this->config['cache'] && empty($this->config['cache_path_prefix'])) {
-            $this->config['cache_path_prefix'] = 'cache';
+            $this->config['cache_path_prefix'] = '.cache';
         }
     }
 }
