@@ -44,6 +44,8 @@ class MediaRule implements UrlRuleInterface
      * @return string|boolean the created URL, or false if this rule cannot be used for creating this URL.
      * @todo 1) check if file exist. UPD no need cause we make url. All checks will do controller  2) url from config
      *     (web acceptable, glide or current controller)
+     * @todo url compiled from config (some configurable component, before each createUrl with FileController will
+     *     generate url and paste it to DB, think about url cache)
      */
     public function createUrl($manager, $route, $params)
     {

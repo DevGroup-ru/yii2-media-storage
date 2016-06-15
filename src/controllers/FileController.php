@@ -8,7 +8,6 @@ use DevGroup\MediaStorage\helpers\MediaHelper;
 use DevGroup\MediaStorage\models\Media;
 use Yii;
 use yii\helpers\ArrayHelper;
-use yii\helpers\Url;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 

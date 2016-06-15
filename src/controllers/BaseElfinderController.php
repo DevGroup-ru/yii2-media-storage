@@ -76,7 +76,6 @@ class BaseElfinderController extends Controller
      * @param  array $args command arguments from client
      * @param  \elFinder $elfinder elFinder instance
      *
-     * @todo tree add
      * @return bool
      */
     public function createRecord($cmd, &$result, $args, $elfinder)

@@ -19,7 +19,6 @@ class GlideHelper
     public static function getServerByConfig($config = [])
     {
         $hash = md5(Json::encode($config));
-
         if (ArrayHelper::keyExists($hash, self::$_identityMap) === false) {
             $config = (new GlideServerConfigurator(['config' => $config]))->config;
             self::$_identityMap[$hash] = ServerFactory::create($config);
