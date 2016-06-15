@@ -99,9 +99,12 @@ class MediaHelper extends Object
 
     /**
      * return roots config from app config
+     *
+     * @param null $where
+     *
      * @return array
      */
-    public static function loadRoots()
+    public static function loadRoots($where = null)
     {
         $configuredFSnames = ArrayHelper::getValue(Yii::$app->params, 'activeFsNames', []);
         if (count($configuredFSnames) === 0) {
@@ -113,7 +116,7 @@ class MediaHelper extends Object
                     'options' => [
                         'attributes' => [
                             [
-                                'pattern' => '#.*(\.tmb|\.quarantine)$#i',
+                                'pattern' => '#.*(\.tmb|\.quarantine|\.cache)$#i',
                                 'read' => false,
                                 'write' => false,
                                 'hidden' => true,
@@ -140,7 +143,7 @@ class MediaHelper extends Object
                 'component' => $configuredFSname,
                 'name' => $configuredFSname,
                 'options' => [
-                    'attributes' => static::loadAttrs(),
+                    'attributes' => static::loadAttrs($where),
                     'uploadOverwrite' => false,
                 ],
             ];

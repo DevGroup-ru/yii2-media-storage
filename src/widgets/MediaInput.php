@@ -32,10 +32,12 @@ class MediaInput extends InputFile
         AssetsCallBack::register($this->getView());
 
         if (!empty($this->multiple)) {
+
             $this->getView()->registerJs(
-                "mihaildev.elFinder.register(" . Json::encode(
-                    $this->options['id']
-                ) . ", function(files, id){ var _f = []; console.log(files); for (var i in files) {
+
+                strtr(
+                /** @lang JavaScript */
+                    "mihaildev.elFinder.register(optId, function(files, id){ var _f = []; for (var i in files) {
         _f.push(files[i].hash);
     }
     $.getJSON('/media/elfinder/connect', {
@@ -53,17 +55,30 @@ class MediaInput extends InputFile
         });
         return true;
     });    
-    $(document).on('click','#" . $this->buttonOptions['id'] . "', function(){mihaildev.elFinder.openManager(" . Json::encode(
-                    $this->_managerOptions
-                ) . ");});"
+    $(document).on('click','#buttonId', function(){mihaildev.elFinder.openManager(managerOpts);});",
+                    [
+                        'optId' => Json::encode($this->options['id']),
+                        'buttonId' => $this->buttonOptions['id'],
+                        'managerOpts' => Json::encode($this->_managerOptions),
+                    ]
+                )
             );
         } else {
             $this->getView()->registerJs(
-                "mihaildev.elFinder.register(" . Json::encode(
+                "mihaildev . elFinder . register(
+                " . Json::encode(
                     $this->options['id']
-                ) . ", function(file, id){ \$('#' + id).val(file.url).trigger('change', [file, id]);; return true;}); $(document).on('click', '#" . $this->buttonOptions['id'] . "', function(){mihaildev.elFinder.openManager(" . Json::encode(
+                ) . ",
+                function (file, id){
+                    \$('#' + id) . val(file . url) . trigger('change', [file, id]);; return true;}
+            ); $(document) . on('click', '#" . $this->buttonOptions['id'] . "', function ()
+            {
+                mihaildev . elFinder . openManager(
+                    " . Json::encode(
                     $this->_managerOptions
-                ) . ");});"
+                ) . "
+                );
+            });"
             );
         }
     }

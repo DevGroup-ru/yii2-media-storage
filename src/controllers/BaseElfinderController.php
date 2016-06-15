@@ -164,7 +164,7 @@ class BaseElfinderController extends Controller
         $this->removeRecord($cmd, $result, $args, $elfinder);
         $this->createRecord($cmd, $result, $args, $elfinder);
         /**
-         * @todo tree
+         * @todo tree, rewrite, cause no need to delete records and create
          */
         return true;
     }
@@ -233,13 +233,18 @@ class BaseElfinderController extends Controller
         }
     }
 
-    protected function getCustomData($getKeys = ['model', 'model_id', 'property_id'])
+    protected function getCustomData($getKeys = ['model', 'model_id', 'property_id'], $managerOptions = false)
     {
         $result = [];
         $get = Yii::$app->request->get();
         foreach ($getKeys as $key) {
-            if (ArrayHelper::keyExists($key, $get)) {
-                $result[$key] = $get[$key];
+            $customKey = $key;
+            if ($managerOptions) {
+                $customKey = 'managerOptions.customData.' . $key;
+            }
+            $val = ArrayHelper::getValue($get, $customKey);
+            if (is_null($val) === false) {
+                $result[$key] = $val;
             }
         }
         return $result;

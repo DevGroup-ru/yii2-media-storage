@@ -18,18 +18,10 @@ class Bootstrap implements BootstrapInterface
     public function bootstrap($app)
     {
         Yii::$classMap['creocoder\flysystem\Filesystem'] = __DIR__ . '/../Filesystem.php';
-
         if ($app instanceof \yii\console\Application) {
-            $this->controllerNamespace = 'DevGroup\MediaStorage\commands';
+            $app->getModule('media')->controllerNamespace = 'DevGroup\MediaStorage\commands';
         } elseif ($app instanceof \yii\web\Application) {
-            $app->getUrlManager()->addRules(
-                [
-                    [
-                        'class' => MediaRule::class,
-                    ],
-                ],
-                false
-            );
+            $app->getUrlManager()->addRules([['class' => MediaRule::class,],], false);
         }
     }
 }

@@ -13,22 +13,19 @@ class MediaElfinderController extends BaseElfinderController
 {
     public function init()
     {
-
-        $modelId = Yii::$app->request->get('model_id', null);
-        $modelClass = Yii::$app->request->get('model', null);
-
-        if (is_null($modelClass) === false && is_null($modelId) === false) {
-            $this->roots['baseRoot']['name'] = 'available';
+        parent::init();
+        $data = $this->getCustomData();
+        if (count($data) > 0) {
             $ids = (new Query())->select('media_id')->from(
-                (new MediaTableGenerator())->getMediaTableName($modelClass)
-            )->where(['model_id' => $modelId])->column();
+                (new MediaTableGenerator())->getMediaTableName($data['model'])
+            )->where(['model_id' => $data['model_id']])->column();
+            //            var_dump($ids);die();
             // @todo show folders
-            $this->roots = ArrayHelper::merge(
-                $this->roots,
-                ['baseRoot' => ['options' => ['attributes' => MediaHelper::loadMediasAttrs($ids)]]]
-            );
+            $this->roots = MediaHelper::loadRoots($ids);
+        }
+        foreach ($this->roots as $name => $root) {
+            $this->roots[$name]['name'] = $name . ' - available';
         }
 
-        parent::init();
     }
 }

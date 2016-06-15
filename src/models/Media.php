@@ -2,6 +2,8 @@
 
 namespace DevGroup\MediaStorage\models;
 
+use DevGroup\TagDependencyHelper\CacheableActiveRecord;
+use DevGroup\TagDependencyHelper\TagDependencyTrait;
 use Yii;
 
 /**
@@ -14,6 +16,21 @@ use Yii;
  */
 class Media extends \yii\db\ActiveRecord
 {
+
+    use TagDependencyTrait;
+
+    /**
+     * @inheritdoc
+     */
+    public function behaviors()
+    {
+        return [
+            'CacheableActiveRecord' => [
+                'class' => CacheableActiveRecord::className(),
+            ],
+        ];
+    }
+
     /**
      * @inheritdoc
      */

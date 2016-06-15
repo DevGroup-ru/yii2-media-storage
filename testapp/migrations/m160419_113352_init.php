@@ -47,23 +47,7 @@ class m160419_113352_init extends Migration
         (new MediaTableGenerator(['db' => $this->db]))->generate(Thing::className());
 
         \DevGroup\DataStructure\helpers\PropertiesTableGenerator::getInstance()->generate(Thing::className()); //@ todo перенести в базовый генератор
-        $this->insert(
-            PropertyHandlers::tableName(),
-            [
-                'name' => 'Media property',
-                'class_name' => MediaHandler::class,
-                'sort_order' => 4,
-            ]
-        );
-        $this->insert(
-            PropertyStorage::tableName(),
-            [
-                'name' => 'Media property',
-                'class_name' => MediaStorage::class,
-                'sort_order' => 4,
-            ]
-        );//@todo drop
-        Yii::$app->cache->flush();
+        
     }
 
     public function down()
