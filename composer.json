@@ -61,6 +61,7 @@
             "src/migrations"
         ],
         "configurables": "src/configurables.php",
-        "translationCategory": "devgroup.media"
+        "translationCategory": "devgroup.media",
+        "bootstrap": "DevGroup\\MediaStorage\\MediaModule"
     }
 }

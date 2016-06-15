@@ -201,6 +201,7 @@ class MediaStorageConfiguration extends BaseConfigurationModel
                     ],
                 ],
             ],
+            'yii.migrations' => ['@vendor/devgroup/yii2-media-storage/src/migrations/'],
         ];
     }
 
