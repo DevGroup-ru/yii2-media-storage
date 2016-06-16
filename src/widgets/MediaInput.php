@@ -13,7 +13,6 @@ class MediaInput extends InputFile
     public function init()
     {
         parent::init();
-
     }
 
     public function run()
@@ -23,6 +22,8 @@ class MediaInput extends InputFile
         } else {
             $replace['{input}'] = Html::textInput($this->name, $this->value, $this->options);
         }
+
+        $inputName = Html::getInputName($this->model, $this->name) . '[]';
 
         $replace['{button}'] = Html::tag($this->buttonTag, $this->buttonName, $this->buttonOptions);
 
@@ -37,29 +38,34 @@ class MediaInput extends InputFile
 
                 strtr(
                 /** @lang JavaScript */
-                    "mihaildev.elFinder.register(optId, function(files, id){ var _f = []; for (var i in files) {
+                    "mihaildev.elFinder.register(optId, function (files, id) {
+    var _f = [];
+    for (var i in files) {
         _f.push(files[i].hash);
     }
     $.getJSON('/media/elfinder/connect', {
-        cmd: \"info\",
+        cmd    : \"info\",
         targets: _f
-    }, function(data) {
-            console.log(data);
-            data.files.every(function(i) {
-                console.log(i);
-                if ($('.multi-media input[value=\"' + i.id + '\"]').length === 0) {
-                    $('.multi-media').append('<input type=\"hidden\" id=\"thing-test-' + i.id + '\" class=\"form-control\" name=\"Thing[test][]\" value=\"' + i.id + '\">');
-                }
-                return true;
-            });
+    }, function (data) {
+        console.log(data);
+        data.files.every(function (i) {
+            console.log(i);
+            if ($('.multi-media input[value=\"' + i.id + '\"]').length === 0) {
+                $('.multi-media').append('<input type=\"hidden\" id=\"thing-test-' + i.id + '\" class=\"form-control\" name=\"inputName\" value=\"' + i.id + '\">');
+            }
+            return true;
         });
-        return true;
-    });    
-    $(document).on('click','#buttonId', function(){mihaildev.elFinder.openManager(managerOpts);});",
+    });
+    return true;
+});
+$(document).on('click', '#buttonId', function () {
+    mihaildev.elFinder.openManager(managerOpts);
+});",
                     [
                         'optId' => Json::encode($this->options['id']),
                         'buttonId' => $this->buttonOptions['id'],
                         'managerOpts' => Json::encode($this->_managerOptions),
+                        'inputName' => $inputName,
                     ]
                 )
             );

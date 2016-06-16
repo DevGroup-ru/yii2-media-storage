@@ -23,7 +23,8 @@ echo MediaInput::widget(
         'buttonOptions' => ['class' => 'btn btn-default'],
         'buttonName' => '<i class="fa fa-plus"></i> ' . Yii::t('devgroup.media-storage', 'Open gallery'),
         'multiple' => true,
-        'name' => $property->key . '_tmp',
+        'name' => $property->key,
+        'model' => $model,
     ]
 );
 if ($property->allow_multiple_values == 1) : ?>
@@ -69,12 +70,12 @@ echo ElfinderWidget::widget(
         'frameOptions' => ['style' => 'width: 100%; height: 100%; border: 0;min-height: 350px;'],
     ]
 );
-echo ImageWidget::widget(
-    [
-        'model' => $model,
-        'propertyId' => $property->id,
-        'config' => [
-            
-        ],
-    ]
-);
+//echo ImageWidget::widget(
+//    [
+//        'model' => $model,
+//        'propertyId' => $property->id,
+//        'config' => [
+//
+//        ],
+//    ]
+//);
