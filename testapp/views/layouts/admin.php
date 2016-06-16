@@ -1,2 +1,0 @@
-<?php
-include 'main.php';

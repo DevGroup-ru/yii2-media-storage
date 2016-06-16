@@ -31,7 +31,9 @@
     "require-dev": {
         "yiisoft/yii2-bootstrap": "^2.0@dev",
         "devgroup/yii2-admin-utils": "dev-master",
-        "devgroup/dotplant-dev": "~1.0.0"
+        "devgroup/dotplant-dev": "~1.0.0",
+        "yiisoft/yii2-faker": "*",
+        "yiisoft/yii2-codeception": "^2.0"
     },
     "autoload": {
         "classmap": [

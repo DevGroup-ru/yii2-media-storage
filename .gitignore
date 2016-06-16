@@ -1,2 +1,5 @@
 .idea
 vendor
+testapp/codeception/_output
+
+tests/_output/*
