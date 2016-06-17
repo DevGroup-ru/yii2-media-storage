@@ -9,3 +9,9 @@ modules:
     enabled:
         # add framework module here
         - \Helper\Functional
+        - Yii2
+    config:
+            Yii2:
+                configFile: 'tests/testapp/config/functional.php'
+
+                #selenium

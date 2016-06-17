@@ -81,20 +81,6 @@ $config = [
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
-            'rules' => [
-                //                'media' => 'media/media/all-files',
-                //                'media/groups' => 'media/media/all-groups',
-                //                'media/show/item/<id:\d+>' => 'media/media/show-item',
-                //                'media/show/group/<id:\d+>' => 'media/media/show-group',
-                //                'media/save/item/<id:\d+>' => 'media/media/save-item',
-                //                'media/save/group/<id:\d+>' => 'media/media/save-group',
-                //                'media/delete/item/<id:\d+>' => 'media/media/delete-item',
-                //                'media/delete/group/<id:\d+>' => 'media/media/delete-group',
-                //'POST media/save/item<id:\d+>' => 'media/media/save-item',
-                //'POST media/save/group<id:\d+>' => 'media/media/save-group',
-                //'DELETE media/delete/item/<id:\d+>' => 'media/media/delete-item',
-                //'DELETE media/delete/group/<id:\d+>' => 'media/media/delete-group',
-            ],
         ],
         'protectedFilesystem' => [
             'class' => 'creocoder\flysystem\LocalFilesystem',

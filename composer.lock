@@ -1577,12 +1577,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/kartik-v/yii2-widget-select2.git",
-                "reference": "00c29bf2ea42df7be2ae6aa2b2be049807a8134b"
+                "reference": "5ca33a716188422e85560cdce0cb2110a998a618"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/yii2-widget-select2/zipball/00c29bf2ea42df7be2ae6aa2b2be049807a8134b",
-                "reference": "00c29bf2ea42df7be2ae6aa2b2be049807a8134b",
+                "url": "https://api.github.com/repos/kartik-v/yii2-widget-select2/zipball/5ca33a716188422e85560cdce0cb2110a998a618",
+                "reference": "5ca33a716188422e85560cdce0cb2110a998a618",
                 "shasum": ""
             },
             "require": {
@@ -1622,7 +1622,7 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2016-06-03 10:10:39"
+            "time": "2016-06-14 13:48:39"
         },
         {
             "name": "league/flysystem",
@@ -2162,12 +2162,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Studio-42/elFinder.git",
-                "reference": "2267550fa08ea0f8f70bec6084ff7376eac73865"
+                "reference": "bb45881a17770c898c0299cac6f08838dbbe1c46"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Studio-42/elFinder/zipball/2267550fa08ea0f8f70bec6084ff7376eac73865",
-                "reference": "2267550fa08ea0f8f70bec6084ff7376eac73865",
+                "url": "https://api.github.com/repos/Studio-42/elFinder/zipball/bb45881a17770c898c0299cac6f08838dbbe1c46",
+                "reference": "bb45881a17770c898c0299cac6f08838dbbe1c46",
                 "shasum": ""
             },
             "require": {
@@ -2212,7 +2212,7 @@
             ],
             "description": "File manager for web",
             "homepage": "http://elfinder.org",
-            "time": "2016-06-13 13:15:56"
+            "time": "2016-06-16 12:49:46"
         },
         {
             "name": "unclead/yii2-multiple-input",
@@ -3673,12 +3673,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/exporter.git",
-                "reference": "f88f8936517d54ae6d589166810877fb2015d0a2"
+                "reference": "6e6a2a0b9aa7be83acb7ba4936f59abea20b6cd0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/exporter/zipball/f88f8936517d54ae6d589166810877fb2015d0a2",
-                "reference": "f88f8936517d54ae6d589166810877fb2015d0a2",
+                "url": "https://api.github.com/repos/sebastianbergmann/exporter/zipball/6e6a2a0b9aa7be83acb7ba4936f59abea20b6cd0",
+                "reference": "6e6a2a0b9aa7be83acb7ba4936f59abea20b6cd0",
                 "shasum": ""
             },
             "require": {
@@ -3732,7 +3732,7 @@
                 "export",
                 "exporter"
             ],
-            "time": "2015-08-09 04:23:41"
+            "time": "2016-06-17 08:12:15"
         },
         {
             "name": "sebastian/global-state",
@@ -3879,12 +3879,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "382e85abe8d9908fdb96e556cc1c6818f9961a35"
+                "reference": "7eaa2ba89227b2809ea89e6abf5636ecbf6c9a2d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/382e85abe8d9908fdb96e556cc1c6818f9961a35",
-                "reference": "382e85abe8d9908fdb96e556cc1c6818f9961a35",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/7eaa2ba89227b2809ea89e6abf5636ecbf6c9a2d",
+                "reference": "7eaa2ba89227b2809ea89e6abf5636ecbf6c9a2d",
                 "shasum": ""
             },
             "require": {
@@ -3920,7 +3920,7 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
-            "time": "2016-06-14 11:18:32"
+            "time": "2016-06-16 19:29:32"
         },
         {
             "name": "webmozart/assert",
@@ -4117,12 +4117,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-gii.git",
-                "reference": "ad215b7f8c679e11e70ff3dc29c7306f28cef576"
+                "reference": "2385e71733d567b72d4e46ddde77f97904448c14"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-gii/zipball/ad215b7f8c679e11e70ff3dc29c7306f28cef576",
-                "reference": "ad215b7f8c679e11e70ff3dc29c7306f28cef576",
+                "url": "https://api.github.com/repos/yiisoft/yii2-gii/zipball/2385e71733d567b72d4e46ddde77f97904448c14",
+                "reference": "2385e71733d567b72d4e46ddde77f97904448c14",
                 "shasum": ""
             },
             "require": {
@@ -4162,7 +4162,7 @@
                 "gii",
                 "yii2"
             ],
-            "time": "2016-05-12 20:54:42"
+            "time": "2016-06-15 11:31:00"
         }
     ],
     "aliases": [],
