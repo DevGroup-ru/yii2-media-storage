@@ -35,14 +35,7 @@ class m160419_113352_init extends Migration
                 'migrationTable' => 'migrations_media',
             ]
         );
-        Yii::$app->runAction(
-            'migrate/up',
-            [
-                'interactive' => 0,
-                'migrationPath' => '@DevGroup/DataStructure/migrations',
-                'migrationTable' => 'migrations_data',
-            ]
-        );
+        
 
         (new MediaTableGenerator(['db' => $this->db]))->generate(Thing::className());
 

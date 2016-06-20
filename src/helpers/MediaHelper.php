@@ -114,22 +114,7 @@ class MediaHelper extends Object
                     'component' => 'protectedFilesystem',
                     'name' => 'protected',
                     'options' => [
-                        'attributes' => [
-                            [
-                                'pattern' => '#.*(\.tmb|\.quarantine|\.cache)$#i',
-                                'read' => false,
-                                'write' => false,
-                                'hidden' => true,
-                                'locked' => false,
-                            ],
-                            [
-                                'pattern' => '#.+[^/]$#',
-                                'read' => false,
-                                'write' => true,
-                                'hidden' => true,
-                                'locked' => false,
-                            ],
-                        ],
+                        'attributes' => static::loadAttrs($where),
                         'uploadOverwrite' => false,
                     ],
 
