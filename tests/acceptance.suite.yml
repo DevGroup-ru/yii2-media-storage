@@ -11,3 +11,4 @@ modules:
         - WebDriver:
                     url: http://localhost:8080/index-test.php
                     browser: firefox
+        - Asserts
