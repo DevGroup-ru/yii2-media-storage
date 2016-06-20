@@ -13,5 +13,3 @@ modules:
     config:
             Yii2:
                 configFile: 'tests/testapp/config/functional.php'
-
-                #selenium

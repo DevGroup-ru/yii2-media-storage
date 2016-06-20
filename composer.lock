@@ -2162,12 +2162,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Studio-42/elFinder.git",
-                "reference": "bb45881a17770c898c0299cac6f08838dbbe1c46"
+                "reference": "a1d6606f6a4e4b5f243d2f52717f87cbabced016"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Studio-42/elFinder/zipball/bb45881a17770c898c0299cac6f08838dbbe1c46",
-                "reference": "bb45881a17770c898c0299cac6f08838dbbe1c46",
+                "url": "https://api.github.com/repos/Studio-42/elFinder/zipball/a1d6606f6a4e4b5f243d2f52717f87cbabced016",
+                "reference": "a1d6606f6a4e4b5f243d2f52717f87cbabced016",
                 "shasum": ""
             },
             "require": {
@@ -2212,7 +2212,7 @@
             ],
             "description": "File manager for web",
             "homepage": "http://elfinder.org",
-            "time": "2016-06-16 12:49:46"
+            "time": "2016-06-19 06:15:46"
         },
         {
             "name": "unclead/yii2-multiple-input",
@@ -2313,12 +2313,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/yiisoft/yii2-framework.git",
-                "reference": "38d2f94432a04b012265f939ab35cc13c480348f"
+                "reference": "c6154ee21ec4fb5fb797299f4e81fd1af8bfe13e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/38d2f94432a04b012265f939ab35cc13c480348f",
-                "reference": "38d2f94432a04b012265f939ab35cc13c480348f",
+                "url": "https://api.github.com/repos/yiisoft/yii2-framework/zipball/c6154ee21ec4fb5fb797299f4e81fd1af8bfe13e",
+                "reference": "c6154ee21ec4fb5fb797299f4e81fd1af8bfe13e",
                 "shasum": ""
             },
             "require": {
@@ -2399,7 +2399,7 @@
                 "framework",
                 "yii2"
             ],
-            "time": "2016-06-12 22:22:38"
+            "time": "2016-06-19 12:33:00"
         },
         {
             "name": "yiisoft/yii2-authclient",
@@ -3379,12 +3379,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "a973e60db89b0c9e44eb480cd3d8d93b80ca754c"
+                "reference": "b9cf8c5ff8bc658bebf8e9a5473fc513c38473de"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/a973e60db89b0c9e44eb480cd3d8d93b80ca754c",
-                "reference": "a973e60db89b0c9e44eb480cd3d8d93b80ca754c",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/b9cf8c5ff8bc658bebf8e9a5473fc513c38473de",
+                "reference": "b9cf8c5ff8bc658bebf8e9a5473fc513c38473de",
                 "shasum": ""
             },
             "require": {
@@ -3443,7 +3443,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2016-06-05 07:11:17"
+            "time": "2016-06-17 15:17:43"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
@@ -3673,12 +3673,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/exporter.git",
-                "reference": "6e6a2a0b9aa7be83acb7ba4936f59abea20b6cd0"
+                "reference": "42c4c2eec485ee3e159ec9884f95b431287edde4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/exporter/zipball/6e6a2a0b9aa7be83acb7ba4936f59abea20b6cd0",
-                "reference": "6e6a2a0b9aa7be83acb7ba4936f59abea20b6cd0",
+                "url": "https://api.github.com/repos/sebastianbergmann/exporter/zipball/42c4c2eec485ee3e159ec9884f95b431287edde4",
+                "reference": "42c4c2eec485ee3e159ec9884f95b431287edde4",
                 "shasum": ""
             },
             "require": {
@@ -3732,7 +3732,7 @@
                 "export",
                 "exporter"
             ],
-            "time": "2016-06-17 08:12:15"
+            "time": "2016-06-17 09:04:28"
         },
         {
             "name": "sebastian/global-state",

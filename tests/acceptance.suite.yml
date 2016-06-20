@@ -7,6 +7,7 @@
 class_name: AcceptanceTester
 modules:
     enabled:
-        - PhpBrowser:
-            url: http://localhost:8080/index-test.php
         - \Helper\Acceptance
+        - WebDriver:
+                    url: http://localhost:8080/index-test.php
+                    browser: firefox

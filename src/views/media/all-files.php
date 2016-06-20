@@ -15,7 +15,10 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'language' => 'ru',
                 'controller' => 'media/elfinder',
-                'frameOptions' => ['style' => 'width: 100%; height: 100%; border: 0;min-height: 750px;'],
+                'frameOptions' => [
+                    'style' => 'width: 100%; height: 100%; border: 0;min-height: 750px;',
+                    'id' => 'all-files',
+                ],
             ]
         ) ?>
     </div>
