@@ -15,9 +15,7 @@ $config = [
         'gii' => [
             'class' => 'yii\gii\Module',
         ],
-        'debug' => [
-            'class' => 'yii\debug\Module',
-        ],
+
         'properties' => [
             'class' => 'DevGroup\DataStructure\Properties\Module',
         ],
@@ -101,8 +99,5 @@ $config = [
     'params' => $params,
 ];
 
-if (YII_DEBUG) {
-    $config['bootstrap'][] = 'debug';
-}
 
 return $config;

@@ -29,13 +29,11 @@
         "unclead/yii2-multiple-input": "~1.0"
     },
     "require-dev": {
-        "yiisoft/yii2-bootstrap": "^2.0@dev",
-        "devgroup/yii2-admin-utils": "dev-master",
-        "devgroup/dotplant-dev": "~1.0.0",
         "yiisoft/yii2-faker": "*",
         "yiisoft/yii2-codeception": "^2.0",
         "codeception/c3": "^2.0",
-        "codeception/codeception": "^2.2"
+        "codeception/codeception": "^2.2",
+        "phpunit/php-code-coverage": "^3.3"
     },
     "autoload": {
         "classmap": [
