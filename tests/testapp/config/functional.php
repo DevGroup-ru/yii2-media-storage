@@ -20,5 +20,8 @@ $config = yii\helpers\ArrayHelper::merge(
 );
 $config['components']['cache'] = [
     'class' => 'yii\caching\DummyCache',
+    'as lazy' => [
+        'class' => 'DevGroup\TagDependencyHelper\LazyCache',
+    ],
 ];
 return $config;

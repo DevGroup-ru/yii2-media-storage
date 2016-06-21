@@ -2,7 +2,7 @@
 //$_SERVER['SCRIPT_FILENAME'] = YII_TEST_ENTRY_FILE;
 //$_SERVER['SCRIPT_NAME'] = YII_TEST_ENTRY_URL;
 /**
- * Application configuration for functional tests
+ * Application configuration for acceptable tests
  */
 $config = yii\helpers\ArrayHelper::merge(
     require(__DIR__ . DIRECTORY_SEPARATOR . 'web.php'),
@@ -20,5 +20,8 @@ $config = yii\helpers\ArrayHelper::merge(
 );
 $config['components']['cache'] = [
     'class' => 'yii\caching\DummyCache',
+    'as lazy' => [
+        'class' => 'DevGroup\TagDependencyHelper\LazyCache',
+    ],
 ];
 return $config;
