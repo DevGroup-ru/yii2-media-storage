@@ -27,12 +27,14 @@ before_script:
   - php tests/testapp/yii migrate --interactive=0
   - phantomjs --webdriver=4444  &
   - sleep 10
-  - php tests/testapp/yii serve/index > /dev/null 2>&1 &
   - |
     if [ $TRAVIS_PHP_VERSION = '5.6' ]; then
       CODECEPT_FLAGS=" --coverage --coverage-xml"
     fi
 script:
+  - cd tests/testapp/web
+  - php -S localhost:8080 > /dev/null 2>&1 &
+  - ../../../
   - vendor/codeception/codeception/codecept run --verbose $CODECEPT_FLAGS
 
 after_script:
