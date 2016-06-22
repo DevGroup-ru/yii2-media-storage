@@ -25,11 +25,8 @@ install:
 before_script:
   - mysql -e 'create database yii2_mediastorage_test;'
   - php tests/testapp/yii migrate --interactive=0
-  - "export DISPLAY=:99.0"
-  - "sh -e /etc/init.d/xvfb start"
-  - sleep 3
-  - php vendor/bin/selenium-server-standalone &
-  - sleep 5
+  - phantomjs --webdriver=4444  &
+  - sleep 10
   - php tests/testapp/yii serve/index > /dev/null 2>&1 &
   - |
     if [ $TRAVIS_PHP_VERSION = '5.6' ]; then
