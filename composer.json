@@ -32,8 +32,7 @@
         "yiisoft/yii2-faker": "*",
         "yiisoft/yii2-codeception": "^2.0",
         "codeception/c3": "^2.0",
-        "codeception/codeception": "^2.2",
-        "phpunit/php-code-coverage": "^3.3"
+        "codeception/codeception": "^2.2"
     },
     "autoload": {
         "classmap": [
