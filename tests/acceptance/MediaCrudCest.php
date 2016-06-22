@@ -45,6 +45,8 @@ class PageCrudCest
         $I->wantTo('ensure i see elfinder frame');
         $I->see('protected');
 
+        $I->switchToIFrame();
+        $I->switchToIFrame("all-files");
         $I->wantTo('upload file');
         $I->click('.elfinder-button-icon-upload');
         $I->attachFile('.elfinder-upload-dialog-wrapper input', 'img.png');

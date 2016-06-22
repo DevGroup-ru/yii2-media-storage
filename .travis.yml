@@ -43,3 +43,6 @@ after_script:
     if [ $TRAVIS_PHP_VERSION = '5.6' ]; then
       bash <(curl -s https://codecov.io/bash)
     fi
+
+after_failure:
+  - cat tests/_output/PageCrudCest.tryToTest.fail.html
