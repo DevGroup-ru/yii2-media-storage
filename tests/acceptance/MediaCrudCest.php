@@ -20,9 +20,6 @@ class PageCrudCest
     public function tryToTest(AcceptanceTester $I)
     {
         $I->wantTo('ensure iframe is protected by login form');
-        if (method_exists($I, 'wait')) {
-            $I->wait(2); // only for selenium
-        }
         $I->amOnPage('/media/media/all-files');
         if (method_exists($I, 'wait')) {
             $I->wait(2); // only for selenium
@@ -47,8 +44,7 @@ class PageCrudCest
             $I->wait(2); // only for selenium
         }
 
-        $I->switchToIFrame();
-        $I->switchToIFrame("all-files");
+
         $I->wantTo('ensure i see elfinder frame');
         $I->see('protected');
 

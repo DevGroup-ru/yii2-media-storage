@@ -11,4 +11,5 @@ modules:
         - WebDriver:
                     url: http://localhost:8080/index-test.php
                     browser: phantomjs
+                    window_size: maximize
         - Asserts
