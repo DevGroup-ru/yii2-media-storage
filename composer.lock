@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "a1adbd9905f787ce9fb99c3914dc27a8",
-    "content-hash": "2a820b90be6fae61d7b5e0dbc3714e2c",
+    "hash": "b70d7efa7db14f3f5db6a5bf7dee4564",
+    "content-hash": "64eb328503f42264e8d5cd14b04a677b",
     "packages": [
         {
             "name": "2amigos/yii2-transliterator-helper",
@@ -3640,6 +3640,45 @@
             "time": "2015-10-02 06:51:40"
         },
         {
+            "name": "se/selenium-server-standalone",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sveneisenschmidt/selenium-server-standalone.git",
+                "reference": "b67b6b933edce2ffa26f075247a05c464a335cea"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sveneisenschmidt/selenium-server-standalone/zipball/b67b6b933edce2ffa26f075247a05c464a335cea",
+                "reference": "b67b6b933edce2ffa26f075247a05c464a335cea",
+                "shasum": ""
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~4.0"
+            },
+            "bin": [
+                "bin/selenium-server-standalone"
+            ],
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache 2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Sven Eisenschmidt",
+                    "email": "sven.eisenschmidt@gmail.com"
+                }
+            ],
+            "description": "Composer distribution of Selenium Server Standalone, the browser automation framework. Adds a executable to your composer bin directory.",
+            "homepage": "https://github.com/sveneisenschmidt/selenium-server-standalone",
+            "keywords": [
+                "selenium",
+                "testing"
+            ],
+            "time": "2016-03-21 15:02:15"
+        },
+        {
             "name": "sebastian/comparator",
             "version": "dev-master",
             "source": {
@@ -4602,7 +4641,8 @@
     "stability-flags": {
         "devgroup/yii2-multilingual": 20,
         "devgroup/yii2-users-module": 20,
-        "phpunit/php-code-coverage": 20
+        "phpunit/php-code-coverage": 20,
+        "se/selenium-server-standalone": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
