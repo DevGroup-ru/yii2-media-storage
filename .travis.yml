@@ -28,11 +28,13 @@ addons:
 
 before_script:
   - mysql -e 'create database yii2_mediastorage_test;'
+  - php tests/testapp/yii migrate --interactive=0
   - |
     if [ $TRAVIS_PHP_VERSION = '5.6' ]; then
       CODECEPT_FLAGS=" --coverage --coverage-xml"
     fi
 script:
+  - php tests/testapp/yii serve/index > /dev/null 2>&1
   - vendor/codeception/codeception/codecept run --verbose $CODECEPT_FLAGS
 
 after_script:
