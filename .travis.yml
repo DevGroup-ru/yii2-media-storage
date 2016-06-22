@@ -25,6 +25,7 @@ install:
 before_script:
   - mysql -e 'create database yii2_mediastorage_test;'
   - php tests/testapp/yii migrate --interactive=0
+  - "sh -e /etc/init.d/xvfb start"
   - php vendor/bin/selenium-server-standalone &
   - sleep 5
   - php tests/testapp/yii serve/index > /dev/null 2>&1 &
