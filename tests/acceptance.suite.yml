@@ -11,4 +11,9 @@ modules:
         - WebDriver:
                     url: http://localhost:8080/index-test.php
                     browser: firefox
+                    host: 'ivansal:c463c760-f7fa-49db-ba4a-21f42f183e2d@ondemand.saucelabs.com'
+                    port: 80
+                    browser: firefox
+                    capabilities:
+                      platform: 'Linux'
         - Asserts

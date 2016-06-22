@@ -21,6 +21,11 @@ install:
   - travis_retry composer install --dev --prefer-dist --no-interaction
   - vendor/codeception/codeception/codecept build
 
+addons:
+  sauce_connect:
+    username: "ivansal"
+    access_key: "c463c760-f7fa-49db-ba4a-21f42f183e2d"
+
 before_script:
   - mysql -e 'create database yii2_mediastorage_test;'
   - |
