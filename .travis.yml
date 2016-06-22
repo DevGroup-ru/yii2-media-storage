@@ -34,7 +34,7 @@ before_script:
       CODECEPT_FLAGS=" --coverage --coverage-xml"
     fi
 script:
-  - php tests/testapp/yii serve/index > /dev/null 2>&1
+  - php tests/testapp/yii serve/index > /dev/null 2>&1 &
   - vendor/codeception/codeception/codecept run --verbose $CODECEPT_FLAGS
 
 after_script:
