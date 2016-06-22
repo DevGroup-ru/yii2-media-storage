@@ -25,8 +25,8 @@ install:
 before_script:
   - mysql -e 'create database yii2_mediastorage_test;'
   - php tests/testapp/yii migrate --interactive=0
-  - wget http://selenium.googlecode.com/files/selenium-server-standalone-2.52.0.jar
-  - java -jar selenium-server-standalone-2.52.0.jar -port 4444 &
+  - wget http://goo.gl/IHP6Qw
+  - java -jar selenium-server-standalone-2.53.0.jar -port 4444 &
   - php tests/testapp/yii serve/index > /dev/null 2>&1 &
   - |
     if [ $TRAVIS_PHP_VERSION = '5.6' ]; then
