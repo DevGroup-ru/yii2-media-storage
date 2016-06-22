@@ -21,7 +21,7 @@ class PageCrudCest
     {
         $I->wantTo('ensure iframe is protected by login form');
         if (method_exists($I, 'wait')) {
-            $I->wait(20); // only for selenium
+            $I->wait(2); // only for selenium
         }
         $I->amOnPage('/media/media/all-files');
         if (method_exists($I, 'wait')) {

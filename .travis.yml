@@ -21,20 +21,18 @@ install:
   - travis_retry composer install --dev --prefer-dist --no-interaction
   - vendor/codeception/codeception/codecept build
 
-addons:
-  sauce_connect:
-    username: "ivansal"
-    access_key: "c463c760-f7fa-49db-ba4a-21f42f183e2d"
 
 before_script:
   - mysql -e 'create database yii2_mediastorage_test;'
   - php tests/testapp/yii migrate --interactive=0
+  - wget http://selenium.googlecode.com/files/selenium-server-standalone-2.52.0.jar
+  - java -jar selenium-server-standalone-2.52.0.jar -port 4444 &
+  - php tests/testapp/yii serve/index > /dev/null 2>&1 &
   - |
     if [ $TRAVIS_PHP_VERSION = '5.6' ]; then
       CODECEPT_FLAGS=" --coverage --coverage-xml"
     fi
 script:
-  - php tests/testapp/yii serve/index > /dev/null 2>&1 &
   - vendor/codeception/codeception/codecept run --verbose $CODECEPT_FLAGS
 
 after_script:
