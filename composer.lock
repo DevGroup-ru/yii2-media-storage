@@ -105,12 +105,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/barryvdh/elfinder-flysystem-driver.git",
-                "reference": "7fabc783b2e1c6d5c7e5b5cf996d96e92cc2d29f"
+                "reference": "fc1b893469db03295f439c615c34fa35e964dd07"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/barryvdh/elfinder-flysystem-driver/zipball/7fabc783b2e1c6d5c7e5b5cf996d96e92cc2d29f",
-                "reference": "7fabc783b2e1c6d5c7e5b5cf996d96e92cc2d29f",
+                "url": "https://api.github.com/repos/barryvdh/elfinder-flysystem-driver/zipball/fc1b893469db03295f439c615c34fa35e964dd07",
+                "reference": "fc1b893469db03295f439c615c34fa35e964dd07",
                 "shasum": ""
             },
             "require": {
@@ -153,7 +153,7 @@
                 "elfinder",
                 "filesystem"
             ],
-            "time": "2016-04-17 19:33:38"
+            "time": "2016-06-22 12:54:36"
         },
         {
             "name": "bower-asset/bootstrap",
@@ -906,12 +906,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/DevGroup-ru/yii2-users-module.git",
-                "reference": "f7838ff5f47714177d7c2286b956f2928b6a3d53"
+                "reference": "9334911c0d79a671a39f20d1451086ca809a90da"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/DevGroup-ru/yii2-users-module/zipball/f7838ff5f47714177d7c2286b956f2928b6a3d53",
-                "reference": "f7838ff5f47714177d7c2286b956f2928b6a3d53",
+                "url": "https://api.github.com/repos/DevGroup-ru/yii2-users-module/zipball/9334911c0d79a671a39f20d1451086ca809a90da",
+                "reference": "9334911c0d79a671a39f20d1451086ca809a90da",
                 "shasum": ""
             },
             "require": {
@@ -954,7 +954,7 @@
                 "rbac",
                 "yii2"
             ],
-            "time": "2016-05-19 12:50:28"
+            "time": "2016-06-22 12:55:01"
         },
         {
             "name": "elasticsearch/elasticsearch",

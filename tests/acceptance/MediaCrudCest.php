@@ -62,6 +62,14 @@ class PageCrudCest
         $I->assertInstanceOf(Media::class, $media);
         $I->assertFileExists(implode(DIRECTORY_SEPARATOR, [__DIR__, '..', 'testapp', 'media', 'img.png']));
 
+        $I->wantTo('delete uploaded file');
+        $I->click('.elfinder-cwd-file');
+        $I->click('.elfinder-button-icon-rm');
+        $I->click(['css' => '.ui-dialog-buttonset button:nth-last-child(1)']);
+        if (method_exists($I, 'wait')) {
+            $I->wait(2); // only for selenium
+        }
 
+        $I->dontSee('img.png');
     }
 }
