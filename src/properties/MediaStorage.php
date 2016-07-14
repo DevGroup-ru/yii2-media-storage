@@ -205,15 +205,18 @@ class MediaStorage extends AbstractPropertyStorage
 
         $rows = [];
 
-        foreach ($values as $index => $value) {
-            $rows[] = [
-                $propertyId,
-                $modelId,
-                $value,
-                $index,
-            ];
-        }
+            foreach ($values as $index => $value) {
+                if (empty($value) === false) {
+                    $rows[] = [
+                        $propertyId,
+                        $modelId,
+                        $value,
+                        $index,
+                    ];
+                }
+            }
 
-        return $rows;
+
+        return $propertyModel->allow_multiple_values == 1 ? $rows : (array) end($rows);
     }
 }

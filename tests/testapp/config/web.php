@@ -10,12 +10,14 @@ $config = [
     'vendorPath' => '@app/../../vendor',
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
-    'bootstrap' => ['log', 'multilingual', 'media', 'properties'],
+    'bootstrap' => ['log', 'multilingual', 'media', 'properties', 'adminUtils'],
     'modules' => [
         'gii' => [
             'class' => 'yii\gii\Module',
         ],
-
+        'adminUtils' => [
+            'class' => DevGroup\AdminUtils\AdminModule::class,
+        ],
         'properties' => [
             'class' => 'DevGroup\DataStructure\Properties\Module',
         ],
@@ -58,11 +60,17 @@ $config = [
         //            ],
         //        ],
         'db' => require(__DIR__ . '/db.php'),
+        'filedb' => [
+            'class' => 'yii2tech\filedb\Connection',
+            'path' => __DIR__ . '/languages',
+        ],
         'multilingual' => [
-            'class' => \DevGroup\Multilingual\Multilingual::className(),
+            'class' => \DevGroup\Multilingual\Multilingual::class,
+            'language_id' => 1,
+            'context_id' => 1,
             'handlers' => [
                 [
-                    'class' => \DevGroup\Multilingual\DefaultGeoProvider::className(),
+                    'class' => \DevGroup\Multilingual\DefaultGeoProvider::class,
                     'default' => [
                         'country' => [
                             'name' => 'England',
@@ -72,13 +80,10 @@ $config = [
                 ],
             ],
         ],
-        'filedb' => [
-            'class' => 'yii2tech\filedb\Connection',
-            'path' => __DIR__ . '/data',
-        ],
         'urlManager' => [
-            'enablePrettyUrl' => true,
-            'showScriptName' => false,
+            'class' => \DevGroup\Multilingual\components\UrlManager::class,
+            'excludeRoutes' => false,
+
         ],
         'protectedFilesystem' => [
             'class' => 'creocoder\flysystem\LocalFilesystem',

@@ -11,6 +11,8 @@ return [
         'domain' => 'yii2-media-storage.dev',
         'folder' => 'en',
         'yii_language' => 'en-US',
+        'context_id' => 1,
+        'sort_order' => 1,
     ],
     2 => [
         'id' => 2,
@@ -22,5 +24,7 @@ return [
         'domain' => 'yii2-media-storage.dev',
         'folder' => 'ru',
         'yii_language' => 'ru',
+        'context_id' => 1,
+        'sort_order' => 2,
     ],
 ];

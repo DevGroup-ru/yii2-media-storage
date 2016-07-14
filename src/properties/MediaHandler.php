@@ -9,6 +9,22 @@ use DevGroup\DataStructure\propertyHandler\AbstractPropertyHandler;
 class MediaHandler extends AbstractPropertyHandler
 {
 
+
+    /** @inheritdoc */
+    public static $multipleMode = Property::MODE_ALLOW_MULTIPLE;
+
+    /** @inheritdoc */
+    public static $allowedStorage = [
+        MediaStorage::class,
+    ];
+
+    /** @inheritdoc */
+    public static $allowedTypes = [
+        Property::DATA_TYPE_STRING,
+    ];
+
+    /** @inheritdoc */
+    public static $allowInSearch = true;
     /**
      * Get validation rules for a property.
      *

@@ -49,7 +49,6 @@ class MediaInput extends InputFile
     }, function (data) {
         console.log(data);
         data.files.every(function (i) {
-            console.log(i);
             if ($('.multi-media input[value=\"' + i.id + '\"]').length === 0) {
                 $('.multi-media').append('<input type=\"hidden\" id=\"thing-test-' + i.id + '\" class=\"form-control\" name=\"inputName\" value=\"' + i.id + '\">');
             }
