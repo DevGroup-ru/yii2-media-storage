@@ -111,7 +111,10 @@ class MediaHelper extends Object
             return [
                 'baseRoot' => [
                     'class' => 'mihaildev\elfinder\flysystem\Volume',
-                    'component' => 'protectedFilesystem',
+                    'component' => [
+                        'class' => 'creocoder\flysystem\LocalFilesystem',
+                        'path' => '@app/media',
+                    ],
                     'name' => 'protected',
                     'options' => [
                         'attributes' => static::loadAttrs($where),

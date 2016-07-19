@@ -19,11 +19,13 @@ class MediaInput extends InputFile
     {
         if ($this->hasModel()) {
             $replace['{input}'] = Html::activeTextInput($this->model, $this->attribute, $this->options);
+            $inputName = Html::getInputName($this->model, $this->name) . '[]';
         } else {
             $replace['{input}'] = Html::textInput($this->name, $this->value, $this->options);
+            $inputName =  $this->name;
         }
 
-        $inputName = Html::getInputName($this->model, $this->name) . '[]';
+
 
         $replace['{button}'] = Html::tag($this->buttonTag, $this->buttonName, $this->buttonOptions);
 
