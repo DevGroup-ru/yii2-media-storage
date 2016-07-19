@@ -22,10 +22,8 @@ class MediaInput extends InputFile
             $inputName = Html::getInputName($this->model, $this->name) . '[]';
         } else {
             $replace['{input}'] = Html::textInput($this->name, $this->value, $this->options);
-            $inputName =  $this->name;
+            $inputName = $this->name;
         }
-
-
 
         $replace['{button}'] = Html::tag($this->buttonTag, $this->buttonName, $this->buttonOptions);
 
@@ -34,7 +32,7 @@ class MediaInput extends InputFile
 
         AssetsCallBack::register($this->getView());
 
-        if (!empty($this->multiple)) {
+        if ($this->multiple === true) {
 
             $this->getView()->registerJs(
 
@@ -49,7 +47,6 @@ class MediaInput extends InputFile
         cmd    : \"info\",
         targets: _f
     }, function (data) {
-        console.log(data);
         data.files.every(function (i) {
             if ($('.multi-media input[value=\"' + i.id + '\"]').length === 0) {
                 $('.multi-media').append('<input type=\"hidden\" id=\"thing-test-' + i.id + '\" class=\"form-control\" name=\"inputName\" value=\"' + i.id + '\">');
@@ -72,20 +69,36 @@ $(document).on('click', '#buttonId', function () {
             );
         } else {
             $this->getView()->registerJs(
-                "mihaildev . elFinder . register(
-                " . Json::encode(
-                    $this->options['id']
-                ) . ",
-                function (file, id){
-                    \$('#' + id) . val(file . url) . trigger('change', [file, id]);; return true;}
-            ); $(document) . on('click', '#" . $this->buttonOptions['id'] . "', function ()
-            {
-                mihaildev . elFinder . openManager(
-                    " . Json::encode(
-                    $this->_managerOptions
-                ) . "
-                );
-            });"
+
+                strtr(
+                /** @lang JavaScript */
+                    "mihaildev.elFinder.register(optId, function (file, id) {
+        var _f = [];
+        _f.push(file.hash);
+        $.getJSON('/media/elfinder/connect', {
+            cmd    : \"info\",
+            targets: _f
+        }, function (data) {
+            data.files.every(function (i) {
+                $('#' + id).val(i.id).trigger('change', [file, id]);
+                return true;
+            });
+        });
+        $('#' + id).val(file.url).trigger('change', [file, id]);
+
+        return true;
+    }
+);
+$(document).on('click', '#buttonId', function () {
+    mihaildev.elFinder.openManager(managerOpts);
+});",
+                    [
+                        'optId' => Json::encode($this->options['id']),
+                        'buttonId' => $this->buttonOptions['id'],
+                        'managerOpts' => Json::encode($this->_managerOptions),
+                        'inputName' => $inputName,
+                    ]
+                )
             );
         }
     }
