@@ -12,15 +12,6 @@ class m160329_140554_init_media_storage extends Migration
     {
         $table_options = ($this->db->driverName === 'mysql') ? 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB' : null;
 
-        Yii::$app->runAction(
-            'migrate/up',
-            [
-                'interactive' => 0,
-                'migrationPath' => '@DevGroup/DataStructure/migrations',
-                'migrationTable' => 'migrations_data',
-            ]
-        );
-
         $this->createTable(
             '{{%media}}',
             [
