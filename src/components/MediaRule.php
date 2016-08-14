@@ -4,6 +4,8 @@
 namespace DevGroup\MediaStorage\components;
 
 use DevGroup\MediaStorage\models\MediaRoute;
+use Yii;
+use yii\caching\TagDependency;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Json;
 use yii\web\Request;
@@ -24,10 +26,30 @@ class MediaRule implements UrlRuleInterface
      */
     public function parseRequest($manager, $request)
     {
-
         $url = trim($request->pathInfo, '/');
         $condition = ['url' => $url];
-        $record = MediaRoute::findOne($condition);
+
+        $cacheKey = "MediaRoute:url:$url";
+        $record = Yii::$app->cache->get($cacheKey);
+
+        if ($record === false) {
+            $record = MediaRoute::findOne($condition);
+            if ($record !== null) {
+                Yii::$app->cache->set(
+                    $cacheKey,
+                    $record,
+                    86400,
+                    new TagDependency(['tags' => $record->objectTag()])
+                );
+            } else {
+                Yii::$app->cache->set(
+                    $cacheKey,
+                    null,
+                    86400,
+                    new TagDependency(['tags' => MediaRoute::commonTag()])
+                );
+            }
+        }
         if (null !== $record) {
             return ['/media/file/send', ['mediaId' => $record->media_id, 'config' => $record->params]];
         }

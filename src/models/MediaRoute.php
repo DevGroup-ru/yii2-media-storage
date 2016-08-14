@@ -2,6 +2,7 @@
 
 namespace DevGroup\MediaStorage\models;
 
+use DevGroup\TagDependencyHelper\TagDependencyTrait;
 use Yii;
 
 /**
@@ -16,6 +17,20 @@ use Yii;
  */
 class MediaRoute extends \yii\db\ActiveRecord
 {
+    use TagDependencyTrait;
+
+    /**
+     * @inheritdoc
+     */
+    public function behaviors()
+    {
+        return [
+            'CacheableActiveRecord' => [
+                'class' => \DevGroup\TagDependencyHelper\CacheableActiveRecord::className(),
+            ],
+        ];
+    }
+
     /**
      * @inheritdoc
      */
@@ -35,7 +50,13 @@ class MediaRoute extends \yii\db\ActiveRecord
             [['params'], 'string'],
             [['url'], 'string', 'max' => 255],
             [['url'], 'unique'],
-            [['media_id'], 'exist', 'skipOnError' => true, 'targetClass' => Media::className(), 'targetAttribute' => ['media_id' => 'id']],
+            [
+                ['media_id'],
+                'exist',
+                'skipOnError' => true,
+                'targetClass' => Media::className(),
+                'targetAttribute' => ['media_id' => 'id']
+            ],
         ];
     }
 

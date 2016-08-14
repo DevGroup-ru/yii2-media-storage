@@ -24,7 +24,7 @@
         "2amigos/yii2-transliterator-helper": "^0.1.0",
         "mihaildev/yii2-elfinder-flysystem": "^0.0.1",
         "devgroup/yii2-data-structure-tools": "*",
-        "devgroup/yii2-tag-dependency-helper": "*",
+        "devgroup/yii2-tag-dependency-helper": "^1.4.0",
         "league/glide": "^1.0",
         "unclead/yii2-multiple-input": "~1.0"
     },
