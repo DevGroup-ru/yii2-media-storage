@@ -28,7 +28,7 @@ class MediaHelper extends Object
     public static function getFsDefaultCfg($number = '')
     {
         $result = Yii::$app->params['flysystemDefaultConfigs'];
-        if (is_int($number)) {
+        if (is_int($number) && isset(MediaModule::module()->activeFS[$number])) {
             $configured = MediaModule::module()->activeFS[$number];
             $result = [ArrayHelper::merge($result[self::getFsCfgDropdown()[$configured['class']]], $configured)];
         }

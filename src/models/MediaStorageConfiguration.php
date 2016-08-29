@@ -20,14 +20,26 @@ class MediaStorageConfiguration extends BaseConfigurationModel
     public function rules()
     {
         return [
-            ['activeFS', 'isArray'],
+            ['activeFS', 'checkConfigurations'],
         ];
     }
 
-    public function isArray($attribute, $params)
+    public function checkConfigurations($attribute, $params)
     {
-        if (!is_array($this->$attribute)) {
-            $this->addError($attribute, "The $attribute must be array");
+        $active = false;
+        foreach ($this->$attribute as $index => $data) {
+            if (empty($data['class'])) {
+                $this->addError(
+                    $attribute . '[' . $index . '][class]',
+                    \Yii::t('yii', 'The field cannot be blank.')
+                );
+            }
+            if (isset($data['options']) && is_array($data['options']) && in_array(1, $data['options'])) {
+                $active = true;
+            }
+        }
+        if (count($this->$attribute) > 0 && !$active) {
+            $this->addError($attribute, 'One or more file system must be an active');
         }
     }
 
