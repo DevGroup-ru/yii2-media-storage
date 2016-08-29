@@ -5,32 +5,23 @@ namespace DevGroup\MediaStorage\models;
 
 use DevGroup\ExtensionsManager\models\BaseConfigurationModel;
 use DevGroup\MediaStorage\MediaModule;
-use Yii;
 use yii\helpers\ArrayHelper;
 
 class MediaStorageConfiguration extends BaseConfigurationModel
 {
+    public function getModuleClassName()
+    {
+        return MediaModule::className();
+    }
 
+    /**
+     * @inheritdoc
+     */
     public function rules()
     {
         return [
             ['activeFS', 'isArray'],
         ];
-    }
-
-    /**
-     * @param array $config
-     */
-    public function __construct($config = [])
-    {
-        $attributes = [
-            'activeFS',
-        ];
-
-        parent::__construct($attributes, $config);
-        /** @var MediaModule $module */
-        $module = MediaModule::getModuleInstance();
-        $this->activeFS = $module->activeFS;
     }
 
     public function isArray($attribute, $params)

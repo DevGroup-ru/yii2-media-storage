@@ -29,7 +29,7 @@ class MediaHelper extends Object
     {
         $result = Yii::$app->params['flysystemDefaultConfigs'];
         if (is_int($number)) {
-            $configured = MediaModule::getModuleInstance()->activeFS[$number];
+            $configured = MediaModule::module()->activeFS[$number];
             $result = [ArrayHelper::merge($result[self::getFsCfgDropdown()[$configured['class']]], $configured)];
         }
         return $result;

@@ -2,21 +2,21 @@
 
 namespace DevGroup\MediaStorage;
 
-use DevGroup\MediaStorage\components\MediaRule;
 use Yii;
-use yii\base\Application;
-use yii\base\BootstrapInterface;
 
 class MediaModule extends \yii\base\Module
 {
     public $controllerNamespace = 'DevGroup\MediaStorage\controllers';
     public $activeFS = [];
 
-    public static function getModuleInstance()
+    /**
+     * @return self Module instance in application
+     */
+    public static function module()
     {
         $module = Yii::$app->getModule('media');
         if ($module === null) {
-            $module = new self('media');
+            $module = $module = Yii::createObject(self::class, ['media']);
         }
         return $module;
     }
