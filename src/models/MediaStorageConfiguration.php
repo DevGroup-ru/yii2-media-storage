@@ -31,7 +31,7 @@ class MediaStorageConfiguration extends BaseConfigurationModel
             if (empty($data['class'])) {
                 $this->addError(
                     $attribute . '[' . $index . '][class]',
-                    \Yii::t('yii', 'The field cannot be blank.')
+                    \Yii::t('devgroup.media-storage', 'The field cannot be blank')
                 );
             }
             if (isset($data['options']) && is_array($data['options']) && in_array(1, $data['options'])) {
@@ -39,7 +39,7 @@ class MediaStorageConfiguration extends BaseConfigurationModel
             }
         }
         if (count($this->$attribute) > 0 && !$active) {
-            $this->addError($attribute, 'One or more file system must be an active');
+            $this->addError($attribute, \Yii::t('devgroup.media-storage', 'One or more file system must be an active'));
         }
     }
 

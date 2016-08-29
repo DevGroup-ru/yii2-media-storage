@@ -41,4 +41,6 @@ return [
     'passive' => 'Пассивный режим',
     'transferMode' => 'Режим передачи',
     'privateKey' => 'Секретный ключ',
+    'The field cannot be blank' => 'Поле не может быть пустым',
+    'One or more file system must be an active' => 'Одна или несколько файловых систем должны быть активны',
 ];
