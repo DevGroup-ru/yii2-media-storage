@@ -3,11 +3,12 @@
 use DevGroup\MediaStorage\widgets\ElfinderWidget;
 use DevGroup\MediaStorage\widgets\ImageWidget;
 use DevGroup\MediaStorage\widgets\MediaInput;
-use Yii;
 use yii\db\ActiveRecord;
 use yii\helpers\Html;
+use yii\helpers\Url;
+use yii\web\JsExpression;
 use yii\widgets\ActiveForm;
-
+use Yii;
 /**
  * @var ActiveForm $form
  * @var ActiveRecord $model
@@ -23,7 +24,7 @@ echo MediaInput::widget(
         'buttonOptions' => ['class' => 'btn btn-default'],
         'buttonName' => '<i class="fa fa-plus"></i> ' . Yii::t('devgroup.media-storage', 'Open gallery'),
         'multiple' => true,
-        'name' => $property->key,
+        'attribute' => $property->key,
         'model' => $model,
     ]
 );
@@ -58,8 +59,8 @@ if ($property->allow_multiple_values == 1) : ?>
 
 echo ElfinderWidget::widget(
     [
-        'language' => 'ru',
-        'controller' => 'media/media-elfinder',
+        'language' => Yii::$app->language,
+        'controller' => '/media/media-elfinder',
         'customManagerOptions' => [
             'customData' => [
                 'model' => $model->className(),

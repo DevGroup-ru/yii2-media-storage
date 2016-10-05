@@ -4,10 +4,13 @@
 namespace DevGroup\MediaStorage\controllers;
 
 use DevGroup\MediaStorage\helpers\MediaHelper;
+use DevGroup\MediaStorage\helpers\MediaTableGenerator;
 use DevGroup\MediaStorage\models\Media;
 use dosamigos\transliterator\TransliteratorHelper;
 use mihaildev\elfinder\Controller;
 use Yii;
+use yii\db\Query;
+use yii\db\QueryBuilder;
 use yii\helpers\ArrayHelper;
 
 /**
@@ -50,7 +53,6 @@ class BaseElfinderController extends Controller
                         [$this, 'onUpLoadPreSaveNameToLowercase'],
                     ],
                 ],
-
                 'plugin' => [
                     'Normalizer' => [
                         'enable' => true,
@@ -90,7 +92,23 @@ class BaseElfinderController extends Controller
             $volume = $elfinder->getVolume($added['hash']);
             //            $relatedPath = str_replace($volume->path($volume->defaultPath()) . '/', '', $volume->path($added['hash']));
             $media->path = $volume->getPath($added['hash']);
-            $media->save();
+
+            $data = $this->getCustomData();
+            if ($media->save() && $data) {
+                $mediaId = $media->id;
+                $tableName = (new MediaTableGenerator())->getMediaTableName($data['model']);
+
+                (new Query())->createCommand()
+                    ->insert(
+                        $tableName,
+                        [
+                            'model_id' => $data['model_id'],
+                            'property_id' => $data['property_id'],
+                            'media_id' => $mediaId
+                        ]
+                    )->execute();
+            }
+
         }
         return true;
     }
@@ -126,29 +144,30 @@ class BaseElfinderController extends Controller
         $data = $this->getCustomData();
         if (count($data) > 0) {
             return false;
-        } else {
-            foreach (ArrayHelper::getValue($result, 'removed', []) as $index => $removed) {
-                /**
-                 * @var \elFinderVolumeDriver $volume
-                 */
-                $volume = $elfinder->getVolume($removed['hash']);
-                //            $relatedPath = str_replace(
-                //                $volume->path($volume->defaultPath()) . '/',
-                //                '',
-                //                $volume->path($removed['hash'])
-                //            );
-                /**
-                 * @todo tree remove fix
-                 */
-                $media = Media::findOne(['path' => $volume->getPath($removed['hash'])]);
-                $data = $this->getCustomData();
-                if (count($data) > 0) {
-                } else {
-                    $media->delete();
-                }
-            }
-            return true;
         }
+        foreach (ArrayHelper::getValue($result, 'removed', []) as $index => $removed) {
+            /**
+             * @var \elFinderVolumeDriver $volume
+             */
+            $volume = $elfinder->getVolume($removed['hash']);
+            //            $relatedPath = str_replace(
+            //                $volume->path($volume->defaultPath()) . '/',
+            //                '',
+            //                $volume->path($removed['hash'])
+            //            );
+            /**
+             * @todo tree remove fix
+             */
+            $data = $this->getCustomData();
+
+            if (empty($data) === true) {
+                $media = Media::findOne(['path' => $volume->getPath($removed['hash'])]);
+                $media->delete();
+            }
+
+        }
+        return true;
+
     }
 
     /**
@@ -204,7 +223,28 @@ class BaseElfinderController extends Controller
     {
         $data = $this->getCustomData();
         if (count($data) > 0) {
+            $targets = ArrayHelper::getValue($args, 'targets', []);
             $args = [];
+            $result = ['preventexec' => true, 'results' => ['error' => false, 'removed' => []]];
+            foreach ($targets as $index => $hash) {
+                /**
+                 * @var \elFinderVolumeDriver $volume
+                 */
+                $volume = $elfinder->getVolume($hash);
+                $mediaId = Media::find()->where(['path' => $volume->getPath($hash)])->scalar();
+                $tableName = (new MediaTableGenerator())->getMediaTableName($data['model']);
+                (new Query())->createCommand()
+                    ->delete(
+                        $tableName,
+                        [
+                            'model_id' => $data['model_id'],
+                            'property_id' => $data['property_id'],
+                            'media_id' => $mediaId
+                        ]
+                    )->execute();
+                $result['results']['removed'][] = ['hash' => $hash];
+            }
+            return $result;
         }
     }
 
@@ -236,7 +276,8 @@ class BaseElfinderController extends Controller
     protected function getCustomData($getKeys = ['model', 'model_id', 'property_id'], $managerOptions = false)
     {
         $result = [];
-        $get = Yii::$app->request->get();
+
+        $get = ArrayHelper::merge(Yii::$app->request->get(), Yii::$app->request->getBodyParams());
         foreach ($getKeys as $key) {
             $customKey = $key;
             if ($managerOptions) {

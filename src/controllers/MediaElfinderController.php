@@ -8,9 +8,12 @@ use DevGroup\MediaStorage\helpers\MediaTableGenerator;
 use Yii;
 use yii\db\Query;
 use yii\helpers\ArrayHelper;
+use yii\web\JsExpression;
 
 class MediaElfinderController extends BaseElfinderController
 {
+
+
     public function init()
     {
         parent::init();
@@ -28,4 +31,17 @@ class MediaElfinderController extends BaseElfinderController
         }
 
     }
+
+    public function actionManager()
+    {
+
+        $this->managerOptions = ArrayHelper::merge($this->managerOptions,
+            ['handlers' => [
+                'upload' => new JsExpression('function(event) { console.log(event) }')]
+            ]
+        );
+
+        return parent::actionManager();
+    }
+
 }
