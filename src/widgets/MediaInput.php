@@ -21,9 +21,11 @@ class MediaInput extends InputFile
             //$replace['{input}'] = Html::activeTextInput($this->model, $this->attribute, $this->options);
             $replace['{input}'] = '';
             $inputName = Html::getInputName($this->model, $this->attribute) . '[]';
+            $inputId = Html::getInputId($this->model, $this->attribute);
         } else {
             $replace['{input}'] = Html::textInput($this->name, $this->value, $this->options);
             $inputName = $this->name;
+            $inputId = $this->name;
         }
 
 
@@ -52,7 +54,7 @@ class MediaInput extends InputFile
 
                             data.files.every(function (i) {
                                 if ($('.multi-media input[value=\"' + i.id + '\"]').length === 0) {
-                                    $('.multi-media').append('<input type=\"hidden\" id=\"thing-test-' + i.id + '\" class=\"form-control\" name=\"inputName\" value=\"' + i.id + '\">');
+                                    $('.multi-media').append('<input type=\"hidden\" id=\"inputId-' + i.id + '\" class=\"form-control\" name=\"inputName\" value=\"' + i.id + '\">');
                                 }
                                 return true;
                             });
@@ -69,6 +71,7 @@ class MediaInput extends InputFile
                         'buttonId' => $this->buttonOptions['id'],
                         'managerOpts' => Json::encode($this->_managerOptions),
                         'inputName' => $inputName,
+                        'inputId' => $inputId,
                     ]
                 )
             );

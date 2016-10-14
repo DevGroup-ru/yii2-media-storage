@@ -9,6 +9,7 @@ use yii\helpers\Url;
 use yii\web\JsExpression;
 use yii\widgets\ActiveForm;
 use Yii;
+
 /**
  * @var ActiveForm $form
  * @var ActiveRecord $model
@@ -45,7 +46,7 @@ if ($property->allow_multiple_values == 1) : ?>
                 $value,
                 [
                     'class' => 'form-control',
-                    'id' => $inputId . '-' . $index,
+                    'id' => $inputId . '-' . $value,
                     'name' => $inputName,
                 ]
             ) ?>
@@ -67,16 +68,23 @@ echo ElfinderWidget::widget(
                 'model_id' => $model->id,
                 'property_id' => $property->id,
             ],
+            'handlers' => [
+                'upload' => new JsExpression(
+                    strtr(
+                    /** @lang JavaScript */
+                        "function (event, instance) {
+    event.data.added.forEach(function (i) {        
+        if ($('.multi-media input[value=\"' + i.id + '\"]').length === 0) {
+            console.log(instance);
+            $('.multi-media', parent.document).append('<input type=\"hidden\" id=\"inputId-' + i.id + '\" class=\"form-control\" name=\"inputName\" value=\"' + i.id + '\">');
+        }
+    });
+}",
+                        ['inputId' => $inputId, 'inputName' => $inputName]
+                    )
+                ),
+            ],
         ],
         'frameOptions' => ['style' => 'width: 100%; height: 100%; border: 0;min-height: 350px;'],
     ]
 );
-//echo ImageWidget::widget(
-//    [
-//        'model' => $model,
-//        'propertyId' => $property->id,
-//        'config' => [
-//
-//        ],
-//    ]
-//);

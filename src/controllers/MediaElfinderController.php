@@ -12,8 +12,6 @@ use yii\web\JsExpression;
 
 class MediaElfinderController extends BaseElfinderController
 {
-
-
     public function init()
     {
         parent::init();
@@ -22,7 +20,6 @@ class MediaElfinderController extends BaseElfinderController
             $ids = (new Query())->select('media_id')->from(
                 (new MediaTableGenerator())->getMediaTableName($data['model'])
             )->where(['model_id' => $data['model_id']])->column();
-            //            var_dump($ids);die();
             // @todo show folders
             $this->roots = MediaHelper::loadRoots($ids);
         }
@@ -31,17 +28,4 @@ class MediaElfinderController extends BaseElfinderController
         }
 
     }
-
-    public function actionManager()
-    {
-
-        $this->managerOptions = ArrayHelper::merge($this->managerOptions,
-            ['handlers' => [
-                'upload' => new JsExpression('function(event) { console.log(event) }')]
-            ]
-        );
-
-        return parent::actionManager();
-    }
-
 }

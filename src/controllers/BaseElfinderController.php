@@ -12,6 +12,7 @@ use Yii;
 use yii\db\Query;
 use yii\db\QueryBuilder;
 use yii\helpers\ArrayHelper;
+use yii\web\JsExpression;
 
 /**
  * Class BaseElfinderController
@@ -26,7 +27,6 @@ class BaseElfinderController extends Controller
     {
         $this->managerOptions = Yii::$app->request->get('managerOptions', []);
         $this->roots = ArrayHelper::merge(MediaHelper::loadRoots(), $this->roots);
-
         $this->connectOptions = ArrayHelper::merge(
             [
                 'bind' => [
@@ -83,6 +83,7 @@ class BaseElfinderController extends Controller
     public function createRecord($cmd, &$result, $args, $elfinder)
     {
         foreach (ArrayHelper::getValue($result, 'added', []) as $index => $added) {
+
             $media = new Media();
             $media->loadDefaultValues();
             $media->mime = $added['mime'];
@@ -90,23 +91,26 @@ class BaseElfinderController extends Controller
              * @var \elFinderVolumeDriver $volume
              */
             $volume = $elfinder->getVolume($added['hash']);
+
             //            $relatedPath = str_replace($volume->path($volume->defaultPath()) . '/', '', $volume->path($added['hash']));
             $media->path = $volume->getPath($added['hash']);
 
             $data = $this->getCustomData();
             if ($media->save() && $data) {
+                $result['added'][$index]['hidden'] = '0';
+                $result['added'][$index]['read'] = 1;
+                $result['added'][$index]['id'] = $media->id;
                 $mediaId = $media->id;
                 $tableName = (new MediaTableGenerator())->getMediaTableName($data['model']);
 
-                (new Query())->createCommand()
-                    ->insert(
-                        $tableName,
-                        [
-                            'model_id' => $data['model_id'],
-                            'property_id' => $data['property_id'],
-                            'media_id' => $mediaId
-                        ]
-                    )->execute();
+                (new Query())->createCommand()->insert(
+                    $tableName,
+                    [
+                        'model_id' => $data['model_id'],
+                        'property_id' => $data['property_id'],
+                        'media_id' => $mediaId,
+                    ]
+                )->execute();
             }
 
         }
@@ -233,15 +237,14 @@ class BaseElfinderController extends Controller
                 $volume = $elfinder->getVolume($hash);
                 $mediaId = Media::find()->where(['path' => $volume->getPath($hash)])->scalar();
                 $tableName = (new MediaTableGenerator())->getMediaTableName($data['model']);
-                (new Query())->createCommand()
-                    ->delete(
-                        $tableName,
-                        [
-                            'model_id' => $data['model_id'],
-                            'property_id' => $data['property_id'],
-                            'media_id' => $mediaId
-                        ]
-                    )->execute();
+                (new Query())->createCommand()->delete(
+                    $tableName,
+                    [
+                        'model_id' => $data['model_id'],
+                        'property_id' => $data['property_id'],
+                        'media_id' => $mediaId,
+                    ]
+                )->execute();
                 $result['results']['removed'][] = ['hash' => $hash];
             }
             return $result;
@@ -289,5 +292,17 @@ class BaseElfinderController extends Controller
             }
         }
         return $result;
+    }
+
+    public function actionManager()
+    {
+        $handlers = ArrayHelper::remove($this->managerOptions, 'handlers', []);
+        foreach ($handlers as $handlerName => $handler) {
+            if (is_array($handler) && ArrayHelper::keyExists('expression', $handler)) {
+                $handler = new JsExpression($handler['expression']);
+            }
+            $this->managerOptions['handlers'][$handlerName] = $handler;
+        }
+        return parent::actionManager();
     }
 }
