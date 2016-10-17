@@ -5,6 +5,7 @@ namespace DevGroup\MediaStorage\controllers;
 
 use DevGroup\MediaStorage\helpers\MediaHelper;
 use DevGroup\MediaStorage\helpers\MediaTableGenerator;
+use DevGroup\MediaStorage\models\Media;
 use Yii;
 use yii\db\Query;
 use yii\helpers\ArrayHelper;
@@ -28,4 +29,5 @@ class MediaElfinderController extends BaseElfinderController
         }
 
     }
+
 }

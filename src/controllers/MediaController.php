@@ -3,8 +3,10 @@
 namespace DevGroup\MediaStorage\controllers;
 
 use DevGroup\AdminUtils\controllers\BaseController;
+use DevGroup\MediaStorage\models\Media;
 use Yii;
 use yii\filters\AccessControl;
+use yii\helpers\Json;
 
 /**
  * Class MediaController
@@ -30,14 +32,14 @@ class MediaController extends BaseController
                 'class' => AccessControl::class,
                 'rules' => [
                     [
-                        'actions' => ['all-files'],
+                        'actions' => ['all-files', 'media-meta'],
                         'allow' => true,
                         'roles' => ['mediastorage-administrate'],
                     ],
                     [
                         'allow' => false,
                         'roles' => ['*'],
-                    ]
+                    ],
                 ],
             ],
         ];
@@ -49,5 +51,28 @@ class MediaController extends BaseController
     public function actionAllFiles()
     {
         return $this->render('all-files');
+    }
+
+
+    public function actionMediaMeta()
+    {
+        $model = new Media(['scenario' => Media::SCENARIO_SEARCH]);
+        $dataProvider = $model->search(Yii::$app->request->queryParams);
+        if (Yii::$app->request->post('hasEditable')) {
+            $mediaId = Yii::$app->request->post('editableKey');
+            $model = Media::findOne($mediaId);
+            $out = Json::encode(['output' => '', 'message' => '']);
+            if (Media::loadMultiple([$model], Yii::$app->request->post())) {
+                $model->save();
+            }
+            return $out;
+        }
+        return $this->render(
+            'media-meta',
+            [
+                'dataProvider' => $dataProvider,
+                'model' => $model,
+            ]
+        );
     }
 }

@@ -52,7 +52,7 @@ class MediaStorageConfiguration extends BaseConfigurationModel
      */
     public function webApplicationAttributes()
     {
-        return [];
+        return ['modules' => ['gridview' => 'kartik\grid\Module']];
     }
 
     /**
@@ -119,9 +119,10 @@ class MediaStorageConfiguration extends BaseConfigurationModel
             ],
             [
                 'components' => [
-                    'urlManager' => [
-                        'excludeRoutes' => ['media/file/send', 'media/file/xsend'],
-                    ],
+//                    'urlManager' => [
+//                        'excludeRoutes' => ['media/file/send', 'media/file/xsend'],
+//                    ],
+//                    @todo find error in UrlManager
                     'i18n' => [
                         'translations' => [
                             'devgroup.media-storage' => [

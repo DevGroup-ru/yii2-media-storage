@@ -5,6 +5,7 @@ namespace DevGroup\MediaStorage\models;
 use DevGroup\TagDependencyHelper\CacheableActiveRecord;
 use DevGroup\TagDependencyHelper\TagDependencyTrait;
 use Yii;
+use yii\data\ActiveDataProvider;
 
 /**
  * This is the model class for table "{{%media}}".
@@ -16,7 +17,7 @@ use Yii;
  */
 class Media extends \yii\db\ActiveRecord
 {
-
+    const SCENARIO_SEARCH = 'search';
     use TagDependencyTrait;
 
     /**
@@ -39,6 +40,13 @@ class Media extends \yii\db\ActiveRecord
         return '{{%media}}';
     }
 
+    public function scenarios()
+    {
+        $scenarios = parent::scenarios();
+        $scenarios[self::SCENARIO_SEARCH] = [];
+        return $scenarios;
+    }
+
     /**
      * @inheritdoc
      */
@@ -46,7 +54,7 @@ class Media extends \yii\db\ActiveRecord
     {
         return [
             [['path', 'mime'], 'required'],
-            [['path', 'mime'], 'string', 'max' => 255],
+            [['path', 'mime', 'alt', 'title'], 'string', 'max' => 255],
             [['path'], 'unique'],
         ];
     }
@@ -66,5 +74,20 @@ class Media extends \yii\db\ActiveRecord
     public function isImage()
     {
         return substr($this->mime, 0, 5) === 'image';
+    }
+
+    public function search($params = [])
+    {
+        $query = static::find();
+        $dataProvider = new ActiveDataProvider(
+            [
+                'query' => $query,
+            ]
+        );
+        $this->load($params);
+        if (!$this->validate()) {
+            return $dataProvider;
+        }
+        return $dataProvider;
     }
 }

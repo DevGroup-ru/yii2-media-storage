@@ -26,7 +26,9 @@
         "devgroup/yii2-data-structure-tools": "*",
         "devgroup/yii2-tag-dependency-helper": "^1.4.0",
         "league/glide": "^1.0",
-        "unclead/yii2-multiple-input": "~1.0"
+        "unclead/yii2-multiple-input": "~1.0",
+        "kartik-v/yii2-editable": "^1.7",
+        "kartik-v/yii2-grid": "^3.1"
     },
     "require-dev": {
         "yiisoft/yii2-faker": "*",

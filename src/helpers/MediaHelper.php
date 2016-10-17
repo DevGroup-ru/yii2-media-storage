@@ -227,8 +227,8 @@ class MediaHelper extends Object
         );
     }
 
-    public static function compileUrl($mediaId)
+    public static function compileUrl($media)
     {
-
+        $fs = static::getFlysystemByMedia($media);
     }
 }
