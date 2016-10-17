@@ -9,25 +9,46 @@ use League\Glide\ServerFactory;
 use Yii;
 use yii\base\Exception;
 use yii\base\Widget;
+use yii\helpers\ArrayHelper;
 
 class ImageWidget extends Widget
 {
-    const RETURN_SRC = 'src';
-    const RETURN_BASE64 = 'base64';
-    const RETURN_CONTENT = 'content';
+    const FIT_CONTAIN = 'contain';
+    const FIT_MAX = 'max';
+    const FIT_FILL = 'fill';
+    const FIT_STRETCH = 'stretch';
+    const FIT_CROP = 'crop';
 
     public $model = null;
     public $propertyId = null;
-    public $config = [];
 
+
+    public $width = null;
+    public $height = null;
+    /**
+     * Sets how the image is fitted to its target dimensions
+     * @see http://glide.thephpleague.com/1.0/api/size//#fit-fit
+     * @var string
+     */
+    public $fit = self::FIT_CONTAIN;
+    // @todo watermark
+    public $quality = 90;
+    public $blur = null;
+    /**
+     * Other configuration options from glide
+     * Will overwrite original options,
+     *     i.e. if $this->width = 80 and $this->config[w] = 100 result will be file.jpg?w=100
+     * @see http://glide.thephpleague.com/1.0/api/quick-reference/
+     */
+    public $config = [];
     /**
      * @var string
      */
-    public $viewFile = self::RETURN_SRC;
+    public $outerViewFile = 'images';
     /**
      * @var string
      */
-    public $noImageViewFile = 'noimage';
+    public $singleViewFile = 'image';
     /**
      * @var null|int
      */
@@ -36,10 +57,6 @@ class ImageWidget extends Widget
      * @var int
      */
     public $offset = 0;
-    /**
-     * @var bool if true and images array empty show "No image"
-     */
-    public $noImageOnEmptyImages = false;
     /** @var array $additional Additional data passed to view */
     public $additional = [];
 
@@ -58,18 +75,33 @@ class ImageWidget extends Widget
     {
         $property = Property::findById($this->propertyId);
         $propValues = (array) $this->model->{$property->key};
-        $imageMedias = Media::find()->where(['id' => $propValues])->andWhere(['like', 'mime', 'image'])->all();
+        $imageMediasIds = Media::find()->select('id')->where(['id' => $propValues])->andWhere(
+            ['like', 'mime', 'image']
+        )->limit($this->limit)->offset($this->offset)->column();
 
-        foreach ($imageMedias as $imageMedia) {
-            // each media each server but cache server only one
-            $server = ServerFactory::create(
-                [
-                    'source' => $this->config['sourceFS'],
-                    'cache' => $this->config['cacheFS'],
-                ]
-            );
-            $path = $imageMedia->path;
+        $options = [];
+        $this->optionsHelper($options, 'w', $this->width);
+        $this->optionsHelper($options, 'h', $this->height);
+        $this->optionsHelper($options, 'fit', $this->fit);
+        $this->optionsHelper($options, 'q', $this->quality);
+        $this->optionsHelper($options, 'blur', $this->blur);
+        $options = ArrayHelper::merge($options, $this->config);
 
+        return $this->render(
+            $this->outerViewFile,
+            [
+                'mediaIds' => $imageMediasIds,
+                'singleViewFile' => $this->singleViewFile,
+                'urlOptions' => $options,
+                'additional' => $this->additional,
+            ]
+        );
+    }
+
+    private function optionsHelper(&$options, $name, $val)
+    {
+        if (is_null($val) === false) {
+            $options[$name] = $val;
         }
     }
 }
