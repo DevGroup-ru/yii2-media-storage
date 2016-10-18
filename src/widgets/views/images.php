@@ -1,17 +1,19 @@
 <?php
 
 /**
- * @var array $mediaIds
+ * @var array $medias
  * @var string $singleViewFile
- * @var array $urlOptions
  * @var array $additional
  */
 ?>
 <div class="images">
-    <?php foreach ($mediaIds as $mediaId): ?>
+    <?php foreach ($medias as $mediaAttrs): ?>
         <?= $this->render(
             $singleViewFile,
-            ['mediaId' => $mediaId, 'urlOptions' => $urlOptions, 'additional' => $additional]
+            [
+                'additional' => $additional,
+                'mediaAttrs' => $mediaAttrs,
+            ]
         ); ?>
     <?php endforeach; ?>
 </div>

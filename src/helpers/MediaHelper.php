@@ -3,6 +3,7 @@
 namespace DevGroup\MediaStorage\helpers;
 
 use creocoder\flysystem\Filesystem;
+use DevGroup\MediaStorage\components\GlideConfigurator;
 use DevGroup\MediaStorage\MediaModule;
 use DevGroup\MediaStorage\models\Media;
 use Yii;
@@ -227,8 +228,50 @@ class MediaHelper extends Object
         );
     }
 
-    public static function compileUrl($media)
+    /**
+     * @param $model
+     * @param $property
+     * @param GlideConfigurator $glideConfigurationObject
+     * @param null|int $limit
+     * @param int $offset
+     *
+     * @return array
+     * [
+     *     ['src' => '', 'data-media-id' => '', 'alt' => '', 'title' => ''],
+     *     ['src' => '', 'data-media-id' => '', 'alt' => '', 'title' => ''],
+     *     ['src' => '', 'data-media-id' => '', 'alt' => '', 'title' => ''],
+     * ]
+     */
+    public static function getMediaData(
+        $model,
+        $property,
+        GlideConfigurator $glideConfigurationObject,
+        $limit = null,
+        $offset = 0
+    )
     {
-        $fs = static::getFlysystemByMedia($media);
+        $propValues = (array) $model->{$property->key};
+        $imageMedias = Media::find()->select(['data-media-id' => 'id', 'alt', 'title'])->indexBy(
+            'data-media-id'
+        )->where(
+            ['id' => $propValues]
+        )->andWhere(
+            ['like', 'mime', 'image']
+        )->limit($limit)->offset($offset)->asArray(true)->all();
+        $urlOptions = $glideConfigurationObject->getConfiguration();
+        return array_map(
+            function ($el) use ($urlOptions) {
+                return ArrayHelper::merge(
+                    $el,
+                    [
+                        'src' => ArrayHelper::merge(
+                            ['/media/file/send', 'mediaId' => $el['data-media-id']],
+                            ['config' => ['imageConfig' => $urlOptions]]
+                        ),
+                    ]
+                );
+            },
+            $imageMedias
+        );
     }
 }

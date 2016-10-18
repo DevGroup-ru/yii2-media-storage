@@ -4,8 +4,9 @@
 namespace DevGroup\MediaStorage\widgets;
 
 use DevGroup\DataStructure\models\Property;
+use DevGroup\MediaStorage\components\GlideConfigurator;
+use DevGroup\MediaStorage\helpers\MediaHelper;
 use DevGroup\MediaStorage\models\Media;
-use League\Glide\ServerFactory;
 use Yii;
 use yii\base\Exception;
 use yii\base\Widget;
@@ -74,34 +75,18 @@ class ImageWidget extends Widget
     public function run()
     {
         $property = Property::findById($this->propertyId);
-        $propValues = (array) $this->model->{$property->key};
-        $imageMediasIds = Media::find()->select('id')->where(['id' => $propValues])->andWhere(
-            ['like', 'mime', 'image']
-        )->limit($this->limit)->offset($this->offset)->column();
-
-        $options = [];
-        $this->optionsHelper($options, 'w', $this->width);
-        $this->optionsHelper($options, 'h', $this->height);
-        $this->optionsHelper($options, 'fit', $this->fit);
-        $this->optionsHelper($options, 'q', $this->quality);
-        $this->optionsHelper($options, 'blur', $this->blur);
-        $options = ArrayHelper::merge($options, $this->config);
+        $configurator = new GlideConfigurator($this->width, $this->height, $this->fit, $this->quality, $this->config);
+        $imageMedias = MediaHelper::getMediaData($this->model, $property, $configurator, $this->limit, $this->offset);
 
         return $this->render(
             $this->outerViewFile,
             [
-                'mediaIds' => $imageMediasIds,
+                'medias' => $imageMedias,
                 'singleViewFile' => $this->singleViewFile,
-                'urlOptions' => $options,
                 'additional' => $this->additional,
             ]
         );
     }
 
-    private function optionsHelper(&$options, $name, $val)
-    {
-        if (is_null($val) === false) {
-            $options[$name] = $val;
-        }
-    }
+
 }

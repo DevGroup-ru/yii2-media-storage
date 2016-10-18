@@ -62,7 +62,9 @@ class MediaController extends BaseController
             $mediaId = Yii::$app->request->post('editableKey');
             $model = Media::findOne($mediaId);
             $out = Json::encode(['output' => '', 'message' => '']);
-            if (Media::loadMultiple([$model], Yii::$app->request->post())) {
+            $formData = Yii::$app->request->post($model->formName());
+            $data = reset($formData);
+            if ($model->load([$model->formName() => $data])) {
                 $model->save();
             }
             return $out;
