@@ -13,6 +13,7 @@ use yii\bootstrap\Tabs;
 use yii\db\ActiveRecord;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Json;
+use yii\helpers\Url;
 
 class MediaHelper extends Object
 {
@@ -264,9 +265,11 @@ class MediaHelper extends Object
                 return ArrayHelper::merge(
                     $el,
                     [
-                        'src' => ArrayHelper::merge(
-                            ['/media/file/send', 'mediaId' => $el['data-media-id']],
-                            ['config' => ['imageConfig' => $urlOptions]]
+                        'src' => Url::to(
+                            ArrayHelper::merge(
+                                ['/media/file/send', 'mediaId' => $el['data-media-id']],
+                                ['config' => ['imageConfig' => $urlOptions]]
+                            )
                         ),
                     ]
                 );
