@@ -22,6 +22,14 @@ use yii\web\JsExpression;
  */
 class BaseElfinderController extends Controller
 {
+    public function beforeAction($action)
+    {
+        $debug = Yii::$app->getModule('debug');
+        if (is_object($debug)) {
+            $debug->instance->allowedIPs = [];
+        }
+        return parent::beforeAction($action);
+    }
 
     public function init()
     {
