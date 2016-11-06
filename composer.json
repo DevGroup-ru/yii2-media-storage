@@ -18,8 +18,6 @@
         "php": ">=5.5.0",
         "yiisoft/yii2": "^2.0.6",
         "yiisoft/yii2-imagine": "*",
-        "devgroup/yii2-multilingual": "dev-master",
-        "devgroup/yii2-users-module": "dev-master",
         "mihaildev/yii2-elfinder": "^1.1.3",
         "2amigos/yii2-transliterator-helper": "^0.1.0",
         "mihaildev/yii2-elfinder-flysystem": "^0.0.1",
