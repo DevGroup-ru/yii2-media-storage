@@ -13,6 +13,8 @@ use yii\data\ActiveDataProvider;
  * @property integer $id
  * @property string $path
  * @property string $mime
+ * @property string $title
+ * @property string $alt
  *
  */
 class Media extends \yii\db\ActiveRecord

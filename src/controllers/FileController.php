@@ -15,9 +15,12 @@ class FileController extends Controller
 {
     public function actionSend($mediaId, array $config = [])
     {
+
         $media = Media::loadModel($mediaId, false, true, 86400, new NotFoundHttpException(), false);
+
         $fs = MediaHelper::getFlysystemByMedia($media);
         if (is_null($fs)) {
+
             throw new NotFoundHttpException();
         }
         if (is_null($media)) {

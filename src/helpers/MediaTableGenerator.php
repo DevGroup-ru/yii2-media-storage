@@ -14,7 +14,7 @@ class MediaTableGenerator extends Object
     /**
      * @var Migration
      */
-    private $migration;
+    private $migrationInstane;
     /**
      * @var Connection
      */
@@ -25,9 +25,15 @@ class MediaTableGenerator extends Object
         if (is_null($this->db)) {
             $this->db = Yii::$app->db;
         }
-        $this->migration = new Migration(['db' => $this->db]);
     }
 
+    public function getMigration()
+    {
+        if ($this->migrationInstane === null) {
+            $this->migrationInstane = new Migration(['db' => $this->db]);
+        }
+        return $this->migrationInstane;
+    }
     /**
      * @param string $className
      *
