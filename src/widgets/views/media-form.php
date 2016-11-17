@@ -1,14 +1,11 @@
 <?php
 
 use DevGroup\MediaStorage\widgets\ElfinderWidget;
-use DevGroup\MediaStorage\widgets\ImageWidget;
 use DevGroup\MediaStorage\widgets\MediaInput;
 use yii\db\ActiveRecord;
 use yii\helpers\Html;
-use yii\helpers\Url;
 use yii\web\JsExpression;
 use yii\widgets\ActiveForm;
-use Yii;
 
 /**
  * @var ActiveForm $form
