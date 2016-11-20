@@ -9,6 +9,9 @@ class m161018_082003_backend_menu extends Migration
 {
     public function up()
     {
+        if (class_exists('app\models\BackendMenu') === false) {
+            return;
+        }
         try {
             $this->insert(
                 BackendMenu::tableName(),
@@ -71,6 +74,9 @@ class m161018_082003_backend_menu extends Migration
 
     public function down()
     {
+        if (class_exists('app\models\BackendMenu') === false) {
+            return;
+        }
         try {
             $this->delete(
                 BackendMenu::tableName(),
