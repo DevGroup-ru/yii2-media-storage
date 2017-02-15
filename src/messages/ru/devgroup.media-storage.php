@@ -43,4 +43,7 @@ return [
     'privateKey' => 'Секретный ключ',
     'The field cannot be blank' => 'Поле не может быть пустым',
     'One or more file system must be an active' => 'Одна или несколько файловых систем должны быть активны',
+    'Media' => 'Медиа хранилище',
+    'All files' => 'Все файлы',
+    'Media meta' => 'Meta-теги для медиа'
 ];
