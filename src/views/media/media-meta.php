@@ -11,7 +11,7 @@ use yii\helpers\Html;
  * @codeCoverageIgnore
  */
 
-$this->title = Yii::t('app', 'Media meta');
+$this->title = Yii::t('devgroup.media-storage', 'Media meta');
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>
